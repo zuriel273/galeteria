@@ -9,51 +9,24 @@ package negocio;
  * @author Arlindo
  */
 public class Pedido {
-    String dataPedido, dataEntrega, horaPedido, horaEntrega, descricao;
+    String  descricao;
     boolean entregue;
+    float valor;
     int id;
-    Cliente c;
+    Cliente cliente;
 
-    public Pedido(String dataPedido, String dataEntrega, String horaPedido, String horaEntrega, String descricao, boolean entregue, Cliente c) {
-        this.dataPedido = dataPedido;
-        this.dataEntrega = dataEntrega;
-        this.horaPedido = horaPedido;
-        this.horaEntrega = horaEntrega;
+    public Pedido(String descricao, float valor, Cliente cliente) {
         this.descricao = descricao;
-        this.entregue = entregue;
-        this.c = c;
+        this.valor = valor;
+        this.cliente = cliente;
     }
 
-    public String getDataPedido() {
-        return dataPedido;
+    public float getValor() {
+        return valor;
     }
 
-    public void setDataPedido(String dataPedido) {
-        this.dataPedido = dataPedido;
-    }
-
-    public String getDataEntrega() {
-        return dataEntrega;
-    }
-
-    public void setDataEntrega(String dataEntrega) {
-        this.dataEntrega = dataEntrega;
-    }
-
-    public String getHoraPedido() {
-        return horaPedido;
-    }
-
-    public void setHoraPedido(String horaPedido) {
-        this.horaPedido = horaPedido;
-    }
-
-    public String getHoraEntrega() {
-        return horaEntrega;
-    }
-
-    public void setHoraEntrega(String horaEntrega) {
-        this.horaEntrega = horaEntrega;
+    public void setValor(float valor) {
+        this.valor = valor;
     }
 
     public String getDescricao() {
@@ -80,14 +53,12 @@ public class Pedido {
         this.id = id;
     }
 
-    public Cliente getC() {
-        return c;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setC(Cliente c) {
-        this.c = c;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-    
-    
-    
+
 }

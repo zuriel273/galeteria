@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.Pedido;
 
 
 /**
@@ -15,23 +16,18 @@ import java.util.List;
  * @author Arlindo
  */
 public class PedidoDAO {
-    public boolean cadastraMembro (Pedido m){
+    public boolean cadastraPedido (Pedido m){
         if(m != null){
-            ResultSet rs_nome;
-            String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE) " +
-            "VALUES ('"+m.getNome()+"','"+m.getEndereco()+"', '"+m.getTelefone()+"');"; 
-            System.out.println(comandoSql_nome);
+                        
+            String comandoSql = "INSERT INTO PEDIDO (DESCRICAO,ENTREGUE,ID_CLIENTE,VALOR) " +
+            "VALUES ('"+m.getDescricao()+"','"+m.isEntregue()+"', '"+m.getCliente().getId()+"', '"+m.getValor()+"');"; 
+          
             System.out.println(comandoSql);
             try{
                 java.sql.Statement stmt = (Statement)Myconnection.getStatement();
-                rs_nome = stmt.executeQuery(comandoSql_nome);
-                if(rs_nome.first() == false){
-                    stmt.executeUpdate(comandoSql);
-                    stmt.close();
-                    System.out.println(rs_nome.first());
-                    return true;
-                }
+                stmt.executeUpdate(comandoSql);
+                stmt.close();
+                return true;                
             }catch(Exception e){
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }        
@@ -39,7 +35,7 @@ public class PedidoDAO {
         return false;
     }
     
-    public Cliente buscaCliente(String nome){
+    public Pedido buscaPedido(String nome){ // fazer um inner join com o nome do cliente
         String sql = "SELECT * FROM Cliente WHERE NOME like '"+nome+"'";
         ResultSet rs;
         try{
