@@ -26,8 +26,8 @@ public class ClienteDAO {
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE) " +
-            "VALUES ('"+m.getNome()+"','"+m.getEndereco()+"', '"+m.getTelefone()+"');"; 
+            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE) "
+                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"', '"+m.getTelefone()+"');"; 
             System.out.println(comandoSql_nome);
             System.out.println(comandoSql);
             try{

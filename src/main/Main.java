@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package galeteria;
+package main;
 
 import java.util.logging.*;
 import javax.swing.UIManager;
@@ -13,24 +13,24 @@ import view.Principal;
  *
  * @author Arlindo
  */
-public class Galeteria {
+public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             new Principal().setVisible(true);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Galeteria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(Galeteria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Galeteria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Galeteria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

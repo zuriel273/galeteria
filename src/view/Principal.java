@@ -27,37 +27,99 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jL_titulo = new javax.swing.JLabel();
+        jB_add_cliente = new javax.swing.JButton();
+        jB_pedido = new javax.swing.JButton();
+        jB_novo_pedido = new javax.swing.JButton();
+        jB_fechar = new javax.swing.JButton();
+        jB_buscar = new javax.swing.JButton();
+        jT_busca = new javax.swing.JTextField();
+        jL_resultado_busca = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Galeteria");
-        jLabel1.setBounds(0, 0, 410, 60);
-        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_titulo.setFont(new java.awt.Font("Sawasdee", 1, 48)); // NOI18N
+        jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_titulo.setText("Galeteria");
+        jL_titulo.setBounds(0, 0, 800, 100);
+        jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setText("Botão de Teste");
-        jButton1.setBounds(252, 260, 120, 30);
-        jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jB_add_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
+        jB_add_cliente.setMnemonic('C');
+        jB_add_cliente.setText("Cliente");
+        jB_add_cliente.setBounds(20, 180, 160, 80);
+        jDesktopPane1.add(jB_add_cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/notepad.png"))); // NOI18N
+        jB_pedido.setMnemonic('P');
+        jB_pedido.setText("Pedidos");
+        jB_pedido.setBounds(20, 280, 160, 80);
+        jDesktopPane1.add(jB_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_novo_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart_add.png"))); // NOI18N
+        jB_novo_pedido.setMnemonic('n');
+        jB_novo_pedido.setText("Novo Pedido");
+        jB_novo_pedido.setBounds(20, 380, 160, 80);
+        jDesktopPane1.add(jB_novo_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_fechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/exit.png"))); // NOI18N
+        jB_fechar.setMnemonic('f');
+        jB_fechar.setText("Fechar");
+        jB_fechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_fecharActionPerformed(evt);
+            }
+        });
+        jB_fechar.setBounds(20, 480, 160, 80);
+        jDesktopPane1.add(jB_fechar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/find.png"))); // NOI18N
+        jB_buscar.setMnemonic('b');
+        jB_buscar.setText("Buscar");
+        jB_buscar.setBounds(670, 110, 110, 40);
+        jDesktopPane1.add(jB_buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jT_busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_buscaActionPerformed(evt);
+            }
+        });
+        jT_busca.setBounds(20, 110, 640, 40);
+        jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_resultado_busca.setBounds(200, 160, 580, 420);
+        jDesktopPane1.add(jL_resultado_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jT_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_buscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_buscaActionPerformed
+
+    private void jB_fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_fecharActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jB_fecharActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jB_add_cliente;
+    private javax.swing.JButton jB_buscar;
+    private javax.swing.JButton jB_fechar;
+    private javax.swing.JButton jB_novo_pedido;
+    private javax.swing.JButton jB_pedido;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jL_resultado_busca;
+    private javax.swing.JLabel jL_titulo;
+    private javax.swing.JTextField jT_busca;
     // End of variables declaration//GEN-END:variables
 }
