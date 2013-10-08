@@ -129,4 +129,20 @@ public class ClienteDAO {
         return false;
     }
     
+    public void excluiCliente(int id){
+         String comandoSQL;
+
+        comandoSQL ="DELETE FROM `CLIENTE` WHERE id="+ id;
+
+        try{
+            stmt =  Myconnection.getStatement();
+            stmt.executeUpdate(comandoSQL);
+            stmt.close();
+
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro no excluir!");
+            e.printStackTrace();
+        }
+    }
+    
 }

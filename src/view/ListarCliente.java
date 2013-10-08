@@ -96,6 +96,11 @@ public class ListarCliente extends javax.swing.JFrame {
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
         jB_excluir.setMnemonic('x');
         jB_excluir.setText("Excluir");
+        jB_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_excluirActionPerformed(evt);
+            }
+        });
         jB_excluir.setBounds(620, 190, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -182,6 +187,24 @@ public class ListarCliente extends javax.swing.JFrame {
            
         }
     }//GEN-LAST:event_jB_editarActionPerformed
+
+    private void jB_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_excluirActionPerformed
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();
+         
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+        
+        ClienteDAO cD = new ClienteDAO();
+        
+        cD.excluiCliente(id);
+        
+        try {
+            atualizarLista("");
+        } catch (Exception ex) {
+            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jB_excluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_editar;
