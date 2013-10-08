@@ -36,7 +36,7 @@ public class Myconnection{
        try{  
           Class.forName("com.mysql.jdbc.Driver").newInstance();  
           String driver = "jdbc:mysql://localhost:3307/galeteria";  
-          Connection con = DriverManager.getConnection(driver,"root","root");   
+          Connection con = DriverManager.getConnection(driver,"root","root");         
           return con;  
         }  
         catch(Exception e){  

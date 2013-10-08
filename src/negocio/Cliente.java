@@ -10,7 +10,7 @@ package negocio;
  */
 public class Cliente {
     private int id;
-    private String nome, endereco, telefone;
+    private String nome, endereco, telefone, complemento;
 
     public Cliente(String nome, String endereco, String telefone) {
         this.nome = nome;
@@ -18,6 +18,14 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+        
     public int getId() {
         return id;
     }
