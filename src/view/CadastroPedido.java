@@ -74,7 +74,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jS_lista.setViewportView(jList1);
 
-        jS_lista.setBounds(20, 130, 360, 170);
+        jS_lista.setBounds(20, 130, 380, 170);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_pedido.setText("Pedido:");

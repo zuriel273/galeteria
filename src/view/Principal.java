@@ -49,13 +49,14 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Galeteria");
+        setName("frame"); // NOI18N
         setResizable(false);
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
         jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Galeteria");
-        jL_titulo.setBounds(0, 0, 800, 90);
+        jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_add_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
@@ -67,7 +68,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_add_clienteActionPerformed(evt);
             }
         });
-        jB_add_cliente.setBounds(20, 150, 160, 80);
+        jB_add_cliente.setBounds(20, 140, 160, 80);
         jDesktopPane1.add(jB_add_cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/clientes.png"))); // NOI18N
@@ -79,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_clientesActionPerformed(evt);
             }
         });
-        jB_clientes.setBounds(20, 240, 160, 80);
+        jB_clientes.setBounds(20, 230, 160, 80);
         jDesktopPane1.add(jB_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart.png"))); // NOI18N
@@ -91,7 +92,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_pedidoActionPerformed(evt);
             }
         });
-        jB_pedido.setBounds(20, 420, 160, 80);
+        jB_pedido.setBounds(20, 410, 160, 80);
         jDesktopPane1.add(jB_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_novo_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart_add.png"))); // NOI18N
@@ -103,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_novo_pedidoActionPerformed(evt);
             }
         });
-        jB_novo_pedido.setBounds(20, 330, 160, 80);
+        jB_novo_pedido.setBounds(20, 320, 160, 80);
         jDesktopPane1.add(jB_novo_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_fechar.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -116,13 +117,13 @@ public class Principal extends javax.swing.JFrame {
                 jB_fecharActionPerformed(evt);
             }
         });
-        jB_fechar.setBounds(20, 510, 160, 80);
+        jB_fechar.setBounds(20, 500, 160, 80);
         jDesktopPane1.add(jB_fechar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/find.png"))); // NOI18N
         jB_buscar.setMnemonic('b');
         jB_buscar.setText("Buscar");
-        jB_buscar.setBounds(660, 100, 120, 40);
+        jB_buscar.setBounds(660, 90, 120, 40);
         jDesktopPane1.add(jB_buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jT_busca.setForeground(new java.awt.Color(187, 187, 187));
@@ -144,7 +145,7 @@ public class Principal extends javax.swing.JFrame {
                 jT_buscaKeyReleased(evt);
             }
         });
-        jT_busca.setBounds(20, 100, 630, 40);
+        jT_busca.setBounds(20, 90, 630, 40);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jScrollPane1.setFocusable(false);
@@ -156,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
         jT_resultado_busca.setFocusable(false);
         jScrollPane1.setViewportView(jT_resultado_busca);
 
-        jScrollPane1.setBounds(200, 150, 580, 440);
+        jScrollPane1.setBounds(200, 140, 580, 440);
         jDesktopPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
