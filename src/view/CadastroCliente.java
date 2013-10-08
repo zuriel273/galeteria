@@ -22,6 +22,22 @@ public class CadastroCliente extends javax.swing.JFrame {
         initComponents();
         jDesktopPane1.setBackground(bgcolor);
     }
+    
+     public CadastroCliente(Color bgcolor,int id){
+        initComponents();
+        Cliente c;
+        ClienteDAO cD = new ClienteDAO();
+        
+        c = cD.buscaClienteId(id);
+        
+        jT_nome.setText(c.getNome());
+        jT_telefone.setText(c.getTelefone());
+        jT_endereco.setText(c.getEndereco());
+        jT_complemento.setText(c.getComplemento());
+        
+        jB_salvar.setText("Atualizar");
+        jDesktopPane1.setBackground(bgcolor);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,7 +147,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         String nome = jT_nome.getText();
         String endereco = jT_endereco.getText();
         String complemento = jT_complemento.getText();
-        String telefone = jT_nome.getText();
+        String telefone = jT_telefone.getText();
         ClienteDAO cD = new ClienteDAO();
         
         Cliente c = new Cliente(nome, endereco, telefone);

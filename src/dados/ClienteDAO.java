@@ -56,6 +56,8 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            int id = Integer.parseInt(rs.getString("id"));
+            m.setId(id);
             stmt.close();
             return m;
         }catch(Exception e){
@@ -63,6 +65,25 @@ public class ClienteDAO {
         }
         return null;
     }
+     
+    public Cliente buscaClienteId(int id){
+        String sql = "SELECT * FROM Cliente WHERE ID = "+ id;
+        ResultSet rs;
+        try{
+            stmt = (Statement) Myconnection.getStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            m.setId(id);
+            stmt.close();
+            return m;
+        }catch(Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return null;
+    }
+    
     
     public List listaCliente(String nome){
         ResultSet rs;
@@ -74,6 +95,11 @@ public class ClienteDAO {
             while(rs.next()){
                                  
                 Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+                int id = Integer.parseInt(rs.getString("id"));
+                System.out.println(rs.getString("NOME"));
+                System.out.println(rs.getString("ENDERECO"));
+                System.out.println(rs.getString("TELEFONE"));
+                m.setId(id);
                 lista.add(m);
             }
             stmt.close();
