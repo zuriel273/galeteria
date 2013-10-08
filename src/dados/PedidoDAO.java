@@ -67,7 +67,7 @@ public class PedidoDAO {
     public List listaPedido(String nome){
         ResultSet rs, rs2;
         List lista = new ArrayList();
-        String sql = "SELECT * FROM PEDIDO INNER JOIN CLIENTE WHERE  CLIENTE.ID = PEDIDO.ID_CLIENTE AND CLIENTE.NOME like '"+nome+"'";
+        String sql = "SELECT * FROM PEDIDO INNER JOIN CLIENTE WHERE  CLIENTE.ID = PEDIDO.ID_CLIENTE AND CLIENTE.NOME like '%"+nome+"%'";
         try{
             java.sql.Statement stmt = Myconnection.getStatement();
             rs = stmt.executeQuery(sql);
