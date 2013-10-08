@@ -30,71 +30,71 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jT_complemento = new javax.swing.JTextField();
+        jT_endereco = new javax.swing.JTextField();
+        jT_telefone = new javax.swing.JTextField();
+        jT_nome = new javax.swing.JTextField();
+        jL_telefone = new javax.swing.JLabel();
+        jL_nome = new javax.swing.JLabel();
+        jL_complemento = new javax.swing.JLabel();
+        jL_endereco = new javax.swing.JLabel();
+        jB_salvar = new javax.swing.JButton();
+        jB_cancelar = new javax.swing.JButton();
+        jL_titulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setAlwaysOnTop(true);
         setResizable(false);
 
-        jTextField1.setBounds(150, 250, 420, 30);
-        jDesktopPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jTextField2.setBounds(150, 200, 420, 30);
-        jDesktopPane1.add(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jTextField3.setBounds(150, 150, 200, 30);
-        jDesktopPane1.add(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jTextField4.setBounds(150, 100, 420, 30);
-        jDesktopPane1.add(jTextField4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_complemento.setBounds(150, 250, 420, 30);
+        jDesktopPane1.add(jT_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_endereco.setBounds(150, 200, 420, 30);
+        jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_telefone.setBounds(150, 150, 200, 30);
+        jDesktopPane1.add(jT_telefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_nome.setBounds(150, 100, 420, 30);
+        jDesktopPane1.add(jT_nome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setText("Telefone");
-        jLabel1.setBounds(30, 150, 120, 30);
-        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_telefone.setText("Telefone");
+        jL_telefone.setBounds(30, 150, 120, 30);
+        jDesktopPane1.add(jL_telefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel2.setText("Nome");
-        jLabel2.setBounds(30, 100, 120, 30);
-        jDesktopPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_nome.setText("Nome");
+        jL_nome.setBounds(30, 100, 120, 30);
+        jDesktopPane1.add(jL_nome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel3.setText("Complemento");
-        jLabel3.setBounds(30, 250, 120, 30);
-        jDesktopPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_complemento.setText("Complemento");
+        jL_complemento.setBounds(30, 250, 120, 30);
+        jDesktopPane1.add(jL_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel4.setText("Endereço");
-        jLabel4.setBounds(30, 200, 120, 30);
-        jDesktopPane1.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_endereco.setText("Endereço");
+        jL_endereco.setBounds(30, 200, 120, 30);
+        jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
-        jButton1.setMnemonic('s');
-        jButton1.setText("Salvar");
-        jButton1.setBounds(20, 300, 120, 80);
-        jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
+        jB_salvar.setMnemonic('s');
+        jB_salvar.setText("Salvar");
+        jB_salvar.setBounds(20, 300, 120, 80);
+        jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
-        jButton2.setMnemonic('c');
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jB_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
+        jB_cancelar.setMnemonic('c');
+        jB_cancelar.setText("Cancelar");
+        jB_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jB_cancelarActionPerformed(evt);
             }
         });
-        jButton2.setBounds(450, 300, 120, 80);
-        jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jB_cancelar.setBounds(450, 300, 120, 80);
+        jDesktopPane1.add(jB_cancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Cadastro de Cliente");
-        jLabel5.setBounds(0, 0, 600, 100);
-        jDesktopPane1.add(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
+        jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_titulo.setText("Cadastro de Cliente");
+        jL_titulo.setBounds(0, 0, 600, 80);
+        jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,22 +114,22 @@ public class CadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jB_cancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jB_cancelar;
+    private javax.swing.JButton jB_salvar;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jL_complemento;
+    private javax.swing.JLabel jL_endereco;
+    private javax.swing.JLabel jL_nome;
+    private javax.swing.JLabel jL_telefone;
+    private javax.swing.JLabel jL_titulo;
+    private javax.swing.JTextField jT_complemento;
+    private javax.swing.JTextField jT_endereco;
+    private javax.swing.JTextField jT_nome;
+    private javax.swing.JTextField jT_telefone;
     // End of variables declaration//GEN-END:variables
 }

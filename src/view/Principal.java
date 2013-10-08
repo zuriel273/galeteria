@@ -73,6 +73,11 @@ public class Principal extends javax.swing.JFrame {
         jB_clientes.setMnemonic('l');
         jB_clientes.setText("Listar Clientes");
         jB_clientes.setToolTipText("Listar Clientes");
+        jB_clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_clientesActionPerformed(evt);
+            }
+        });
         jB_clientes.setBounds(20, 240, 160, 80);
         jDesktopPane1.add(jB_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -183,6 +188,10 @@ public class Principal extends javax.swing.JFrame {
     private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
         new CadastroCliente(bgcolor).setVisible(true);
     }//GEN-LAST:event_jB_add_clienteActionPerformed
+
+    private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed
+        new ListarCliente(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_clientesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
