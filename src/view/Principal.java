@@ -116,9 +116,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jT_busca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jT_buscaKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jT_buscaKeyReleased(evt);
             }
@@ -143,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jT_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_buscaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jT_buscaActionPerformed
 
     private void jB_fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_fecharActionPerformed
@@ -156,10 +153,6 @@ public class Principal extends javax.swing.JFrame {
             jT_busca.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_jT_buscaFocusGained
-
-    private void jT_buscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyPressed
-        
-    }//GEN-LAST:event_jT_buscaKeyPressed
 
     private void jT_buscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyReleased
         if(!jT_busca.getText().isEmpty()){
