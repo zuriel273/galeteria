@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import negocio.Cliente;
 
 /**
@@ -22,7 +23,7 @@ public class ClienteDAO {
     Statement stmt;
     
     //NO CADASTRA SE O CPF EXISTE NAO CADASTRO.
-    public boolean cadastraMembro (Cliente m){
+    public boolean cadastraCliente (Cliente m){
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
@@ -109,5 +110,23 @@ public class ClienteDAO {
         return lista;
     }
     
+    public boolean editarCliente(Cliente m) throws Exception {
+        if(m!=null) {
+            String comandoSQL = "UPDATE CLIENTE SET nome='"+m.getNome()+"', COMPLEMENTO='"+m.getComplemento()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
+            System.out.println(comandoSQL);
+            try {
+                    stmt = (Statement) Myconnection.getStatement();
+                    stmt.executeUpdate(comandoSQL);
+                    stmt.close();
+                    return true;
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,"Erro ao alterar cadastro."+e.getMessage());
+                e.getStackTrace();
+            }
+        } else {
+                
+        }
+        return false;
+    }
     
 }

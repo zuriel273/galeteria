@@ -6,6 +6,8 @@ package view;
 
 import dados.ClienteDAO;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
 
@@ -18,9 +20,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastroCliente
      */
+    int id;
     public CadastroCliente(Color bgcolor){
         initComponents();
         jDesktopPane1.setBackground(bgcolor);
+        
     }
     
      public CadastroCliente(Color bgcolor,int id){
@@ -29,7 +33,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         ClienteDAO cD = new ClienteDAO();
         
         c = cD.buscaClienteId(id);
-        
+        this.id = id;
         jT_nome.setText(c.getNome());
         jT_telefone.setText(c.getTelefone());
         jT_endereco.setText(c.getEndereco());
@@ -151,18 +155,30 @@ public class CadastroCliente extends javax.swing.JFrame {
         ClienteDAO cD = new ClienteDAO();
         
         Cliente c = new Cliente(nome, endereco, telefone);
+        c.setId(id);
         
         if(complemento != null){
             c.setComplemento(complemento);
         }
         
-        if(cD.cadastraMembro(c)){
-            JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO COM SUCESSO.");
-            this.dispose();
+        if (jB_salvar.getText().equals("Atualizar")){
+            try {
+                if(cD.editarCliente(c)){ 
+                    JOptionPane.showMessageDialog(null, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+        
+            if(cD.cadastraCliente(c)){
+                JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO COM SUCESSO.");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+            }        
         }
-
         
         
     }//GEN-LAST:event_jB_salvarActionPerformed

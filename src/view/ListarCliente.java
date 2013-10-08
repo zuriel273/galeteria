@@ -176,7 +176,7 @@ public class ListarCliente extends javax.swing.JFrame {
                        
             new CadastroCliente(this.bgcolor,id).setVisible(true);
             
-            this.dispose();       
+            //this.dispose();       
         
         } catch (Exception e){
            
