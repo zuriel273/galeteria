@@ -44,7 +44,8 @@ public class Principal extends javax.swing.JFrame {
         jB_fechar = new javax.swing.JButton();
         jB_buscar = new javax.swing.JButton();
         jT_busca = new javax.swing.JTextField();
-        jL_resultado_busca = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jT_resultado_busca = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Galeteria");
@@ -92,6 +93,11 @@ public class Principal extends javax.swing.JFrame {
         jB_novo_pedido.setMnemonic('n');
         jB_novo_pedido.setText("Novo Pedido");
         jB_novo_pedido.setToolTipText("Novo Pedido");
+        jB_novo_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_novo_pedidoActionPerformed(evt);
+            }
+        });
         jB_novo_pedido.setBounds(20, 330, 160, 80);
         jDesktopPane1.add(jB_novo_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -136,11 +142,17 @@ public class Principal extends javax.swing.JFrame {
         jT_busca.setBounds(20, 100, 630, 40);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_resultado_busca.setBackground(new java.awt.Color(255, 255, 255));
-        jL_resultado_busca.setForeground(new java.awt.Color(0, 0, 0));
-        jL_resultado_busca.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jL_resultado_busca.setBounds(200, 160, 580, 420);
-        jDesktopPane1.add(jL_resultado_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jScrollPane1.setFocusable(false);
+
+        jT_resultado_busca.setBackground(new java.awt.Color(255, 255, 255));
+        jT_resultado_busca.setColumns(20);
+        jT_resultado_busca.setRows(5);
+        jT_resultado_busca.setBorder(null);
+        jT_resultado_busca.setFocusable(false);
+        jScrollPane1.setViewportView(jT_resultado_busca);
+
+        jScrollPane1.setBounds(200, 150, 580, 440);
+        jDesktopPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,6 +205,10 @@ public class Principal extends javax.swing.JFrame {
         new ListarCliente(bgcolor).setVisible(true);
     }//GEN-LAST:event_jB_clientesActionPerformed
 
+    private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
+        new CadastroPedido(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_novo_pedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
     private javax.swing.JButton jB_buscar;
@@ -201,8 +217,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jB_novo_pedido;
     private javax.swing.JButton jB_pedido;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jL_resultado_busca;
     private javax.swing.JLabel jL_titulo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_busca;
+    private javax.swing.JTextArea jT_resultado_busca;
     // End of variables declaration//GEN-END:variables
 }
