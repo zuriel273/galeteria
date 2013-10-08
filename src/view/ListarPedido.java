@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author massilva
  */
-public class ListarCliente extends javax.swing.JFrame {
+public class ListarPedido extends javax.swing.JFrame {
 
     /**
      * Creates new form ListarCliente
      */
-    public ListarCliente(Color bgcolor) {
+    public ListarPedido(Color bgcolor) {
         initComponents();
         jDesktopPane1.setBackground(bgcolor);
     }
@@ -45,7 +45,7 @@ public class ListarCliente extends javax.swing.JFrame {
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
         jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jL_titulo.setText("Lista de Clientes");
+        jL_titulo.setText("Lista de Pedidos");
         jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 

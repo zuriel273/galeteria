@@ -51,7 +51,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Cadasto de Pedido");
-        jL_titulo.setBounds(0, 0, 600, 80);
+        jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jT_busca.setForeground(new java.awt.Color(187, 187, 187));
@@ -68,24 +68,24 @@ public class CadastroPedido extends javax.swing.JFrame {
                 jT_buscaKeyReleased(evt);
             }
         });
-        jT_busca.setBounds(20, 90, 250, 28);
+        jT_busca.setBounds(20, 90, 360, 28);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jS_lista.setViewportView(jList1);
 
-        jS_lista.setBounds(20, 130, 250, 170);
+        jS_lista.setBounds(20, 130, 360, 170);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_pedido.setText("Pedido:");
-        jL_pedido.setBounds(290, 90, 290, 30);
+        jL_pedido.setBounds(420, 90, 290, 30);
         jDesktopPane1.add(jL_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jS_tabela.setViewportView(jTextArea1);
 
-        jS_tabela.setBounds(290, 130, 290, 170);
+        jS_tabela.setBounds(420, 130, 360, 170);
         jDesktopPane1.add(jS_tabela, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
@@ -101,7 +101,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(420, 310, 160, 80);
+        jB_voltar.setBounds(620, 310, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,13 +109,13 @@ public class CadastroPedido extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

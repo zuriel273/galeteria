@@ -86,6 +86,11 @@ public class Principal extends javax.swing.JFrame {
         jB_pedido.setMnemonic('P');
         jB_pedido.setText("Listar Pedidos");
         jB_pedido.setToolTipText("Listar Pedidos");
+        jB_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_pedidoActionPerformed(evt);
+            }
+        });
         jB_pedido.setBounds(20, 420, 160, 80);
         jDesktopPane1.add(jB_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -208,6 +213,10 @@ public class Principal extends javax.swing.JFrame {
     private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
         new CadastroPedido(bgcolor).setVisible(true);
     }//GEN-LAST:event_jB_novo_pedidoActionPerformed
+
+    private void jB_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_pedidoActionPerformed
+        new ListarPedido(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_pedidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
