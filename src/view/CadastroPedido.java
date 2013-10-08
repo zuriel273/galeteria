@@ -42,7 +42,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
         setAlwaysOnTop(true);
         setResizable(false);
