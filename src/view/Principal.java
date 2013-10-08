@@ -4,17 +4,22 @@
  */
 package view;
 
+import java.awt.Color;
+
 /**
  *
  * @author massilva
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    private String msg_busca = "Digite o telefone do cliente";
+    
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        jT_busca.setText(msg_busca);
     }
 
     /**
@@ -29,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jL_titulo = new javax.swing.JLabel();
         jB_add_cliente = new javax.swing.JButton();
+        jB_clientes = new javax.swing.JButton();
         jB_pedido = new javax.swing.JButton();
         jB_novo_pedido = new javax.swing.JButton();
         jB_fechar = new javax.swing.JButton();
@@ -37,54 +43,87 @@ public class Principal extends javax.swing.JFrame {
         jL_resultado_busca = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Galeteria");
+        setResizable(false);
+
+        jDesktopPane1.setBackground(new java.awt.Color(242, 242, 242));
 
         jL_titulo.setFont(new java.awt.Font("Sawasdee", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Galeteria");
-        jL_titulo.setBounds(0, 0, 800, 100);
+        jL_titulo.setBounds(0, 0, 800, 90);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_add_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
         jB_add_cliente.setMnemonic('C');
-        jB_add_cliente.setText("Cliente");
-        jB_add_cliente.setBounds(20, 180, 160, 80);
+        jB_add_cliente.setText("Novo Cliente");
+        jB_add_cliente.setToolTipText("Novo Cliente");
+        jB_add_cliente.setBounds(10, 150, 160, 80);
         jDesktopPane1.add(jB_add_cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/notepad.png"))); // NOI18N
+        jB_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/clientes.png"))); // NOI18N
+        jB_clientes.setMnemonic('l');
+        jB_clientes.setText("Listar Clientes");
+        jB_clientes.setToolTipText("Listar Clientes");
+        jB_clientes.setBounds(10, 240, 160, 80);
+        jDesktopPane1.add(jB_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart.png"))); // NOI18N
         jB_pedido.setMnemonic('P');
-        jB_pedido.setText("Pedidos");
-        jB_pedido.setBounds(20, 280, 160, 80);
+        jB_pedido.setText("Listar Pedidos");
+        jB_pedido.setToolTipText("Listar Pedidos");
+        jB_pedido.setBounds(10, 420, 160, 80);
         jDesktopPane1.add(jB_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_novo_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart_add.png"))); // NOI18N
         jB_novo_pedido.setMnemonic('n');
         jB_novo_pedido.setText("Novo Pedido");
-        jB_novo_pedido.setBounds(20, 380, 160, 80);
+        jB_novo_pedido.setToolTipText("Novo Pedido");
+        jB_novo_pedido.setBounds(10, 330, 160, 80);
         jDesktopPane1.add(jB_novo_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jB_fechar.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         jB_fechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/exit.png"))); // NOI18N
         jB_fechar.setMnemonic('f');
         jB_fechar.setText("Fechar");
+        jB_fechar.setToolTipText("Fechar Programa");
         jB_fechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_fecharActionPerformed(evt);
             }
         });
-        jB_fechar.setBounds(20, 480, 160, 80);
+        jB_fechar.setBounds(10, 510, 160, 80);
         jDesktopPane1.add(jB_fechar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/find.png"))); // NOI18N
         jB_buscar.setMnemonic('b');
         jB_buscar.setText("Buscar");
-        jB_buscar.setBounds(670, 110, 110, 40);
+        jB_buscar.setBounds(660, 100, 120, 40);
         jDesktopPane1.add(jB_buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jT_busca.setForeground(new java.awt.Color(187, 187, 187));
         jT_busca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_buscaActionPerformed(evt);
             }
         });
-        jT_busca.setBounds(20, 110, 640, 40);
+        jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jT_buscaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jT_buscaFocusLost(evt);
+            }
+        });
+        jT_busca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jT_buscaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jT_buscaKeyReleased(evt);
+            }
+        });
+        jT_busca.setBounds(10, 100, 640, 40);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jL_resultado_busca.setBounds(200, 160, 580, 420);
         jDesktopPane1.add(jL_resultado_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -111,9 +150,35 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jB_fecharActionPerformed
 
+    private void jT_buscaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusGained
+        if(jT_busca.getText().equals(msg_busca)){
+            jT_busca.setText("");
+            jT_busca.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jT_buscaFocusGained
+
+    private void jT_buscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyPressed
+        
+    }//GEN-LAST:event_jT_buscaKeyPressed
+
+    private void jT_buscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyReleased
+        if(!jT_busca.getText().isEmpty()){
+            jT_busca.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jT_buscaKeyReleased
+
+    private void jT_buscaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusLost
+        if(jT_busca.getText().isEmpty())
+        {
+            jT_busca.setForeground(Color.gray);
+            jT_busca.setText(msg_busca);
+        }
+    }//GEN-LAST:event_jT_buscaFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
     private javax.swing.JButton jB_buscar;
+    private javax.swing.JButton jB_clientes;
     private javax.swing.JButton jB_fechar;
     private javax.swing.JButton jB_novo_pedido;
     private javax.swing.JButton jB_pedido;
