@@ -33,10 +33,19 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jL_titulo = new javax.swing.JLabel();
+        jL_busca = new javax.swing.JLabel();
         jT_busca = new javax.swing.JTextField();
         jS_lista = new javax.swing.JScrollPane();
         jL_lista = new javax.swing.JList();
         jL_pedido = new javax.swing.JLabel();
+        jL_1 = new javax.swing.JLabel();
+        jL_2 = new javax.swing.JLabel();
+        jL_3 = new javax.swing.JLabel();
+        jL_4 = new javax.swing.JLabel();
+        jL_5 = new javax.swing.JLabel();
+        jL_6 = new javax.swing.JLabel();
+        jL_7 = new javax.swing.JLabel();
+        jL_8 = new javax.swing.JLabel();
         jT_pedido_1 = new javax.swing.JTextField();
         jT_pedido_2 = new javax.swing.JTextField();
         jT_pedido_3 = new javax.swing.JTextField();
@@ -49,7 +58,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_endereco = new javax.swing.JTextField();
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
@@ -62,6 +70,10 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_titulo.setText("Cadasto de Pedido");
         jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_busca.setText("Busca pelo cliente");
+        jL_busca.setBounds(260, 90, 160, 30);
+        jDesktopPane1.add(jL_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jT_busca.setForeground(new java.awt.Color(187, 187, 187));
         jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -89,21 +101,53 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_pedido.setText("Pedido");
         jL_pedido.setBounds(20, 230, 400, 30);
         jDesktopPane1.add(jL_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_1.setBounds(20, 260, 360, 28);
+
+        jL_1.setText("#1");
+        jL_1.setBounds(30, 260, 20, 30);
+        jDesktopPane1.add(jL_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_2.setText("#2");
+        jL_2.setBounds(30, 300, 20, 30);
+        jDesktopPane1.add(jL_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_3.setText("#3");
+        jL_3.setBounds(30, 340, 20, 30);
+        jDesktopPane1.add(jL_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_4.setText("#4");
+        jL_4.setBounds(30, 380, 20, 30);
+        jDesktopPane1.add(jL_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_5.setText("#5");
+        jL_5.setBounds(410, 260, 20, 30);
+        jDesktopPane1.add(jL_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_6.setText("#6");
+        jL_6.setBounds(410, 300, 20, 30);
+        jDesktopPane1.add(jL_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_7.setText("#7");
+        jL_7.setBounds(410, 340, 20, 30);
+        jDesktopPane1.add(jL_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_8.setText("#8");
+        jL_8.setBounds(410, 380, 20, 30);
+        jDesktopPane1.add(jL_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_pedido_1.setBounds(50, 260, 350, 28);
         jDesktopPane1.add(jT_pedido_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_2.setBounds(20, 300, 360, 28);
+        jT_pedido_2.setBounds(50, 300, 350, 28);
         jDesktopPane1.add(jT_pedido_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_3.setBounds(20, 340, 360, 28);
+        jT_pedido_3.setBounds(50, 340, 350, 28);
         jDesktopPane1.add(jT_pedido_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_4.setBounds(20, 380, 360, 28);
+        jT_pedido_4.setBounds(50, 380, 350, 28);
         jDesktopPane1.add(jT_pedido_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_5.setBounds(420, 260, 360, 28);
+        jT_pedido_5.setBounds(430, 260, 350, 28);
         jDesktopPane1.add(jT_pedido_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_6.setBounds(420, 300, 360, 28);
+        jT_pedido_6.setBounds(430, 300, 350, 28);
         jDesktopPane1.add(jT_pedido_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_7.setBounds(420, 340, 360, 28);
+        jT_pedido_7.setBounds(430, 340, 350, 28);
         jDesktopPane1.add(jT_pedido_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_8.setBounds(420, 380, 360, 28);
+        jT_pedido_8.setBounds(430, 380, 350, 28);
         jDesktopPane1.add(jT_pedido_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_endereco.setText("Endereço de entrega");
@@ -127,10 +171,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         });
         jB_voltar.setBounds(620, 500, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel1.setText("Busca pelo cliente");
-        jLabel1.setBounds(260, 90, 160, 30);
-        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,11 +219,19 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jL_1;
+    private javax.swing.JLabel jL_2;
+    private javax.swing.JLabel jL_3;
+    private javax.swing.JLabel jL_4;
+    private javax.swing.JLabel jL_5;
+    private javax.swing.JLabel jL_6;
+    private javax.swing.JLabel jL_7;
+    private javax.swing.JLabel jL_8;
+    private javax.swing.JLabel jL_busca;
     private javax.swing.JLabel jL_endereco;
     private javax.swing.JList jL_lista;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jS_lista;
     private javax.swing.JTextField jT_busca;
     private javax.swing.JTextField jT_endereco;
