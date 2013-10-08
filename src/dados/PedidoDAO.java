@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.Cliente;
 import negocio.Pedido;
 
 
@@ -36,33 +37,51 @@ public class PedidoDAO {
     }
     
     public Pedido buscaPedido(String nome){ // fazer um inner join com o nome do cliente
-        String sql = "SELECT * FROM Cliente WHERE NOME like '"+nome+"'";
-        ResultSet rs;
+        String sql = "SELECT * FROM PEDIDO INNER JOIN CLIENTE WHERE  CLIENTE.ID = PEDIDO.ID_CLIENTE AND CLIENTE.NOME like '%"+nome+"%'";
+        
+        ResultSet rs, rs2;
         try{
-            stmt = (Statement) Myconnection.getStatement();
+            java.sql.Statement  stmt = (Statement) Myconnection.getStatement();
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            String sql2 = "SELECT * FROM Cliente WHERE id ="+ rs.getInt("id");
+            
+            java.sql.Statement  stmt2 = (Statement) Myconnection.getStatement();
+            rs2 = stmt2.executeQuery(sql2);
+            rs2.next();
+            
+            Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
+            Pedido p = new Pedido(rs.getString("descricao"), rs.getFloat("valor"), c);
+            
             stmt.close();
-            return m;
+            stmt2.close();
+            
+            return p;
         }catch(Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return null;
     }
     
-    public List listaCliente(String nome){
-        ResultSet rs;
+    public List listaPedido(String nome){
+        ResultSet rs, rs2;
         List lista = new ArrayList();
-        String sql = "SELECT * FROM CLIENTE WHERE NOME like '%"+ nome +"%' ORDER BY NOME";
+        String sql = "SELECT * FROM PEDIDO INNER JOIN CLIENTE WHERE  CLIENTE.ID = PEDIDO.ID_CLIENTE AND CLIENTE.NOME like '"+nome+"'";
         try{
-            stmt = Myconnection.getStatement();
+            java.sql.Statement stmt = Myconnection.getStatement();
             rs = stmt.executeQuery(sql);
             while(rs.next()){
                                  
-                Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
-                lista.add(m);
+                String sql2 = "SELECT * FROM Cliente WHERE id ="+ rs.getInt("id");
+
+                java.sql.Statement  stmt2 = (Statement) Myconnection.getStatement();
+                rs2 = stmt2.executeQuery(sql2);
+                rs2.next();
+
+                Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
+                Pedido p = new Pedido(rs.getString("descricao"), rs.getFloat("valor"), c);
+                lista.add(p);
             }
             stmt.close();
         }catch(Exception e){
