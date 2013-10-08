@@ -4,7 +4,10 @@
  */
 package view;
 
+import dados.ClienteDAO;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import negocio.Cliente;
 
 /**
  *
@@ -47,6 +50,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jT_complemento.setBounds(150, 250, 420, 30);
         jDesktopPane1.add(jT_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jT_endereco.setBounds(150, 200, 420, 30);
@@ -75,6 +79,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
         jB_salvar.setMnemonic('s');
         jB_salvar.setText("Salvar");
+        jB_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_salvarActionPerformed(evt);
+            }
+        });
         jB_salvar.setBounds(20, 300, 120, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -90,7 +99,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jDesktopPane1.add(jB_cancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
-        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Cadastro de Cliente");
         jL_titulo.setBounds(0, 0, 600, 80);
@@ -117,6 +125,31 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jB_cancelarActionPerformed
+
+    private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
+        // TODO add your handling code here:
+        String nome = jT_nome.getText();
+        String endereco = jT_endereco.getText();
+        String complemento = jT_complemento.getText();
+        String telefone = jT_nome.getText();
+        ClienteDAO cD = new ClienteDAO();
+        
+        Cliente c = new Cliente(nome, endereco, telefone);
+        
+        if(complemento != null){
+            c.setComplemento(complemento);
+        }
+        
+        if(cD.cadastraMembro(c)){
+            JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO COM SUCESSO.");
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+        }
+
+        
+        
+    }//GEN-LAST:event_jB_salvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cancelar;

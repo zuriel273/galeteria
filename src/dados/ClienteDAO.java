@@ -26,17 +26,18 @@ public class ClienteDAO {
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE) "
-                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"', '"+m.getTelefone()+"');"; 
+            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE,COMPLEMENTO) "
+                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"','"+m.getComplemento()+"');"; 
             System.out.println(comandoSql_nome);
             System.out.println(comandoSql);
             try{
-                java.sql.Statement stmt = (Statement)Myconnection.getStatement();
+                stmt = (Statement)Myconnection.getStatement();
                 rs_nome = stmt.executeQuery(comandoSql_nome);
                 if(rs_nome.first() == false){
+                    
                     stmt.executeUpdate(comandoSql);
                     stmt.close();
-                    System.out.println(rs_nome.first());
+                    
                     return true;
                 }
             }catch(Exception e){
