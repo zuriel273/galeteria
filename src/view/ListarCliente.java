@@ -4,7 +4,17 @@
  */
 package view;
 
+import dados.ClienteDAO;
+import dados.PedidoDAO;
 import java.awt.Color;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import negocio.Cliente;
+import negocio.Pedido;
 
 /**
  *
@@ -12,12 +22,20 @@ import java.awt.Color;
  */
 public class ListarCliente extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
+    Color bgcolor;
     /**
      * Creates new form ListarCliente
      */
     public ListarCliente(Color bgcolor) {
         initComponents();
+        this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
+        try {
+            atualizarLista("");
+        } catch (Exception ex) {
+            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -43,7 +61,6 @@ public class ListarCliente extends javax.swing.JFrame {
         setResizable(false);
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
-        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Lista de Clientes");
         jL_titulo.setBounds(0, 0, 800, 80);
@@ -68,12 +85,22 @@ public class ListarCliente extends javax.swing.JFrame {
         jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
         jB_editar.setMnemonic('e');
         jB_editar.setText("Editar");
+        jB_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_editarActionPerformed(evt);
+            }
+        });
         jB_editar.setBounds(620, 80, 160, 80);
         jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
         jB_excluir.setMnemonic('x');
         jB_excluir.setText("Excluir");
+        jB_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_excluirActionPerformed(evt);
+            }
+        });
         jB_excluir.setBounds(620, 190, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -106,9 +133,78 @@ public class ListarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void atualizarLista(String nome) throws Exception{
+        
+        this.setAlwaysOnTop(false);
+        
+        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
+        modelo = new DefaultTableModel(null, colunas){
+            
+        @Override
+        public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        
+         ClienteDAO f = new ClienteDAO();
+         List listar = f.listaCliente(nome);
+        if(listar.isEmpty()){
+            jB_editar.setVisible(false);
+            jB_excluir.setVisible(false);
+            
+        }
+        
+        Iterator it = listar.iterator();
+        while(it.hasNext()){
+            Cliente l = (Cliente)it.next();
+            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
+        }
+        
+        jT_lista.setModel(modelo);
+        jT_lista.setShowHorizontalLines(false);
+        jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
+    }
+    
     private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
+
+    private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
+        // TODO add your handling code here:
+        try {
+            
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+         
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+                       
+            new CadastroCliente(this.bgcolor,id).setVisible(true);
+            
+            //this.dispose();       
+        
+        } catch (Exception e){
+           
+        }
+    }//GEN-LAST:event_jB_editarActionPerformed
+
+    private void jB_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_excluirActionPerformed
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();
+         
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+        
+        ClienteDAO cD = new ClienteDAO();
+        
+        cD.excluiCliente(id);
+        
+        try {
+            atualizarLista("");
+        } catch (Exception ex) {
+            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jB_excluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_editar;

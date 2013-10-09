@@ -17,11 +17,11 @@ import negocio.Pedido;
  * @author Arlindo
  */
 public class PedidoDAO {
-    public boolean cadastraPedido (Pedido m){
+    public boolean cadastraPedido (Pedido m) throws Exception{
         if(m != null){
                         
-            String comandoSql = "INSERT INTO PEDIDO (DESCRICAO,ENTREGUE,ID_CLIENTE,VALOR) " +
-            "VALUES ('"+m.getDescricao()+"','"+m.isEntregue()+"', '"+m.getCliente().getId()+"', '"+m.getValor()+"');"; 
+            String comandoSql = "INSERT INTO PEDIDO (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,ENTREGUE,ID_CLIENTE) " +
+            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"',false, '"+m.getCliente().getId()+"');"; 
           
             System.out.println(comandoSql);
             try{
@@ -52,7 +52,7 @@ public class PedidoDAO {
             rs2.next();
             
             Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
-            Pedido p = new Pedido(rs.getString("descricao"), rs.getFloat("valor"), c);
+            Pedido p = new Pedido(c);
             
             stmt.close();
             stmt2.close();
@@ -80,7 +80,7 @@ public class PedidoDAO {
                 rs2.next();
 
                 Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
-                Pedido p = new Pedido(rs.getString("descricao"), rs.getFloat("valor"), c);
+                Pedido p = new Pedido(c);
                 lista.add(p);
             }
             stmt.close();

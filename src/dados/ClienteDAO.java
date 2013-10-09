@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import negocio.Cliente;
 
 /**
@@ -22,7 +23,7 @@ public class ClienteDAO {
     Statement stmt;
     
     //NO CADASTRA SE O CPF EXISTE NAO CADASTRO.
-    public boolean cadastraMembro (Cliente m){
+    public boolean cadastraCliente (Cliente m){
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
@@ -56,6 +57,8 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            int id = Integer.parseInt(rs.getString("id"));
+            m.setId(id);
             stmt.close();
             return m;
         }catch(Exception e){
@@ -63,6 +66,25 @@ public class ClienteDAO {
         }
         return null;
     }
+     
+    public Cliente buscaClienteId(int id){
+        String sql = "SELECT * FROM Cliente WHERE ID = "+ id;
+        ResultSet rs;
+        try{
+            stmt = (Statement) Myconnection.getStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            m.setId(id);
+            stmt.close();
+            return m;
+        }catch(Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return null;
+    }
+    
     
     public List listaCliente(String nome){
         ResultSet rs;
@@ -74,6 +96,11 @@ public class ClienteDAO {
             while(rs.next()){
                                  
                 Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+                int id = Integer.parseInt(rs.getString("id"));
+                System.out.println(rs.getString("NOME"));
+                System.out.println(rs.getString("ENDERECO"));
+                System.out.println(rs.getString("TELEFONE"));
+                m.setId(id);
                 lista.add(m);
             }
             stmt.close();
@@ -83,5 +110,39 @@ public class ClienteDAO {
         return lista;
     }
     
+    public boolean editarCliente(Cliente m) throws Exception {
+        if(m!=null) {
+            String comandoSQL = "UPDATE CLIENTE SET nome='"+m.getNome()+"', COMPLEMENTO='"+m.getComplemento()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
+            System.out.println(comandoSQL);
+            try {
+                    stmt = (Statement) Myconnection.getStatement();
+                    stmt.executeUpdate(comandoSQL);
+                    stmt.close();
+                    return true;
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,"Erro ao alterar cadastro."+e.getMessage());
+                e.getStackTrace();
+            }
+        } else {
+                
+        }
+        return false;
+    }
+    
+    public void excluiCliente(int id){
+         String comandoSQL;
+
+        comandoSQL ="DELETE FROM `CLIENTE` WHERE id="+ id;
+
+        try{
+            stmt =  Myconnection.getStatement();
+            stmt.executeUpdate(comandoSQL);
+            stmt.close();
+
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro no excluir!");
+            e.printStackTrace();
+        }
+    }
     
 }

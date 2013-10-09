@@ -4,7 +4,18 @@
  */
 package view;
 
+import dados.ClienteDAO;
+import dados.PedidoDAO;
 import java.awt.Color;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import negocio.Cliente;
+import negocio.Pedido;
 
 /**
  *
@@ -12,13 +23,21 @@ import java.awt.Color;
  */
 public class CadastroPedido extends javax.swing.JFrame {
 
-    private String msg_busca = "Digite o telefone ou o nome do cliente";
+    private String msg_busca = "Digite o nome do cliente";
+    DefaultTableModel modelo;
+    Color bgcolor;
+    Cliente c;
     /**
      * Creates new form CadastroPedido
      */
     public CadastroPedido(Color bgcolor) {
         initComponents();
         jT_busca.setText(msg_busca);
+        try {
+            atualizarLista("");
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.setBackground(bgcolor);
     }
 
@@ -35,8 +54,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_titulo = new javax.swing.JLabel();
         jL_busca = new javax.swing.JLabel();
         jT_busca = new javax.swing.JTextField();
-        jS_lista = new javax.swing.JScrollPane();
-        jL_lista = new javax.swing.JList();
         jL_pedido = new javax.swing.JLabel();
         jL_1 = new javax.swing.JLabel();
         jL_2 = new javax.swing.JLabel();
@@ -54,20 +71,25 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_pedido_6 = new javax.swing.JTextField();
         jT_pedido_7 = new javax.swing.JTextField();
         jT_pedido_8 = new javax.swing.JTextField();
-        jL_endereco = new javax.swing.JLabel();
-        jT_endereco = new javax.swing.JTextField();
+        jL_complemento = new javax.swing.JLabel();
+        jT_complemento = new javax.swing.JTextField();
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
+        jS_lista = new javax.swing.JScrollPane();
+        jT_lista = new javax.swing.JTable();
+        jT_endereco = new javax.swing.JTextField();
+        jL_endereco = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
+
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
-        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jL_titulo.setText("Cadasto de Pedido");
+        jL_titulo.setText("Cadastro de Pedido");
         jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -77,11 +99,11 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jT_busca.setForeground(new java.awt.Color(187, 187, 187));
         jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jT_buscaFocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jT_buscaFocusLost(evt);
+            }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jT_buscaFocusGained(evt);
             }
         });
         jT_busca.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -91,12 +113,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         });
         jT_busca.setBounds(420, 90, 360, 28);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jL_lista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jS_lista.setViewportView(jL_lista);
-
-        jS_lista.setBounds(20, 130, 760, 90);
-        jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_pedido.setText("Pedido");
         jL_pedido.setBounds(20, 230, 400, 30);
@@ -150,15 +166,26 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_pedido_8.setBounds(430, 380, 350, 28);
         jDesktopPane1.add(jT_pedido_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_endereco.setText("Endereço de entrega");
-        jL_endereco.setBounds(20, 420, 180, 30);
-        jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_endereco.setBounds(20, 450, 760, 28);
-        jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_complemento.setText("Complemento");
+        jL_complemento.setBounds(20, 470, 180, 20);
+        jDesktopPane1.add(jL_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jT_complemento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_complementoActionPerformed(evt);
+            }
+        });
+        jT_complemento.setBounds(20, 490, 420, 28);
+        jDesktopPane1.add(jT_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
         jB_salvar.setText("Salvar");
-        jB_salvar.setBounds(20, 500, 160, 80);
+        jB_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_salvarActionPerformed(evt);
+            }
+        });
+        jB_salvar.setBounds(20, 530, 160, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -169,8 +196,43 @@ public class CadastroPedido extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 500, 160, 80);
+        jB_voltar.setBounds(620, 530, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jT_lista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jT_lista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jT_listaMouseClicked(evt);
+            }
+        });
+        jT_lista.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jT_listaFocusLost(evt);
+            }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jT_listaFocusGained(evt);
+            }
+        });
+        jS_lista.setViewportView(jT_lista);
+
+        jS_lista.setBounds(20, 120, 760, 110);
+        jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jT_endereco.setBounds(20, 440, 760, 28);
+        jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_endereco.setText("Endereço de entrega");
+        jL_endereco.setBounds(20, 420, 180, 20);
+        jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,14 +244,45 @@ public class CadastroPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void atualizarLista(String nome) throws Exception{
+        
+        this.setAlwaysOnTop(false);
+        
+        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
+        modelo = new DefaultTableModel(null, colunas){
+            
+        @Override
+        public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        
+         ClienteDAO f = new ClienteDAO();
+         List listar = f.listaCliente(nome);
+        if(listar.isEmpty()){
+            jB_salvar.setVisible(false);
+                        
+        }
+        
+        Iterator it = listar.iterator();
+        while(it.hasNext()){
+            Cliente l = (Cliente)it.next();
+            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
+        }
+        
+        jT_lista.setModel(modelo);
+        jT_lista.setShowHorizontalLines(false);
+        jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
+    }
+    
     private void jT_buscaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusGained
         if(jT_busca.getText().equals(msg_busca)){
             jT_busca.setText("");
@@ -199,8 +292,17 @@ public class CadastroPedido extends javax.swing.JFrame {
 
     private void jT_buscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyReleased
         if(!jT_busca.getText().isEmpty()){
-            jT_busca.setForeground(Color.BLACK);
+            jT_busca.setForeground(Color.BLACK);            
         }
+        
+        String filtro = jT_busca.getText();
+        
+        try {        
+            atualizarLista(filtro);
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jT_buscaKeyReleased
 
     private void jT_buscaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusLost
@@ -215,6 +317,91 @@ public class CadastroPedido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
+    private void jT_complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_complementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_complementoActionPerformed
+
+    private void jT_listaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusGained
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();         
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+        
+        ClienteDAO cD = new ClienteDAO();
+        c = cD.buscaClienteId(id);
+                
+        jT_endereco.setText(c.getEndereco());
+        jT_complemento.setText(c.getComplemento());
+    }//GEN-LAST:event_jT_listaFocusGained
+
+    private void jT_listaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusLost
+        // TODO add your handling code here:
+        
+        int numLinhaSelecionada = jT_lista.getSelectedRow();         
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+        
+        ClienteDAO cD = new ClienteDAO();
+        c = cD.buscaClienteId(id);
+                
+        jT_endereco.setText(c.getEndereco());
+        jT_complemento.setText(c.getComplemento());
+    }//GEN-LAST:event_jT_listaFocusLost
+
+    private void jT_listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_listaMouseClicked
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();         
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+        
+        ClienteDAO cD = new ClienteDAO();
+        c = cD.buscaClienteId(id);
+                
+        jT_endereco.setText(c.getEndereco());
+        jT_complemento.setText(c.getComplemento());
+    }//GEN-LAST:event_jT_listaMouseClicked
+
+    private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
+        // TODO add your handling code here:
+        String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
+        String  endereco, complemento;
+        PedidoDAO pD = new PedidoDAO();
+        
+        endereco = jT_endereco.getText();
+        complemento = jT_complemento.getText();
+        
+        pedido1 = jT_pedido_1.getText();
+        pedido2 = jT_pedido_2.getText();
+        pedido3 = jT_pedido_3.getText();
+        pedido4 = jT_pedido_4.getText();
+        pedido5 = jT_pedido_5.getText();
+        pedido6 = jT_pedido_6.getText();
+        pedido7 = jT_pedido_7.getText();
+        pedido8 = jT_pedido_8.getText();
+        
+        Pedido p = new Pedido(c);
+        p.setPedido1(pedido1);
+        p.setPedido2(pedido2);
+        p.setPedido3(pedido3);
+        p.setPedido4(pedido4);
+        p.setPedido5(pedido5);
+        p.setPedido6(pedido6);
+        p.setPedido7(pedido7);
+        p.setPedido8(pedido8);
+        
+        p.setEndereco(endereco);
+        p.setComplemento(complemento);
+        try {
+            if(pD.cadastraPedido(p)){
+                JOptionPane.showMessageDialog(null, "PEDIDO CADASTRADO COM SUCESSO.");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+            }       
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jB_salvarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
@@ -228,13 +415,15 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jL_7;
     private javax.swing.JLabel jL_8;
     private javax.swing.JLabel jL_busca;
+    private javax.swing.JLabel jL_complemento;
     private javax.swing.JLabel jL_endereco;
-    private javax.swing.JList jL_lista;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
     private javax.swing.JScrollPane jS_lista;
     private javax.swing.JTextField jT_busca;
+    private javax.swing.JTextField jT_complemento;
     private javax.swing.JTextField jT_endereco;
+    private javax.swing.JTable jT_lista;
     private javax.swing.JTextField jT_pedido_1;
     private javax.swing.JTextField jT_pedido_2;
     private javax.swing.JTextField jT_pedido_3;
