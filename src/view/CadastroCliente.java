@@ -141,10 +141,10 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
         
         if(cD.cadastraMembro(c)){
-            JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO COM SUCESSO.");
+            JOptionPane.showMessageDialog(this, "CLIENTE CADASTRADO COM SUCESSO.");
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
         }
 
         
