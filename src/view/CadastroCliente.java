@@ -23,8 +23,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     int id;
     public CadastroCliente(Color bgcolor){
         initComponents();
-        jDesktopPane1.setBackground(bgcolor);
-        
+        jDesktopPane1.setBackground(bgcolor);     
     }
     
      public CadastroCliente(Color bgcolor,int id){
@@ -164,7 +163,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         if (jB_salvar.getText().equals("Atualizar")){
             try {
                 if(cD.editarCliente(c)){ 
-                    JOptionPane.showMessageDialog(null, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                 }
             } catch (Exception ex) {
@@ -173,10 +172,10 @@ public class CadastroCliente extends javax.swing.JFrame {
         }else{
         
             if(cD.cadastraCliente(c)){
-                JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO COM SUCESSO.");
+                JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
             }        
         }
         

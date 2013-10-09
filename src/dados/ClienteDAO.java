@@ -26,11 +26,11 @@ public class ClienteDAO {
     public boolean cadastraCliente (Cliente m){
         if(m != null){
             ResultSet rs_nome;
-            String comandoSql_nome = "SELECT * FROM CLIENTE WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO CLIENTE (NOME,ENDERECO,TELEFONE,COMPLEMENTO) "
+            String comandoSql_nome = "SELECT * FROM cliente WHERE NOME like '"+m.getNome()+"'";
+            String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE,COMPLEMENTO) "
                                 +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"','"+m.getComplemento()+"');"; 
-            System.out.println(comandoSql_nome);
-            System.out.println(comandoSql);
+//            System.out.println(comandoSql_nome);
+//            System.out.println(comandoSql);
             try{
                 stmt = (Statement)Myconnection.getStatement();
                 rs_nome = stmt.executeQuery(comandoSql_nome);
@@ -68,7 +68,7 @@ public class ClienteDAO {
     }
      
     public Cliente buscaClienteId(int id){
-        String sql = "SELECT * FROM Cliente WHERE ID = "+ id;
+        String sql = "SELECT * FROM cliente WHERE ID = "+ id;
         ResultSet rs;
         try{
             stmt = (Statement) Myconnection.getStatement();
@@ -89,7 +89,7 @@ public class ClienteDAO {
     public List listaCliente(String nome){
         ResultSet rs;
         List lista = new ArrayList();
-        String sql = "SELECT * FROM CLIENTE WHERE NOME like '%"+ nome +"%' ORDER BY NOME";
+        String sql = "SELECT * FROM cliente WHERE NOME like '%"+ nome +"%' ORDER BY NOME";
         try{
             stmt = Myconnection.getStatement();
             rs = stmt.executeQuery(sql);
@@ -97,9 +97,9 @@ public class ClienteDAO {
                                  
                 Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
                 int id = Integer.parseInt(rs.getString("id"));
-                System.out.println(rs.getString("NOME"));
-                System.out.println(rs.getString("ENDERECO"));
-                System.out.println(rs.getString("TELEFONE"));
+//                System.out.println(rs.getString("NOME"));
+//                System.out.println(rs.getString("ENDERECO"));
+//                System.out.println(rs.getString("TELEFONE"));
                 m.setId(id);
                 lista.add(m);
             }
@@ -112,8 +112,8 @@ public class ClienteDAO {
     
     public boolean editarCliente(Cliente m) throws Exception {
         if(m!=null) {
-            String comandoSQL = "UPDATE CLIENTE SET nome='"+m.getNome()+"', COMPLEMENTO='"+m.getComplemento()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
-            System.out.println(comandoSQL);
+            String comandoSQL = "UPDATE cliente SET nome='"+m.getNome()+"', COMPLEMENTO='"+m.getComplemento()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
+//            System.out.println(comandoSQL);
             try {
                     stmt = (Statement) Myconnection.getStatement();
                     stmt.executeUpdate(comandoSQL);
@@ -132,7 +132,7 @@ public class ClienteDAO {
     public void excluiCliente(int id){
          String comandoSQL;
 
-        comandoSQL ="DELETE FROM `CLIENTE` WHERE id="+ id;
+        comandoSQL ="DELETE FROM `cliente` WHERE id="+ id;
 
         try{
             stmt =  Myconnection.getStatement();
