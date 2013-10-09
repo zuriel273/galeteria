@@ -12,10 +12,11 @@ public class Cliente {
     private int id;
     private String nome, endereco, telefone, complemento;
 
-    public Cliente(String nome, String endereco, String telefone) {
+    public Cliente(String nome, String endereco, String telefone,String complemento) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.complemento = complemento;
     }
 
     public String getComplemento() {

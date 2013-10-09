@@ -56,7 +56,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
             int id = Integer.parseInt(rs.getString("id"));
             m.setId(id);
             stmt.close();
@@ -75,7 +75,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
             m.setId(id);
             stmt.close();
             return m;
@@ -95,7 +95,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             while(rs.next()){
                                  
-                Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+                Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
                 int id = Integer.parseInt(rs.getString("id"));
 //                System.out.println(rs.getString("NOME"));
 //                System.out.println(rs.getString("ENDERECO"));

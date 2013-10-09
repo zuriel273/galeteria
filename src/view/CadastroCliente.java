@@ -153,12 +153,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         String telefone = jT_telefone.getText();
         ClienteDAO cD = new ClienteDAO();
         
-        Cliente c = new Cliente(nome, endereco, telefone);
+        Cliente c = new Cliente(nome, endereco, telefone,complemento);
         c.setId(id);
-        
-        if(complemento != null){
-            c.setComplemento(complemento);
-        }
         
         if (jB_salvar.getText().equals("Atualizar")){
             try {

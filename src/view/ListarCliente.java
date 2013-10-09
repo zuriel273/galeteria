@@ -5,16 +5,15 @@
 package view;
 
 import dados.ClienteDAO;
-import dados.PedidoDAO;
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
-import negocio.Pedido;
 
 /**
  *
@@ -137,7 +136,7 @@ public class ListarCliente extends javax.swing.JFrame {
         
         this.setAlwaysOnTop(false);
         
-        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
+        String [] colunas = new String []{"#","Nome","Telefone","Endereco","Complemento"};
         modelo = new DefaultTableModel(null, colunas){
             
         @Override
@@ -146,18 +145,17 @@ public class ListarCliente extends javax.swing.JFrame {
             }
         };
         
-         ClienteDAO f = new ClienteDAO();
-         List listar = f.listaCliente(nome);
+        ClienteDAO f = new ClienteDAO();
+        List listar = f.listaCliente(nome);
         if(listar.isEmpty()){
             jB_editar.setVisible(false);
             jB_excluir.setVisible(false);
-            
         }
         
         Iterator it = listar.iterator();
         while(it.hasNext()){
             Cliente l = (Cliente)it.next();
-            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
+            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco(),l.getComplemento()});
         }
         
         jT_lista.setModel(modelo);
@@ -184,7 +182,7 @@ public class ListarCliente extends javax.swing.JFrame {
             //this.dispose();       
         
         } catch (Exception e){
-           
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
         }
     }//GEN-LAST:event_jB_editarActionPerformed
 

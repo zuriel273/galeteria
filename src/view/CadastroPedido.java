@@ -266,8 +266,7 @@ public class CadastroPedido extends javax.swing.JFrame {
          ClienteDAO f = new ClienteDAO();
          List listar = f.listaCliente(nome);
         if(listar.isEmpty()){
-            jB_salvar.setVisible(false);
-                        
+            jB_salvar.setVisible(false);                 
         }
         
         Iterator it = listar.iterator();
@@ -390,10 +389,10 @@ public class CadastroPedido extends javax.swing.JFrame {
         p.setComplemento(complemento);
         try {
             if(pD.cadastraPedido(p)){
-                JOptionPane.showMessageDialog(null, "PEDIDO CADASTRADO COM SUCESSO.");
+                JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
             }       
         } catch (Exception ex) {
             Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
