@@ -20,8 +20,8 @@ public class PedidoDAO {
     public boolean cadastraPedido (Pedido m) throws Exception{
         if(m != null){
                         
-            String comandoSql = "INSERT INTO pedido (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,ENTREGUE,ID_CLIENTE) " +
-            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"',false, '"+m.getCliente().getId()+"');"; 
+            String comandoSql = "INSERT INTO pedido (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,VALOR,ID_CLIENTE) " +
+            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"','"+m.getValor()+"','"+m.getCliente().getId()+"');"; 
           
 //            System.out.println(comandoSql);
             try{
@@ -91,7 +91,7 @@ public class PedidoDAO {
     }
     
     public List listaPedidoIdCliente(Cliente cliente){
-        ResultSet rs, rs2;
+        ResultSet rs;
         List lista = new ArrayList();
         String sql = "SELECT * FROM pedido WHERE id ="+ cliente.getId() + "ORDER BY id DESC";
         try{
@@ -100,8 +100,9 @@ public class PedidoDAO {
             while(rs.next()){
                             
                 Pedido p = new Pedido(cliente);
-                p.setEndereco(rs.getString(""));
-                
+                p.setEndereco(rs.getString("endereco"));
+                p.setId(rs.getInt("id"));
+                p.setValor(rs.getFloat("valor"));
                 
                 lista.add(p);
             }

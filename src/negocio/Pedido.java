@@ -11,14 +11,22 @@ package negocio;
 public class Pedido {
     String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
     String  endereco;
-    boolean entregue;
     int id;
+    float valor;
     Cliente cliente;
 
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
     }
 
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+        
     public String getPedido1() {
         return pedido1;
     }
@@ -81,14 +89,6 @@ public class Pedido {
 
     public void setPedido8(String pedido8) {
         this.pedido8 = pedido8;
-    }
-
-    public boolean isEntregue() {
-        return entregue;
-    }
-
-    public void setEntregue(boolean entregue) {
-        this.entregue = entregue;
     }
 
     public int getId() {

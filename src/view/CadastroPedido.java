@@ -33,6 +33,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     public CadastroPedido(Color bgcolor) {
         initComponents();
         jT_busca.setText(msg_busca);
+        jF_Valor.setText("0");
         try {
             atualizarLista("");
         } catch (Exception ex) {
@@ -77,8 +78,8 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_lista = new javax.swing.JTable();
         jT_endereco = new javax.swing.JTextField();
         jL_endereco = new javax.swing.JLabel();
-        jL_endereco1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jL_Valor = new javax.swing.JLabel();
+        jF_Valor = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
@@ -222,14 +223,15 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_endereco.setBounds(20, 420, 180, 20);
         jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_endereco1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jL_endereco1.setText("Valor:");
-        jL_endereco1.setBounds(400, 480, 60, 40);
-        jDesktopPane1.add(jL_endereco1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_Valor.setText("Valor:   R$");
+        jL_Valor.setBounds(370, 480, 90, 40);
+        jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        jFormattedTextField1.setBounds(460, 480, 130, 40);
-        jDesktopPane1.add(jFormattedTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jF_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jF_Valor.setBounds(460, 480, 130, 40);
+        jDesktopPane1.add(jF_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -398,7 +400,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jF_Valor;
     private javax.swing.JLabel jL_1;
     private javax.swing.JLabel jL_2;
     private javax.swing.JLabel jL_3;
@@ -407,9 +409,9 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jL_6;
     private javax.swing.JLabel jL_7;
     private javax.swing.JLabel jL_8;
+    private javax.swing.JLabel jL_Valor;
     private javax.swing.JLabel jL_busca;
     private javax.swing.JLabel jL_endereco;
-    private javax.swing.JLabel jL_endereco1;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
     private javax.swing.JScrollPane jS_lista;
