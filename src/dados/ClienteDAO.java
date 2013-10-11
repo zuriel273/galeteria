@@ -132,9 +132,9 @@ public class ClienteDAO {
         return false;
     }
     
-    public boolean addNumPedidos(int id,int num) throws Exception {
-        if(id != 0) {
-            String comandoSQL = "UPDATE cliente SET numeroPedidos='"+num+"' WHERE id = "+id;
+    public boolean addNumPedidos(Cliente c) throws Exception {
+        if(c != null) {
+            String comandoSQL = "UPDATE cliente SET numeroPedidos='"+c.getNumPedidos()+1+"' WHERE id = "+c.getId();
 //            System.out.println(comandoSQL);
             try {
                     stmt = (Statement) Myconnection.getStatement();

@@ -23,22 +23,22 @@ import negocio.Pedido;
  */
 public class CadastroPedido extends javax.swing.JFrame {
 
-    private String msg_busca = "Digite o nome do cliente";
+    
     DefaultTableModel modelo;
     Color bgcolor;
     Cliente c;
     /**
      * Creates new form CadastroPedido
      */
-    public CadastroPedido(Color bgcolor) {
+    public CadastroPedido(Color bgcolor, Cliente c) {
         initComponents();
-        jT_busca.setText(msg_busca);
+        
         jF_Valor.setText("0");
-        try {
-            atualizarLista("");
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.c = c;
+        jT_endereco.setText(c.getEndereco());
+        jL_Cliente.setText(c.getNome());
+        jL_Telefone.setText(c.getTelefone());
+       
         jDesktopPane1.setBackground(bgcolor);
     }
 
@@ -53,8 +53,6 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jL_titulo = new javax.swing.JLabel();
-        jL_busca = new javax.swing.JLabel();
-        jT_busca = new javax.swing.JTextField();
         jL_pedido = new javax.swing.JLabel();
         jL_1 = new javax.swing.JLabel();
         jL_2 = new javax.swing.JLabel();
@@ -74,12 +72,14 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_pedido_8 = new javax.swing.JTextField();
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
-        jS_lista = new javax.swing.JScrollPane();
-        jT_lista = new javax.swing.JTable();
         jT_endereco = new javax.swing.JTextField();
         jL_endereco = new javax.swing.JLabel();
         jL_Valor = new javax.swing.JLabel();
         jF_Valor = new javax.swing.JFormattedTextField();
+        jL_TelefoneN = new javax.swing.JLabel();
+        jL_Telefone = new javax.swing.JLabel();
+        jL_ClienteN = new javax.swing.JLabel();
+        jL_Cliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
@@ -94,77 +94,57 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_busca.setText("Busca pelo cliente");
-        jL_busca.setBounds(260, 90, 160, 30);
-        jDesktopPane1.add(jL_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jT_busca.setForeground(new java.awt.Color(187, 187, 187));
-        jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jT_buscaFocusLost(evt);
-            }
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jT_buscaFocusGained(evt);
-            }
-        });
-        jT_busca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jT_buscaKeyReleased(evt);
-            }
-        });
-        jT_busca.setBounds(420, 90, 360, 28);
-        jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
+        jL_pedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jL_pedido.setText("Pedido");
-        jL_pedido.setBounds(20, 230, 400, 30);
+        jL_pedido.setBounds(20, 180, 400, 30);
         jDesktopPane1.add(jL_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_1.setText("#1");
-        jL_1.setBounds(30, 260, 20, 30);
+        jL_1.setBounds(30, 220, 20, 30);
         jDesktopPane1.add(jL_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_2.setText("#2");
-        jL_2.setBounds(30, 300, 20, 30);
+        jL_2.setBounds(30, 260, 20, 30);
         jDesktopPane1.add(jL_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_3.setText("#3");
-        jL_3.setBounds(30, 340, 20, 30);
+        jL_3.setBounds(30, 300, 20, 30);
         jDesktopPane1.add(jL_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_4.setText("#4");
-        jL_4.setBounds(30, 380, 20, 30);
+        jL_4.setBounds(30, 340, 20, 30);
         jDesktopPane1.add(jL_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_5.setText("#5");
-        jL_5.setBounds(410, 260, 20, 30);
+        jL_5.setBounds(410, 220, 20, 30);
         jDesktopPane1.add(jL_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_6.setText("#6");
-        jL_6.setBounds(410, 300, 20, 30);
+        jL_6.setBounds(410, 260, 20, 30);
         jDesktopPane1.add(jL_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_7.setText("#7");
-        jL_7.setBounds(410, 340, 20, 30);
+        jL_7.setBounds(410, 300, 20, 30);
         jDesktopPane1.add(jL_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_8.setText("#8");
-        jL_8.setBounds(410, 380, 20, 30);
+        jL_8.setBounds(410, 340, 20, 30);
         jDesktopPane1.add(jL_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_1.setBounds(50, 260, 350, 28);
+        jT_pedido_1.setBounds(50, 220, 350, 28);
         jDesktopPane1.add(jT_pedido_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_2.setBounds(50, 300, 350, 28);
+        jT_pedido_2.setBounds(50, 260, 350, 28);
         jDesktopPane1.add(jT_pedido_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_3.setBounds(50, 340, 350, 28);
+        jT_pedido_3.setBounds(50, 300, 350, 28);
         jDesktopPane1.add(jT_pedido_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_4.setBounds(50, 380, 350, 28);
+        jT_pedido_4.setBounds(50, 340, 350, 28);
         jDesktopPane1.add(jT_pedido_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_5.setBounds(430, 260, 350, 28);
+        jT_pedido_5.setBounds(430, 220, 350, 28);
         jDesktopPane1.add(jT_pedido_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_6.setBounds(430, 300, 350, 28);
+        jT_pedido_6.setBounds(430, 260, 350, 28);
         jDesktopPane1.add(jT_pedido_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_7.setBounds(430, 340, 350, 28);
+        jT_pedido_7.setBounds(430, 300, 350, 28);
         jDesktopPane1.add(jT_pedido_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_8.setBounds(430, 380, 350, 28);
+        jT_pedido_8.setBounds(430, 340, 350, 28);
         jDesktopPane1.add(jT_pedido_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
@@ -174,7 +154,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                 jB_salvarActionPerformed(evt);
             }
         });
-        jB_salvar.setBounds(20, 530, 160, 80);
+        jB_salvar.setBounds(20, 520, 160, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -185,177 +165,67 @@ public class CadastroPedido extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 530, 160, 80);
+        jB_voltar.setBounds(620, 520, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jT_lista.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jT_lista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jT_listaMouseClicked(evt);
-            }
-        });
-        jT_lista.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jT_listaFocusLost(evt);
-            }
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jT_listaFocusGained(evt);
-            }
-        });
-        jS_lista.setViewportView(jT_lista);
-
-        jS_lista.setBounds(20, 120, 760, 110);
-        jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_endereco.setBounds(20, 440, 760, 28);
+        jT_endereco.setBounds(20, 420, 760, 40);
         jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_endereco.setText("Endereço de entrega");
-        jL_endereco.setBounds(20, 420, 180, 20);
+        jL_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jL_endereco.setText("Endereço de Entrega");
+        jL_endereco.setBounds(20, 390, 180, 30);
         jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jL_Valor.setText("Valor:   R$");
-        jL_Valor.setBounds(370, 480, 90, 40);
+        jL_Valor.setBounds(370, 470, 90, 40);
         jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jF_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jF_Valor.setBounds(460, 480, 130, 40);
+        jF_Valor.setBounds(460, 470, 130, 40);
         jDesktopPane1.add(jF_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_TelefoneN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_TelefoneN.setText("Telefone:");
+        jL_TelefoneN.setBounds(20, 130, 90, 40);
+        jDesktopPane1.add(jL_TelefoneN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_Telefone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_Telefone.setBounds(120, 130, 240, 40);
+        jDesktopPane1.add(jL_Telefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_ClienteN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_ClienteN.setText("Cliente:");
+        jL_ClienteN.setBounds(20, 80, 90, 40);
+        jDesktopPane1.add(jL_ClienteN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_Cliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_Cliente.setBounds(120, 80, 580, 40);
+        jDesktopPane1.add(jL_Cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-     private void atualizarLista(String nome) throws Exception{
-        
-        this.setAlwaysOnTop(false);
-        
-        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
-        modelo = new DefaultTableModel(null, colunas){
-            
-        @Override
-        public boolean isCellEditable(int row, int col){
-                return false;
-            }
-        };
-        
-         ClienteDAO f = new ClienteDAO();
-         List listar = f.listaCliente(nome);
-        if(listar.isEmpty()){
-            jB_salvar.setVisible(false);                 
-        }
-        
-        Iterator it = listar.iterator();
-        while(it.hasNext()){
-            Cliente l = (Cliente)it.next();
-            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
-        }
-        
-        jT_lista.setModel(modelo);
-        jT_lista.setShowHorizontalLines(false);
-        jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
-        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
-    }
+   
     
-    private void jT_buscaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusGained
-        if(jT_busca.getText().equals(msg_busca)){
-            jT_busca.setText("");
-            jT_busca.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_jT_buscaFocusGained
-
-    private void jT_buscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_buscaKeyReleased
-        if(!jT_busca.getText().isEmpty()){
-            jT_busca.setForeground(Color.BLACK);            
-        }
-        
-        String filtro = jT_busca.getText();
-        
-        try {        
-            atualizarLista(filtro);
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jT_buscaKeyReleased
-
-    private void jT_buscaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusLost
-        if(jT_busca.getText().isEmpty())
-        {
-            jT_busca.setForeground(Color.gray);
-            jT_busca.setText(msg_busca);
-        }
-    }//GEN-LAST:event_jT_buscaFocusLost
-
     private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
-    private void jT_listaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusGained
-        // TODO add your handling code here:
-        int numLinhaSelecionada = jT_lista.getSelectedRow();         
-        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-        
-        ClienteDAO cD = new ClienteDAO();
-        c = cD.buscaClienteId(id);
-                
-        jT_endereco.setText(c.getEndereco());
-        
-    }//GEN-LAST:event_jT_listaFocusGained
-
-    private void jT_listaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusLost
-        // TODO add your handling code here:
-        
-        int numLinhaSelecionada = jT_lista.getSelectedRow();         
-        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-        
-        ClienteDAO cD = new ClienteDAO();
-        c = cD.buscaClienteId(id);
-                
-        jT_endereco.setText(c.getEndereco());
-        
-    }//GEN-LAST:event_jT_listaFocusLost
-
-    private void jT_listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_listaMouseClicked
-        // TODO add your handling code here:
-        int numLinhaSelecionada = jT_lista.getSelectedRow();         
-        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-        
-        ClienteDAO cD = new ClienteDAO();
-        c = cD.buscaClienteId(id);
-                
-        jT_endereco.setText(c.getEndereco());
-        
-    }//GEN-LAST:event_jT_listaMouseClicked
-
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         // TODO add your handling code here:
         String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
-        String  endereco, complemento;
+        String  endereco;
         PedidoDAO pD = new PedidoDAO();
         
         endereco = jT_endereco.getText();
@@ -385,7 +255,8 @@ public class CadastroPedido extends javax.swing.JFrame {
         try {
             if(pD.cadastraPedido(p)){
                 JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
-                
+                ClienteDAO cD = new ClienteDAO();
+                cD.addNumPedidos(c);
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
@@ -410,15 +281,15 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jL_6;
     private javax.swing.JLabel jL_7;
     private javax.swing.JLabel jL_8;
+    private javax.swing.JLabel jL_Cliente;
+    private javax.swing.JLabel jL_ClienteN;
+    private javax.swing.JLabel jL_Telefone;
+    private javax.swing.JLabel jL_TelefoneN;
     private javax.swing.JLabel jL_Valor;
-    private javax.swing.JLabel jL_busca;
     private javax.swing.JLabel jL_endereco;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
-    private javax.swing.JScrollPane jS_lista;
-    private javax.swing.JTextField jT_busca;
     private javax.swing.JTextField jT_endereco;
-    private javax.swing.JTable jT_lista;
     private javax.swing.JTextField jT_pedido_1;
     private javax.swing.JTextField jT_pedido_2;
     private javax.swing.JTextField jT_pedido_3;

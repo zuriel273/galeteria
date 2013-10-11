@@ -4,7 +4,16 @@
  */
 package view;
 
+import dados.ClienteDAO;
 import java.awt.Color;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import negocio.Cliente;
 
 /**
  *
@@ -14,18 +23,55 @@ public class Principal extends javax.swing.JFrame {
     
     private String msg_busca = "Digite o telefone do cliente";
     private Color bgcolor;
+    Cliente c;
+    DefaultTableModel modelo;
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal() throws Exception {
         initComponents();
         jT_busca.setText(msg_busca);
         float [] hsb = new float[3];
         Color.RGBtoHSB(242,241,240,hsb);
         this.bgcolor = Color.getHSBColor(hsb[0],hsb[1],hsb[2]);
         jDesktopPane1.setBackground(this.bgcolor);
+        jB_novo_pedido.setEnabled(false);
+         atualizarLista("");
     }
 
+     private void atualizarLista(String nome) throws Exception{
+        
+        this.setAlwaysOnTop(false);
+        
+        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
+        modelo = new DefaultTableModel(null, colunas){
+            
+        @Override
+        public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        
+         ClienteDAO f = new ClienteDAO();
+         List listar = f.listaCliente(nome);
+        if(listar.isEmpty()){
+          //  jB_salvar.setVisible(false);
+            jB_novo_pedido.setEnabled(false);
+        }
+        
+        Iterator it = listar.iterator();
+        while(it.hasNext()){
+            Cliente l = (Cliente)it.next();
+            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
+        }
+        
+        jT_lista.setModel(modelo);
+        jT_lista.setShowHorizontalLines(false);
+        jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,9 +89,9 @@ public class Principal extends javax.swing.JFrame {
         jB_novo_pedido = new javax.swing.JButton();
         jB_fechar = new javax.swing.JButton();
         jB_buscar = new javax.swing.JButton();
+        jS_lista = new javax.swing.JScrollPane();
+        jT_lista = new javax.swing.JTable();
         jT_busca = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jT_resultado_busca = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Galeteria");
@@ -53,7 +99,6 @@ public class Principal extends javax.swing.JFrame {
         setResizable(false);
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
-        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Galeteria");
         jL_titulo.setBounds(0, 0, 800, 80);
@@ -126,18 +171,42 @@ public class Principal extends javax.swing.JFrame {
         jB_buscar.setBounds(660, 90, 120, 40);
         jDesktopPane1.add(jB_buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jT_busca.setForeground(new java.awt.Color(187, 187, 187));
-        jT_busca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_buscaActionPerformed(evt);
+        jT_lista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jT_lista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jT_listaMouseClicked(evt);
             }
         });
-        jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jT_buscaFocusGained(evt);
+        jT_lista.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jT_listaFocusLost(evt);
             }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jT_listaFocusGained(evt);
+            }
+        });
+        jS_lista.setViewportView(jT_lista);
+
+        jS_lista.setBounds(200, 140, 580, 440);
+        jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jT_busca.setForeground(new java.awt.Color(187, 187, 187));
+        jT_busca.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jT_buscaFocusLost(evt);
+            }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jT_buscaFocusGained(evt);
             }
         });
         jT_busca.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -147,18 +216,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jT_busca.setBounds(20, 90, 630, 40);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jScrollPane1.setFocusable(false);
-
-        jT_resultado_busca.setBackground(new java.awt.Color(255, 255, 255));
-        jT_resultado_busca.setColumns(20);
-        jT_resultado_busca.setRows(5);
-        jT_resultado_busca.setBorder(null);
-        jT_resultado_busca.setFocusable(false);
-        jScrollPane1.setViewportView(jT_resultado_busca);
-
-        jScrollPane1.setBounds(200, 140, 580, 440);
-        jDesktopPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,13 +231,87 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jT_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_buscaActionPerformed
-        
-    }//GEN-LAST:event_jT_buscaActionPerformed
-
     private void jB_fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_fecharActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jB_fecharActionPerformed
+
+    private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
+        new CadastroCliente(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_add_clienteActionPerformed
+
+    private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed
+        new ListarCliente(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_clientesActionPerformed
+
+    private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
+        //new CadastroPedido(bgcolor).setVisible(true);
+         try {
+            
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+         
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+                       
+            new PerfilCliente(bgcolor, c).setVisible(true);
+            
+            //this.dispose();       
+        
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
+        }
+        
+    }//GEN-LAST:event_jB_novo_pedidoActionPerformed
+
+    private void jB_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_pedidoActionPerformed
+        new ListarPedido(bgcolor).setVisible(true);
+    }//GEN-LAST:event_jB_pedidoActionPerformed
+
+    private void jT_listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_listaMouseClicked
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+
+        ClienteDAO cD = new ClienteDAO();
+        c = cD.buscaClienteId(id);
+        jB_novo_pedido.setEnabled(true);
+
+        //jT_endereco.setText(c.getEndereco());
+
+    }//GEN-LAST:event_jT_listaMouseClicked
+
+    private void jT_listaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusLost
+        // TODO add your handling code here:
+
+        int numLinhaSelecionada = jT_lista.getSelectedRow();
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+
+        ClienteDAO cD = new ClienteDAO();
+        c = cD.buscaClienteId(id);
+        //jB_novo_pedido.setEnabled(true);
+        
+       // jT_endereco.setText(c.getEndereco());
+
+    }//GEN-LAST:event_jT_listaFocusLost
+
+    private void jT_listaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusGained
+        // TODO add your handling code here:
+        int numLinhaSelecionada = jT_lista.getSelectedRow();
+        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+
+        ClienteDAO cD = new ClienteDAO();
+        //jB_novo_pedido.setEnabled(true);
+        c = cD.buscaClienteId(id);
+
+        //jT_endereco.setText(c.getEndereco());
+
+    }//GEN-LAST:event_jT_listaFocusGained
+
+    private void jT_buscaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusLost
+        if(jT_busca.getText().isEmpty())
+        {
+            jT_busca.setForeground(Color.gray);
+            jT_busca.setText(msg_busca);
+        }
+    }//GEN-LAST:event_jT_buscaFocusLost
 
     private void jT_buscaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusGained
         if(jT_busca.getText().equals(msg_busca)){
@@ -193,31 +324,17 @@ public class Principal extends javax.swing.JFrame {
         if(!jT_busca.getText().isEmpty()){
             jT_busca.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_jT_buscaKeyReleased
 
-    private void jT_buscaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_buscaFocusLost
-        if(jT_busca.getText().isEmpty())
-        {
-            jT_busca.setForeground(Color.gray);
-            jT_busca.setText(msg_busca);
+        String filtro = jT_busca.getText();
+        try {
+       
+            atualizarLista(filtro);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jT_buscaFocusLost
+        
 
-    private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
-        new CadastroCliente(bgcolor).setVisible(true);
-    }//GEN-LAST:event_jB_add_clienteActionPerformed
-
-    private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed
-        new ListarCliente(bgcolor).setVisible(true);
-    }//GEN-LAST:event_jB_clientesActionPerformed
-
-    private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
-        new CadastroPedido(bgcolor).setVisible(true);
-    }//GEN-LAST:event_jB_novo_pedidoActionPerformed
-
-    private void jB_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_pedidoActionPerformed
-        new ListarPedido(bgcolor).setVisible(true);
-    }//GEN-LAST:event_jB_pedidoActionPerformed
+    }//GEN-LAST:event_jT_buscaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
@@ -228,8 +345,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jB_pedido;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jL_titulo;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jS_lista;
     private javax.swing.JTextField jT_busca;
-    private javax.swing.JTextArea jT_resultado_busca;
+    private javax.swing.JTable jT_lista;
     // End of variables declaration//GEN-END:variables
 }

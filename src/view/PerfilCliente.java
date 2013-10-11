@@ -37,6 +37,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         jL_titulo.setText(cliente.getNome());
         jL_Telefone.setText(cliente.getTelefone());
         jL_Endereco.setText(cliente.getEndereco());
+        jL_NumPedidos.setText(""+cliente.getNumPedidos());
         
         try {
             atualizarLista();
@@ -59,8 +60,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         jL_titulo = new javax.swing.JLabel();
         jS_lista = new javax.swing.JScrollPane();
         jT_lista = new javax.swing.JTable();
-        jB_editar = new javax.swing.JButton();
-        jB_excluir = new javax.swing.JButton();
+        jB_Adicionar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
         jL_Endereco = new javax.swing.JLabel();
         jL_EnderecoN = new javax.swing.JLabel();
@@ -98,27 +98,16 @@ public class PerfilCliente extends javax.swing.JFrame {
         jS_lista.setBounds(20, 180, 580, 300);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
-        jB_editar.setMnemonic('e');
-        jB_editar.setText("Editar");
-        jB_editar.addActionListener(new java.awt.event.ActionListener() {
+        jB_Adicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
+        jB_Adicionar.setMnemonic('e');
+        jB_Adicionar.setText("Adicionar Pedido");
+        jB_Adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_editarActionPerformed(evt);
+                jB_AdicionarActionPerformed(evt);
             }
         });
-        jB_editar.setBounds(620, 180, 160, 80);
-        jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
-        jB_excluir.setMnemonic('x');
-        jB_excluir.setText("Excluir");
-        jB_excluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_excluirActionPerformed(evt);
-            }
-        });
-        jB_excluir.setBounds(620, 290, 160, 80);
-        jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jB_Adicionar.setBounds(620, 180, 160, 80);
+        jDesktopPane1.add(jB_Adicionar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
         jB_voltar.setMnemonic('v');
@@ -188,8 +177,8 @@ public class PerfilCliente extends javax.swing.JFrame {
         PedidoDAO f = new PedidoDAO();
         List listar = f.listaPedidoIdCliente(cliente);
         if(listar.isEmpty()){
-            jB_editar.setVisible(false);
-            jB_excluir.setVisible(false);
+            //jB_Adicionar.setVisible(false);
+            //jB_excluir.setVisible(false);
         }
         
         Iterator it = listar.iterator();
@@ -209,44 +198,13 @@ public class PerfilCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
-    private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
+    private void jB_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AdicionarActionPerformed
         // TODO add your handling code here:
-        try {
-            
-            int numLinhaSelecionada = jT_lista.getSelectedRow();
-         
-            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-                       
-            new CadastroCliente(this.bgcolor,id).setVisible(true);
-            
-            //this.dispose();       
-        
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
-        }
-    }//GEN-LAST:event_jB_editarActionPerformed
-
-    private void jB_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_excluirActionPerformed
-        // TODO add your handling code here:
-        int numLinhaSelecionada = jT_lista.getSelectedRow();
-         
-        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-        
-        ClienteDAO cD = new ClienteDAO();
-        
-        cD.excluiCliente(id);
-        
-        try {
-            atualizarLista();
-        } catch (Exception ex) {
-            Logger.getLogger(PerfilCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jB_excluirActionPerformed
+       new CadastroPedido(bgcolor,cliente).setVisible(true);
+    }//GEN-LAST:event_jB_AdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jB_editar;
-    private javax.swing.JButton jB_excluir;
+    private javax.swing.JButton jB_Adicionar;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jL_Endereco;
