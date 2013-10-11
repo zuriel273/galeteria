@@ -36,7 +36,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jT_nome.setText(c.getNome());
         jT_telefone.setText(c.getTelefone());
         jT_endereco.setText(c.getEndereco());
-        jT_complemento.setText(c.getComplemento());
+        
         
         jB_salvar.setText("Atualizar");
         jDesktopPane1.setBackground(bgcolor);
@@ -52,13 +52,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jT_complemento = new javax.swing.JTextField();
         jT_endereco = new javax.swing.JTextField();
         jT_telefone = new javax.swing.JTextField();
         jT_nome = new javax.swing.JTextField();
         jL_telefone = new javax.swing.JLabel();
         jL_nome = new javax.swing.JLabel();
-        jL_complemento = new javax.swing.JLabel();
         jL_endereco = new javax.swing.JLabel();
         jB_salvar = new javax.swing.JButton();
         jB_cancelar = new javax.swing.JButton();
@@ -70,8 +68,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
-        jT_complemento.setBounds(150, 250, 420, 30);
-        jDesktopPane1.add(jT_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jT_endereco.setBounds(150, 200, 420, 30);
         jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jT_telefone.setBounds(150, 150, 200, 30);
@@ -86,10 +82,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jL_nome.setText("Nome");
         jL_nome.setBounds(30, 100, 120, 30);
         jDesktopPane1.add(jL_nome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jL_complemento.setText("Complemento");
-        jL_complemento.setBounds(30, 250, 120, 30);
-        jDesktopPane1.add(jL_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_endereco.setText("Endereço");
         jL_endereco.setBounds(30, 200, 120, 30);
@@ -149,11 +141,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nome = jT_nome.getText();
         String endereco = jT_endereco.getText();
-        String complemento = jT_complemento.getText();
+        
         String telefone = jT_telefone.getText();
         ClienteDAO cD = new ClienteDAO();
         
-        Cliente c = new Cliente(nome, endereco, telefone,complemento);
+        Cliente c = new Cliente(nome, endereco, telefone);
         c.setId(id);
         
         if (jB_salvar.getText().equals("Atualizar")){
@@ -182,12 +174,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton jB_cancelar;
     private javax.swing.JButton jB_salvar;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jL_complemento;
     private javax.swing.JLabel jL_endereco;
     private javax.swing.JLabel jL_nome;
     private javax.swing.JLabel jL_telefone;
     private javax.swing.JLabel jL_titulo;
-    private javax.swing.JTextField jT_complemento;
     private javax.swing.JTextField jT_endereco;
     private javax.swing.JTextField jT_nome;
     private javax.swing.JTextField jT_telefone;

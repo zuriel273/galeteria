@@ -71,14 +71,14 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_pedido_6 = new javax.swing.JTextField();
         jT_pedido_7 = new javax.swing.JTextField();
         jT_pedido_8 = new javax.swing.JTextField();
-        jL_complemento = new javax.swing.JLabel();
-        jT_complemento = new javax.swing.JTextField();
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
         jS_lista = new javax.swing.JScrollPane();
         jT_lista = new javax.swing.JTable();
         jT_endereco = new javax.swing.JTextField();
         jL_endereco = new javax.swing.JLabel();
+        jL_endereco1 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pedido");
@@ -166,18 +166,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         jT_pedido_8.setBounds(430, 380, 350, 28);
         jDesktopPane1.add(jT_pedido_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_complemento.setText("Complemento");
-        jL_complemento.setBounds(20, 470, 180, 20);
-        jDesktopPane1.add(jL_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jT_complemento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_complementoActionPerformed(evt);
-            }
-        });
-        jT_complemento.setBounds(20, 490, 420, 28);
-        jDesktopPane1.add(jT_complemento, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
         jB_salvar.setText("Salvar");
         jB_salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +221,15 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_endereco.setText("Endereço de entrega");
         jL_endereco.setBounds(20, 420, 180, 20);
         jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_endereco1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_endereco1.setText("Valor:");
+        jL_endereco1.setBounds(400, 480, 60, 40);
+        jDesktopPane1.add(jL_endereco1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        jFormattedTextField1.setBounds(460, 480, 130, 40);
+        jDesktopPane1.add(jFormattedTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,10 +313,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
-    private void jT_complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_complementoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jT_complementoActionPerformed
-
     private void jT_listaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusGained
         // TODO add your handling code here:
         int numLinhaSelecionada = jT_lista.getSelectedRow();         
@@ -329,7 +322,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         c = cD.buscaClienteId(id);
                 
         jT_endereco.setText(c.getEndereco());
-        jT_complemento.setText(c.getComplemento());
+        
     }//GEN-LAST:event_jT_listaFocusGained
 
     private void jT_listaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_listaFocusLost
@@ -342,7 +335,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         c = cD.buscaClienteId(id);
                 
         jT_endereco.setText(c.getEndereco());
-        jT_complemento.setText(c.getComplemento());
+        
     }//GEN-LAST:event_jT_listaFocusLost
 
     private void jT_listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_listaMouseClicked
@@ -354,7 +347,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         c = cD.buscaClienteId(id);
                 
         jT_endereco.setText(c.getEndereco());
-        jT_complemento.setText(c.getComplemento());
+        
     }//GEN-LAST:event_jT_listaMouseClicked
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
@@ -364,7 +357,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         PedidoDAO pD = new PedidoDAO();
         
         endereco = jT_endereco.getText();
-        complemento = jT_complemento.getText();
+       
         
         pedido1 = jT_pedido_1.getText();
         pedido2 = jT_pedido_2.getText();
@@ -386,7 +379,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         p.setPedido8(pedido8);
         
         p.setEndereco(endereco);
-        p.setComplemento(complemento);
+        
         try {
             if(pD.cadastraPedido(p)){
                 JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
@@ -405,6 +398,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jL_1;
     private javax.swing.JLabel jL_2;
     private javax.swing.JLabel jL_3;
@@ -414,13 +408,12 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jL_7;
     private javax.swing.JLabel jL_8;
     private javax.swing.JLabel jL_busca;
-    private javax.swing.JLabel jL_complemento;
     private javax.swing.JLabel jL_endereco;
+    private javax.swing.JLabel jL_endereco1;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
     private javax.swing.JScrollPane jS_lista;
     private javax.swing.JTextField jT_busca;
-    private javax.swing.JTextField jT_complemento;
     private javax.swing.JTextField jT_endereco;
     private javax.swing.JTable jT_lista;
     private javax.swing.JTextField jT_pedido_1;

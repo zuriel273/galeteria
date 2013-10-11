@@ -10,7 +10,7 @@ package negocio;
  */
 public class Pedido {
     String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
-    String  endereco, complemento;
+    String  endereco;
     boolean entregue;
     int id;
     Cliente cliente;
@@ -115,13 +115,5 @@ public class Pedido {
         this.endereco = endereco;
     }
 
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-    
-    
+     
 }

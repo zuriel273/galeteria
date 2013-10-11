@@ -28,7 +28,7 @@ public class ClienteDAO {
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM cliente WHERE NOME like '"+m.getNome()+"'";
             String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE,COMPLEMENTO) "
-                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"','"+m.getComplemento()+"');"; 
+                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"');"; 
 //            System.out.println(comandoSql_nome);
 //            System.out.println(comandoSql);
             try{
@@ -56,7 +56,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
             int id = Integer.parseInt(rs.getString("id"));
             m.setId(id);
             stmt.close();
@@ -75,7 +75,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             rs.next();
             
-            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
+            Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
             m.setId(id);
             stmt.close();
             return m;
@@ -95,7 +95,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery(sql);
             while(rs.next()){
                                  
-                Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"),rs.getString("COMPLEMENTO"));
+                Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
                 int id = Integer.parseInt(rs.getString("id"));
 //                System.out.println(rs.getString("NOME"));
 //                System.out.println(rs.getString("ENDERECO"));
@@ -112,7 +112,7 @@ public class ClienteDAO {
     
     public boolean editarCliente(Cliente m) throws Exception {
         if(m!=null) {
-            String comandoSQL = "UPDATE cliente SET nome='"+m.getNome()+"', COMPLEMENTO='"+m.getComplemento()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
+            String comandoSQL = "UPDATE cliente SET nome='"+m.getNome()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
 //            System.out.println(comandoSQL);
             try {
                     stmt = (Statement) Myconnection.getStatement();

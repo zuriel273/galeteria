@@ -19,21 +19,23 @@ import negocio.Cliente;
  *
  * @author massilva
  */
-public class ListarCliente extends javax.swing.JFrame {
+public class PerfilCliente extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     Color bgcolor;
+    Cliente cliente;
     /**
      * Creates new form ListarCliente
      */
-    public ListarCliente(Color bgcolor) {
+    public PerfilCliente(Color bgcolor, Cliente cliente) {
         initComponents();
         this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
+        this.cliente = cliente;
         try {
             atualizarLista("");
         } catch (Exception ex) {
-            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PerfilCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -58,6 +60,8 @@ public class ListarCliente extends javax.swing.JFrame {
         setTitle("Lista de Clientes");
         setAlwaysOnTop(true);
         setResizable(false);
+
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,7 +203,7 @@ public class ListarCliente extends javax.swing.JFrame {
         try {
             atualizarLista("");
         } catch (Exception ex) {
-            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PerfilCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jB_excluirActionPerformed

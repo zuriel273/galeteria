@@ -51,7 +51,7 @@ public class PedidoDAO {
             rs2 = stmt2.executeQuery(sql2);
             rs2.next();
             
-            Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"),rs2.getString("COMPLEMENTO"));
+            Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
             Pedido p = new Pedido(c);
             
             stmt.close();
@@ -79,8 +79,30 @@ public class PedidoDAO {
                 rs2 = stmt2.executeQuery(sql2);
                 rs2.next();
 
-                Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"),rs2.getString("COMPLEMENTO"));
+                Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
                 Pedido p = new Pedido(c);
+                lista.add(p);
+            }
+            stmt.close();
+        }catch(Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }            
+        return lista;
+    }
+    
+    public List listaPedidoIdCliente(Cliente cliente){
+        ResultSet rs, rs2;
+        List lista = new ArrayList();
+        String sql = "SELECT * FROM pedido WHERE id ="+ cliente.getId() + "ORDER BY id DESC";
+        try{
+            java.sql.Statement stmt = Myconnection.getStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                            
+                Pedido p = new Pedido(cliente);
+                p.setEndereco(rs.getString(""));
+                
+                
                 lista.add(p);
             }
             stmt.close();
