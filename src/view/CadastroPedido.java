@@ -385,6 +385,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         try {
             if(pD.cadastraPedido(p)){
                 JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
+                
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");

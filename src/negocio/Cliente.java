@@ -9,7 +9,7 @@ package negocio;
  * @author Arlindo
  */
 public class Cliente {
-    private int id;
+    private int id, numPedidos;
     private String nome, endereco, telefone;
 
     public Cliente(String nome, String endereco, String telefone) {
@@ -19,7 +19,14 @@ public class Cliente {
         
     }
 
-            
+    public int getNumPedidos() {
+        return numPedidos;
+    }
+
+    public void setNumPedidos(int numPedidos) {
+        this.numPedidos = numPedidos;
+    }
+    
     public int getId() {
         return id;
     }

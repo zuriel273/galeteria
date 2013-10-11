@@ -27,8 +27,8 @@ public class ClienteDAO {
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM cliente WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE) "
-                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"');"; 
+            String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE,numeroPedidos) "
+                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"','"+m.getNumPedidos()+"');"; 
 //            System.out.println(comandoSql_nome);
 //            System.out.println(comandoSql);
             try{
@@ -57,6 +57,7 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            m.setNumPedidos(rs.getInt("numeroPedidos"));
             int id = Integer.parseInt(rs.getString("id"));
             m.setId(id);
             stmt.close();
@@ -76,6 +77,7 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+            m.setNumPedidos(rs.getInt("numeroPedidos"));
             m.setId(id);
             stmt.close();
             return m;
@@ -96,6 +98,7 @@ public class ClienteDAO {
             while(rs.next()){
                                  
                 Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
+                m.setNumPedidos(rs.getInt("numeroPedidos"));
                 int id = Integer.parseInt(rs.getString("id"));
 //                System.out.println(rs.getString("NOME"));
 //                System.out.println(rs.getString("ENDERECO"));
@@ -121,6 +124,25 @@ public class ClienteDAO {
                     return true;
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,"Erro ao alterar cadastro."+e.getMessage());
+                e.getStackTrace();
+            }
+        } else {
+                
+        }
+        return false;
+    }
+    
+    public boolean addNumPedidos(int id,int num) throws Exception {
+        if(id != 0) {
+            String comandoSQL = "UPDATE cliente SET numeroPedidos='"+num+"' WHERE id = "+id;
+//            System.out.println(comandoSQL);
+            try {
+                    stmt = (Statement) Myconnection.getStatement();
+                    stmt.executeUpdate(comandoSQL);
+                    stmt.close();
+                    return true;
+            } catch (SQLException e) {
+                //JOptionPane.showMessageDialog(null,"Erro ao alterar cadastro."+e.getMessage());
                 e.getStackTrace();
             }
         } else {

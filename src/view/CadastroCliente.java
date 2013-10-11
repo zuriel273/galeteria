@@ -147,7 +147,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         
         Cliente c = new Cliente(nome, endereco, telefone);
         c.setId(id);
-        
+        c.setNumPedidos(0);
         if (jB_salvar.getText().equals("Atualizar")){
             try {
                 if(cD.editarCliente(c)){ 

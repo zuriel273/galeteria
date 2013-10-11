@@ -5,6 +5,7 @@
 package view;
 
 import dados.ClienteDAO;
+import dados.PedidoDAO;
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
+import negocio.Pedido;
 
 /**
  *
@@ -32,11 +34,16 @@ public class PerfilCliente extends javax.swing.JFrame {
         this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
         this.cliente = cliente;
+        jL_titulo.setText(cliente.getNome());
+        jL_Telefone.setText(cliente.getTelefone());
+        jL_Endereco.setText(cliente.getEndereco());
+        
         try {
-            atualizarLista("");
+            atualizarLista();
         } catch (Exception ex) {
             Logger.getLogger(PerfilCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
     }
 
     /**
@@ -55,6 +62,12 @@ public class PerfilCliente extends javax.swing.JFrame {
         jB_editar = new javax.swing.JButton();
         jB_excluir = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
+        jL_Endereco = new javax.swing.JLabel();
+        jL_EnderecoN = new javax.swing.JLabel();
+        jL_TelefoneN = new javax.swing.JLabel();
+        jL_Telefone = new javax.swing.JLabel();
+        jL_NumPedidosN = new javax.swing.JLabel();
+        jL_NumPedidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
@@ -65,7 +78,7 @@ public class PerfilCliente extends javax.swing.JFrame {
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jL_titulo.setText("Lista de Clientes");
+        jL_titulo.setText("Cliente");
         jL_titulo.setBounds(0, 0, 800, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -82,7 +95,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         ));
         jS_lista.setViewportView(jT_lista);
 
-        jS_lista.setBounds(20, 80, 580, 300);
+        jS_lista.setBounds(20, 180, 580, 300);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
@@ -93,7 +106,7 @@ public class PerfilCliente extends javax.swing.JFrame {
                 jB_editarActionPerformed(evt);
             }
         });
-        jB_editar.setBounds(620, 80, 160, 80);
+        jB_editar.setBounds(620, 180, 160, 80);
         jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
@@ -104,7 +117,7 @@ public class PerfilCliente extends javax.swing.JFrame {
                 jB_excluirActionPerformed(evt);
             }
         });
-        jB_excluir.setBounds(620, 190, 160, 80);
+        jB_excluir.setBounds(620, 290, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -115,32 +128,55 @@ public class PerfilCliente extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 300, 160, 80);
+        jB_voltar.setBounds(620, 400, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_Endereco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_Endereco.setBounds(140, 80, 630, 40);
+        jDesktopPane1.add(jL_Endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_EnderecoN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_EnderecoN.setText("Endereço:");
+        jL_EnderecoN.setBounds(40, 80, 90, 40);
+        jDesktopPane1.add(jL_EnderecoN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_TelefoneN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_TelefoneN.setText("Telefone:");
+        jL_TelefoneN.setBounds(40, 120, 90, 40);
+        jDesktopPane1.add(jL_TelefoneN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_Telefone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_Telefone.setBounds(140, 120, 240, 40);
+        jDesktopPane1.add(jL_Telefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_NumPedidosN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_NumPedidosN.setText("N° de Pedidos:");
+        jL_NumPedidosN.setBounds(390, 120, 130, 40);
+        jDesktopPane1.add(jL_NumPedidosN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_NumPedidos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jL_NumPedidos.setBounds(530, 120, 240, 40);
+        jDesktopPane1.add(jL_NumPedidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void atualizarLista(String nome) throws Exception{
+     private void atualizarLista() throws Exception{
         
         this.setAlwaysOnTop(false);
         
-        String [] colunas = new String []{"#","Nome","Telefone","Endereco"};
+        String [] colunas = new String []{"#","Endereço","Valor"};
         modelo = new DefaultTableModel(null, colunas){
             
         @Override
@@ -149,8 +185,8 @@ public class PerfilCliente extends javax.swing.JFrame {
             }
         };
         
-        ClienteDAO f = new ClienteDAO();
-        List listar = f.listaCliente(nome);
+        PedidoDAO f = new PedidoDAO();
+        List listar = f.listaPedidoIdCliente(cliente);
         if(listar.isEmpty()){
             jB_editar.setVisible(false);
             jB_excluir.setVisible(false);
@@ -158,8 +194,8 @@ public class PerfilCliente extends javax.swing.JFrame {
         
         Iterator it = listar.iterator();
         while(it.hasNext()){
-            Cliente l = (Cliente)it.next();
-            modelo.addRow(new Object[]{l.getId(),l.getNome(),l.getTelefone(),l.getEndereco()});
+            Pedido l = (Pedido)it.next();
+            modelo.addRow(new Object[]{l.getId(),l.getEndereco(),l.getValor()});
         }
         
         jT_lista.setModel(modelo);
@@ -201,7 +237,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         cD.excluiCliente(id);
         
         try {
-            atualizarLista("");
+            atualizarLista();
         } catch (Exception ex) {
             Logger.getLogger(PerfilCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,6 +249,12 @@ public class PerfilCliente extends javax.swing.JFrame {
     private javax.swing.JButton jB_excluir;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jL_Endereco;
+    private javax.swing.JLabel jL_EnderecoN;
+    private javax.swing.JLabel jL_NumPedidos;
+    private javax.swing.JLabel jL_NumPedidosN;
+    private javax.swing.JLabel jL_Telefone;
+    private javax.swing.JLabel jL_TelefoneN;
     private javax.swing.JLabel jL_titulo;
     private javax.swing.JScrollPane jS_lista;
     private javax.swing.JTable jT_lista;
