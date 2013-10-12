@@ -35,6 +35,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         
         this.cliente = cliente;
         int numPedido = cDAO.getNumPedidoClienteById(cliente.getId());
+        cliente.setNumPedidos(numPedido);
         jL_NumPedidos.setText(""+numPedido);
         
         this.bgcolor = bgcolor;
