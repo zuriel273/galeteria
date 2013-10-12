@@ -246,15 +246,10 @@ public class Principal extends javax.swing.JFrame {
     private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
         //new CadastroPedido(bgcolor).setVisible(true);
          try {
-            
             int numLinhaSelecionada = jT_lista.getSelectedRow();
-         
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-                       
             new PerfilCliente(bgcolor, c).setVisible(true);
-            
             //this.dispose();       
-        
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
         }

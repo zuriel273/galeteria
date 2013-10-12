@@ -7,12 +7,9 @@ package view;
 import dados.ClienteDAO;
 import dados.PedidoDAO;
 import java.awt.Color;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
 import negocio.Pedido;
@@ -27,13 +24,12 @@ public class CadastroPedido extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Color bgcolor;
     Cliente c;
+    
     /**
      * Creates new form CadastroPedido
      */
     public CadastroPedido(Color bgcolor, Cliente c) {
         initComponents();
-        
-        jF_Valor.setText("0");
         this.c = c;
         jT_endereco.setText(c.getEndereco());
         jL_Cliente.setText(c.getNome());
@@ -177,7 +173,7 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jL_Valor.setText("Valor:   R$");
-        jL_Valor.setBounds(370, 470, 90, 40);
+        jL_Valor.setBounds(340, 470, 120, 40);
         jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));

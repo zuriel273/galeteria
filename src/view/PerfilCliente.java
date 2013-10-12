@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
@@ -26,10 +25,14 @@ public class PerfilCliente extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Color bgcolor;
     Cliente cliente;
+    ClienteDAO cDAO = new ClienteDAO();
+    
     /**
      * Creates new form ListarCliente
      */
     public PerfilCliente(Color bgcolor, Cliente cliente) {
+        int numPedido = cDAO.getNumPedidoClienteById(cliente.getId());
+        jL_NumPedidos.setText(numPedido+"");
         initComponents();
         this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
@@ -100,7 +103,7 @@ public class PerfilCliente extends javax.swing.JFrame {
 
         jB_Adicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
         jB_Adicionar.setMnemonic('e');
-        jB_Adicionar.setText("Adicionar Pedido");
+        jB_Adicionar.setText("Add Pedido");
         jB_Adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_AdicionarActionPerformed(evt);
@@ -140,7 +143,7 @@ public class PerfilCliente extends javax.swing.JFrame {
 
         jL_NumPedidosN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jL_NumPedidosN.setText("N° de Pedidos:");
-        jL_NumPedidosN.setBounds(390, 120, 130, 40);
+        jL_NumPedidosN.setBounds(360, 120, 160, 40);
         jDesktopPane1.add(jL_NumPedidosN, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_NumPedidos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

@@ -4,8 +4,6 @@
  */
 package dados;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,8 +25,8 @@ public class ClienteDAO {
         if(m != null){
             ResultSet rs_nome;
             String comandoSql_nome = "SELECT * FROM cliente WHERE NOME like '"+m.getNome()+"'";
-            String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE,numeroPedidos) "
-                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"','"+m.getNumPedidos()+"');"; 
+            String comandoSql = "INSERT INTO cliente (NOME,ENDERECO,TELEFONE) "
+                                +"VALUES ('"+m.getNome()+"','"+m.getEndereco()+"','"+m.getTelefone()+"');"; 
 //            System.out.println(comandoSql_nome);
 //            System.out.println(comandoSql);
             try{
@@ -57,7 +55,6 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
-            m.setNumPedidos(rs.getInt("numeroPedidos"));
             int id = Integer.parseInt(rs.getString("id"));
             m.setId(id);
             stmt.close();
@@ -77,7 +74,6 @@ public class ClienteDAO {
             rs.next();
             
             Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
-            m.setNumPedidos(rs.getInt("numeroPedidos"));
             m.setId(id);
             stmt.close();
             return m;
@@ -98,7 +94,6 @@ public class ClienteDAO {
             while(rs.next()){
                                  
                 Cliente m = new Cliente(rs.getString("NOME"), rs.getString("ENDERECO"),rs.getString("TELEFONE"));
-                m.setNumPedidos(rs.getInt("numeroPedidos"));
                 int id = Integer.parseInt(rs.getString("id"));
 //                System.out.println(rs.getString("NOME"));
 //                System.out.println(rs.getString("ENDERECO"));
@@ -118,10 +113,10 @@ public class ClienteDAO {
             String comandoSQL = "UPDATE cliente SET nome='"+m.getNome()+"', ENDERECO='"+m.getEndereco()+"',TELEFONE='"+m.getTelefone()+"' WHERE id = "+m.getId();
 //            System.out.println(comandoSQL);
             try {
-                    stmt = (Statement) Myconnection.getStatement();
-                    stmt.executeUpdate(comandoSQL);
-                    stmt.close();
-                    return true;
+                stmt = (Statement) Myconnection.getStatement();
+                stmt.executeUpdate(comandoSQL);
+                stmt.close();
+                return true;
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,"Erro ao alterar cadastro."+e.getMessage());
                 e.getStackTrace();
@@ -167,4 +162,23 @@ public class ClienteDAO {
         }
     }
     
+    public int getNumPedidoClienteById(int id){
+        int numPedido = 0;
+        String consulta = "SELECT COUNT(*) AS numPedido FROM cliente AS c "
+                        + "INNER JOIN pedido AS p ON p.id_cliente = c.id WHERE c.id = "+id;
+        
+        try{
+            stmt =  Myconnection.getStatement();
+            ResultSet rs = stmt.executeQuery(consulta);
+            while(rs.next()){
+                 numPedido = Integer.parseInt(rs.getString("numPedido"));
+            }
+            stmt.close();
+
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro no excluir!");
+            e.printStackTrace();
+        }
+        return numPedido;
+    }
 }

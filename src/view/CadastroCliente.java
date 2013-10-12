@@ -140,8 +140,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         // TODO add your handling code here:
         String nome = jT_nome.getText();
-        String endereco = jT_endereco.getText();
-        
+        String endereco = jT_endereco.getText();        
         String telefone = jT_telefone.getText();
         ClienteDAO cD = new ClienteDAO();
         

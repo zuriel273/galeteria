@@ -15,8 +15,7 @@ public class Cliente {
     public Cliente(String nome, String endereco, String telefone) {
         this.nome = nome;
         this.endereco = endereco;
-        this.telefone = telefone;
-        
+        this.telefone = telefone;    
     }
 
     public int getNumPedidos() {
