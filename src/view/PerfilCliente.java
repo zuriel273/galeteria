@@ -31,12 +31,15 @@ public class PerfilCliente extends javax.swing.JFrame {
      * Creates new form ListarCliente
      */
     public PerfilCliente(Color bgcolor, Cliente cliente) {
+         initComponents();
+        
+        this.cliente = cliente;
         int numPedido = cDAO.getNumPedidoClienteById(cliente.getId());
-        jL_NumPedidos.setText(numPedido+"");
-        initComponents();
+        jL_NumPedidos.setText(""+numPedido);
+        
         this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
-        this.cliente = cliente;
+        
         jL_titulo.setText(cliente.getNome());
         jL_Telefone.setText(cliente.getTelefone());
         jL_Endereco.setText(cliente.getEndereco());

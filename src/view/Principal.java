@@ -248,10 +248,13 @@ public class Principal extends javax.swing.JFrame {
          try {
             int numLinhaSelecionada = jT_lista.getSelectedRow();
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+            c.setId(id);
             new PerfilCliente(bgcolor, c).setVisible(true);
+            
+            
             //this.dispose();       
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
+            JOptionPane.showMessageDialog(this,e+"Por favor, selecione o cliente.");
         }
         
     }//GEN-LAST:event_jB_novo_pedidoActionPerformed
