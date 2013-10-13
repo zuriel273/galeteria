@@ -6,11 +6,14 @@ package view;
 
 import dados.ClienteDAO;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
@@ -25,12 +28,16 @@ public class Principal extends javax.swing.JFrame {
     private Color bgcolor;
     Cliente c;
     DefaultTableModel modelo;
+    Dimension dimensao;
+    
     /**
      * Creates new form Principal
      */
     public Principal() throws Exception {
         initComponents();
         jT_busca.setText(msg_busca);
+        this.dimensao = this.getToolkit().getScreenSize();
+        jL_titulo.setSize((int) dimensao.getWidth(),80);
         float [] hsb = new float[3];
         Color.RGBtoHSB(242,241,240,hsb);
         this.bgcolor = Color.getHSBColor(hsb[0],hsb[1],hsb[2]);
@@ -67,9 +74,13 @@ public class Principal extends javax.swing.JFrame {
         
         jT_lista.setModel(modelo);
         jT_lista.setShowHorizontalLines(false);
+        jT_lista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
-        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.03*jS_lista.getSize().getWidth()));   
+        jT_lista.getColumnModel().getColumn(2).setPreferredWidth((int) (0.08*jS_lista.getSize().getWidth()));  
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth((int) (0.30*jS_lista.getSize().getWidth()));  
+        jT_lista.getColumnModel().getColumn(3).setPreferredWidth((int) (0.59*jS_lista.getSize().getWidth()));  
+        
     }
     
     /**
@@ -88,20 +99,19 @@ public class Principal extends javax.swing.JFrame {
         jB_pedido = new javax.swing.JButton();
         jB_novo_pedido = new javax.swing.JButton();
         jB_fechar = new javax.swing.JButton();
-        jB_buscar = new javax.swing.JButton();
         jS_lista = new javax.swing.JScrollPane();
         jT_lista = new javax.swing.JTable();
         jT_busca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Galeteria");
+        setExtendedState(6);
         setName("frame"); // NOI18N
-        setResizable(false);
 
         jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Galeteria");
-        jL_titulo.setBounds(0, 0, 800, 80);
+        jL_titulo.setBounds(0, 0, 1270, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_add_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/+.png"))); // NOI18N
@@ -113,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_add_clienteActionPerformed(evt);
             }
         });
-        jB_add_cliente.setBounds(20, 140, 160, 80);
+        jB_add_cliente.setBounds(50, 620, 160, 80);
         jDesktopPane1.add(jB_add_cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/clientes.png"))); // NOI18N
@@ -125,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_clientesActionPerformed(evt);
             }
         });
-        jB_clientes.setBounds(20, 230, 160, 80);
+        jB_clientes.setBounds(260, 620, 160, 80);
         jDesktopPane1.add(jB_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart.png"))); // NOI18N
@@ -137,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_pedidoActionPerformed(evt);
             }
         });
-        jB_pedido.setBounds(20, 410, 160, 80);
+        jB_pedido.setBounds(670, 620, 160, 80);
         jDesktopPane1.add(jB_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_novo_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart_add.png"))); // NOI18N
@@ -149,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
                 jB_novo_pedidoActionPerformed(evt);
             }
         });
-        jB_novo_pedido.setBounds(20, 320, 160, 80);
+        jB_novo_pedido.setBounds(460, 620, 160, 80);
         jDesktopPane1.add(jB_novo_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_fechar.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -162,14 +172,10 @@ public class Principal extends javax.swing.JFrame {
                 jB_fecharActionPerformed(evt);
             }
         });
-        jB_fechar.setBounds(20, 500, 160, 80);
+        jB_fechar.setBounds(1050, 620, 160, 80);
         jDesktopPane1.add(jB_fechar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/find.png"))); // NOI18N
-        jB_buscar.setMnemonic('b');
-        jB_buscar.setText("Buscar");
-        jB_buscar.setBounds(660, 90, 120, 40);
-        jDesktopPane1.add(jB_buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jS_lista.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jT_lista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jS_lista.setViewportView(jT_lista);
 
-        jS_lista.setBounds(200, 140, 580, 440);
+        jS_lista.setBounds(50, 140, 1160, 440);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jT_busca.setForeground(new java.awt.Color(187, 187, 187));
@@ -214,18 +220,18 @@ public class Principal extends javax.swing.JFrame {
                 jT_buscaKeyReleased(evt);
             }
         });
-        jT_busca.setBounds(20, 90, 630, 40);
+        jT_busca.setBounds(50, 90, 760, 40);
         jDesktopPane1.add(jT_busca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1266, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         pack();
@@ -337,7 +343,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_add_cliente;
-    private javax.swing.JButton jB_buscar;
     private javax.swing.JButton jB_clientes;
     private javax.swing.JButton jB_fechar;
     private javax.swing.JButton jB_novo_pedido;

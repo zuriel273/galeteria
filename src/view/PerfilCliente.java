@@ -183,10 +183,6 @@ public class PerfilCliente extends javax.swing.JFrame {
         
         PedidoDAO f = new PedidoDAO();
         List listar = f.listaPedidoIdCliente(cliente);
-        if(listar.isEmpty()){
-            jB_Adicionar.setVisible(false);
-            //jB_excluir.setVisible(false);
-        }
         
         Iterator it = listar.iterator();
         while(it.hasNext()){

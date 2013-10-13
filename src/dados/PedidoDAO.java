@@ -94,7 +94,7 @@ public class PedidoDAO {
         ResultSet rs;
         List lista = new ArrayList();
         String sql = "SELECT * FROM pedido WHERE id_cliente ="+ cliente.getId() + " ORDER BY id DESC";
-        System.out.println(sql);
+//        System.out.println(sql);
         try{
             java.sql.Statement stmt = Myconnection.getStatement();
             rs = stmt.executeQuery(sql);

@@ -4,7 +4,10 @@
  */
 package main;
 
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.logging.*;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import view.Principal;
@@ -22,7 +25,12 @@ public class Main {
         try {
 //            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            new Principal().setVisible(true);
+            Principal principal = new Principal();
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            Toolkit theKit = principal.getToolkit(); // for Fullscreen  
+            System.out.println(theKit.getScreenSize());
+            principal.setBounds(new Rectangle(theKit.getScreenSize()));  
+            principal.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
