@@ -175,8 +175,8 @@ public class PerfilCliente extends javax.swing.JFrame {
         String [] colunas = new String []{"#","Endereço","Valor"};
         modelo = new DefaultTableModel(null, colunas){
             
-        @Override
-        public boolean isCellEditable(int row, int col){
+            @Override
+            public boolean isCellEditable(int row, int col){
                 return false;
             }
         };
@@ -184,7 +184,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         PedidoDAO f = new PedidoDAO();
         List listar = f.listaPedidoIdCliente(cliente);
         if(listar.isEmpty()){
-            //jB_Adicionar.setVisible(false);
+            jB_Adicionar.setVisible(false);
             //jB_excluir.setVisible(false);
         }
         
@@ -208,6 +208,7 @@ public class PerfilCliente extends javax.swing.JFrame {
     private void jB_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AdicionarActionPerformed
         // TODO add your handling code here:
        new CadastroPedido(bgcolor,cliente).setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jB_AdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

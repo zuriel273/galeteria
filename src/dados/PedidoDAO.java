@@ -21,7 +21,7 @@ public class PedidoDAO {
         if(m != null){
                         
             String comandoSql = "INSERT INTO pedido (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,VALOR,ID_CLIENTE,ENDERECO) " +
-            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"','"+m.getValor()+"','"+m.getCliente().getId()+"');"; 
+            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"','"+m.getValor()+"',"+m.getCliente().getId()+",'"+m.getEndereco()+"');"; 
           
 //            System.out.println(comandoSql);
             try{
@@ -93,7 +93,7 @@ public class PedidoDAO {
     public List listaPedidoIdCliente(Cliente cliente){
         ResultSet rs;
         List lista = new ArrayList();
-        String sql = "SELECT * FROM pedido WHERE id ="+ cliente.getId() + " ORDER BY id DESC";
+        String sql = "SELECT * FROM pedido WHERE id_cliente ="+ cliente.getId() + " ORDER BY id DESC";
         System.out.println(sql);
         try{
             java.sql.Statement stmt = Myconnection.getStatement();

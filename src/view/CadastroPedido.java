@@ -215,6 +215,7 @@ public class CadastroPedido extends javax.swing.JFrame {
    
     
     private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
+        new PerfilCliente(bgcolor, c).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
@@ -225,8 +226,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         PedidoDAO pD = new PedidoDAO();
         
         endereco = jT_endereco.getText();
-       
-        
         pedido1 = jT_pedido_1.getText();
         pedido2 = jT_pedido_2.getText();
         pedido3 = jT_pedido_3.getText();
@@ -235,33 +234,39 @@ public class CadastroPedido extends javax.swing.JFrame {
         pedido6 = jT_pedido_6.getText();
         pedido7 = jT_pedido_7.getText();
         pedido8 = jT_pedido_8.getText();
+        String valor = jF_Valor.getText();
         
-        Pedido p = new Pedido(c);
-        p.setPedido1(pedido1);
-        p.setPedido2(pedido2);
-        p.setPedido3(pedido3);
-        p.setPedido4(pedido4);
-        p.setPedido5(pedido5);
-        p.setPedido6(pedido6);
-        p.setPedido7(pedido7);
-        p.setPedido8(pedido8);
-        
-        p.setEndereco(endereco);
-        
-        try {
-            if(pD.cadastraPedido(p)){
-                JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
-                ClienteDAO cD = new ClienteDAO();
-                cD.addNumPedidos(c);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
-            }       
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
+        if(valor.isEmpty()){
+            JOptionPane.showMessageDialog(this,"O campo valor está vázio");
         }
-        
-        
+        else{
+            
+            valor = valor.replace(",",".");
+            Pedido p = new Pedido(c);
+            p.setPedido1(pedido1);
+            p.setPedido2(pedido2);
+            p.setPedido3(pedido3);
+            p.setPedido4(pedido4);
+            p.setPedido5(pedido5);
+            p.setPedido6(pedido6);
+            p.setPedido7(pedido7);
+            p.setPedido8(pedido8);
+            p.setValor(Float.parseFloat(valor));
+            p.setEndereco(endereco);
+
+            try {
+                if(pD.cadastraPedido(p)){
+                    JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
+                    new PerfilCliente(bgcolor, c).setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
+                }       
+            } catch (Exception ex) {
+                Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_jB_salvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -237,6 +237,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
         new CadastroCliente(bgcolor).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jB_add_clienteActionPerformed
 
     private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed

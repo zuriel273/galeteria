@@ -134,7 +134,12 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
-        this.dispose();
+        try {
+            new Principal().setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jB_cancelarActionPerformed
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
@@ -151,7 +156,12 @@ public class CadastroCliente extends javax.swing.JFrame {
             try {
                 if(cD.editarCliente(c)){ 
                     JOptionPane.showMessageDialog(this, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
+                    try {
+                        new Principal().setVisible(true);
+                        this.dispose();
+                    } catch (Exception ex) {
+                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
