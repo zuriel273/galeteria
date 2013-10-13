@@ -59,7 +59,7 @@ public class ListarCliente extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
-        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setFont(new java.awt.Font("Ume Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Lista de Clientes");
         jL_titulo.setBounds(0, 0, 800, 80);

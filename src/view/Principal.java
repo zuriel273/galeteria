@@ -108,7 +108,7 @@ public class Principal extends javax.swing.JFrame {
         setExtendedState(6);
         setName("frame"); // NOI18N
 
-        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setFont(new java.awt.Font("Ume P Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Galeteria");
         jL_titulo.setBounds(0, 0, 1270, 80);

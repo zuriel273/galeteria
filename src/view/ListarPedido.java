@@ -42,7 +42,7 @@ public class ListarPedido extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
-        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setFont(new java.awt.Font("Ume P Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Lista de Pedidos");

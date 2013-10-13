@@ -109,7 +109,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jB_cancelar.setBounds(450, 300, 120, 80);
         jDesktopPane1.add(jB_cancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setFont(new java.awt.Font("Ume Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Cadastro de Cliente");
         jL_titulo.setBounds(0, 0, 600, 80);

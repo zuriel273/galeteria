@@ -83,7 +83,7 @@ public class PerfilCliente extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jL_titulo.setFont(new java.awt.Font("Ubuntu", 1, 48)); // NOI18N
+        jL_titulo.setFont(new java.awt.Font("Ume Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Cliente");
         jL_titulo.setBounds(0, 0, 800, 80);
