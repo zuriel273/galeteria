@@ -126,7 +126,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         ));
         jS_lista.setViewportView(jT_lista);
 
-        jS_lista.setBounds(20, 80, 1250, 560);
+        jS_lista.setBounds(20, 80, 1250, 520);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
@@ -137,13 +137,13 @@ public class GerenciarPedido extends javax.swing.JFrame {
                 jB_editarActionPerformed(evt);
             }
         });
-        jB_editar.setBounds(20, 660, 160, 80);
+        jB_editar.setBounds(20, 620, 160, 80);
         jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
         jB_excluir.setMnemonic('x');
         jB_excluir.setText("Excluir");
-        jB_excluir.setBounds(230, 660, 160, 80);
+        jB_excluir.setBounds(240, 620, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -154,7 +154,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(1120, 670, 160, 80);
+        jB_voltar.setBounds(1100, 620, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +168,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

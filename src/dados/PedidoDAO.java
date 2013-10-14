@@ -73,7 +73,7 @@ public class PedidoDAO {
             rs = stmt.executeQuery(sql);
             while(rs.next()){
                                  
-                String sql2 = "SELECT * FROM cliente WHERE id ="+ rs.getInt("id");
+                String sql2 = "SELECT * FROM cliente WHERE id ="+ rs.getInt("id_cliente");
 
                 java.sql.Statement  stmt2 = (Statement) Myconnection.getStatement();
                 rs2 = stmt2.executeQuery(sql2);
