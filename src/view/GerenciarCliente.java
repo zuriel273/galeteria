@@ -193,36 +193,31 @@ public class GerenciarCliente extends javax.swing.JFrame {
     private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
         // TODO add your handling code here:
         try {
-            
             int numLinhaSelecionada = jT_lista.getSelectedRow();
-         
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-                       
             new CadastroCliente(this.bgcolor,id).setVisible(true);
-            
-            //this.dispose();       
-        
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
         }
     }//GEN-LAST:event_jB_editarActionPerformed
 
     private void jB_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_excluirActionPerformed
-        // TODO add your handling code here:
-        int numLinhaSelecionada = jT_lista.getSelectedRow();
-         
-        int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-        
-        ClienteDAO cD = new ClienteDAO();
-        
-        cD.excluiCliente(id);
-        
         try {
-            atualizarLista("");
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+            ClienteDAO cD = new ClienteDAO();
+            int conf = JOptionPane.showConfirmDialog(this, "Ao deletar o cliente será apagado também todos os seus pedidos.\nDesejar deletar?","", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(conf == 0){
+                cD.excluiCliente(id);
+            }
+            try {
+                atualizarLista("");
+            } catch (Exception ex) {
+                Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
         }
-        
     }//GEN-LAST:event_jB_excluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

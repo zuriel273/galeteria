@@ -166,8 +166,8 @@ public class Principal extends javax.swing.JFrame {
 
         jB_fechar.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         jB_fechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/exit.png"))); // NOI18N
-        jB_fechar.setMnemonic('f');
-        jB_fechar.setText("Fechar");
+        jB_fechar.setMnemonic('r');
+        jB_fechar.setText("Sair");
         jB_fechar.setToolTipText("Fechar Programa");
         jB_fechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

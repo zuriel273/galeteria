@@ -116,9 +116,9 @@ public class PerfilCliente extends javax.swing.JFrame {
         jB_Adicionar.setBounds(620, 180, 160, 80);
         jDesktopPane1.add(jB_Adicionar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
-        jB_voltar.setMnemonic('v');
-        jB_voltar.setText("Voltar");
+        jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
+        jB_voltar.setMnemonic('f');
+        jB_voltar.setText("Fechar");
         jB_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_voltarActionPerformed(evt);

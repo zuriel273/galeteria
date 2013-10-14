@@ -5,9 +5,11 @@
 package dados;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import negocio.Cliente;
 import negocio.Pedido;
 
@@ -148,6 +150,22 @@ public class PedidoDAO {
             }        
         }        
         return false;
+    }
+    
+    
+    public void excluirPedido(int id){
+         String comandoSQL;
+
+        comandoSQL ="DELETE FROM `pedido` WHERE id = "+ id;
+        try{
+            java.sql.Statement stmt = Myconnection.getStatement();
+            stmt =  Myconnection.getStatement();
+            stmt.executeUpdate(comandoSQL);
+            stmt.close();
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir pedido!");
+            e.printStackTrace();
+        }
     }
     
 }

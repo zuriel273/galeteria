@@ -149,8 +149,7 @@ public class ClienteDAO {
     public void excluiCliente(int id){
          String comandoSQL;
 
-        comandoSQL ="DELETE FROM `cliente` WHERE id="+ id;
-
+        comandoSQL ="DELETE FROM `cliente` WHERE id = "+ id;
         try{
             stmt =  Myconnection.getStatement();
             stmt.executeUpdate(comandoSQL);

@@ -143,6 +143,11 @@ public class GerenciarPedido extends javax.swing.JFrame {
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
         jB_excluir.setMnemonic('x');
         jB_excluir.setText("Excluir");
+        jB_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_excluirActionPerformed(evt);
+            }
+        });
         jB_excluir.setBounds(240, 620, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -198,6 +203,25 @@ public class GerenciarPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
         }
     }//GEN-LAST:event_jB_editarActionPerformed
+
+    private void jB_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_excluirActionPerformed
+        try {
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+            PedidoDAO pD = new PedidoDAO();
+            int conf = JOptionPane.showConfirmDialog(this, "Desejar deletar?","", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(conf == 0){
+                pD.excluirPedido(id);
+            }
+            try {
+                atualizarLista("");
+            } catch (Exception ex) {
+                Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+        }
+    }//GEN-LAST:event_jB_excluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_editar;
