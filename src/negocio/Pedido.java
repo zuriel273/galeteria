@@ -15,6 +15,24 @@ public class Pedido {
     float valor;
     Cliente cliente;
 
+    public Pedido() {
+    }
+
+    public Pedido(String pedido1, String pedido2, String pedido3, String pedido4, String pedido5, String pedido6, String pedido7, String pedido8, String endereco, int id, float valor, Cliente cliente) {
+        this.pedido1 = pedido1;
+        this.pedido2 = pedido2;
+        this.pedido3 = pedido3;
+        this.pedido4 = pedido4;
+        this.pedido5 = pedido5;
+        this.pedido6 = pedido6;
+        this.pedido7 = pedido7;
+        this.pedido8 = pedido8;
+        this.endereco = endereco;
+        this.id = id;
+        this.valor = valor;
+        this.cliente = cliente;
+    }
+
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
     }

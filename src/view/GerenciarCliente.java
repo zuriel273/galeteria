@@ -6,11 +6,16 @@ package view;
 
 import dados.ClienteDAO;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
@@ -19,21 +24,24 @@ import negocio.Cliente;
  *
  * @author massilva
  */
-public class ListarCliente extends javax.swing.JFrame {
+public class GerenciarCliente extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     Color bgcolor;
+    Dimension dimensao;
     /**
-     * Creates new form ListarCliente
+     * Creates new form GerenciarCliente
      */
-    public ListarCliente(Color bgcolor) {
+    public GerenciarCliente(Color bgcolor) {
         initComponents();
         this.bgcolor = bgcolor;
+        this.dimensao = this.getToolkit().getScreenSize();
+        jL_titulo.setSize((int) dimensao.getWidth(),80);
         jDesktopPane1.setBackground(bgcolor);
         try {
             atualizarLista("");
         } catch (Exception ex) {
-            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -57,13 +65,14 @@ public class ListarCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
         setAlwaysOnTop(true);
-        setResizable(false);
 
         jL_titulo.setFont(new java.awt.Font("Ume Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jL_titulo.setText("Lista de Clientes");
-        jL_titulo.setBounds(0, 0, 800, 80);
+        jL_titulo.setText("Gerenciar Clientes");
+        jL_titulo.setBounds(0, 0, 1270, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jS_lista.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jT_lista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +87,7 @@ public class ListarCliente extends javax.swing.JFrame {
         ));
         jS_lista.setViewportView(jT_lista);
 
-        jS_lista.setBounds(20, 80, 580, 300);
+        jS_lista.setBounds(40, 80, 1000, 620);
         jDesktopPane1.add(jS_lista, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
@@ -89,7 +98,7 @@ public class ListarCliente extends javax.swing.JFrame {
                 jB_editarActionPerformed(evt);
             }
         });
-        jB_editar.setBounds(620, 80, 160, 80);
+        jB_editar.setBounds(1080, 80, 160, 80);
         jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/-.png"))); // NOI18N
@@ -100,7 +109,7 @@ public class ListarCliente extends javax.swing.JFrame {
                 jB_excluirActionPerformed(evt);
             }
         });
-        jB_excluir.setBounds(620, 190, 160, 80);
+        jB_excluir.setBounds(1080, 200, 160, 80);
         jDesktopPane1.add(jB_excluir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -111,7 +120,7 @@ public class ListarCliente extends javax.swing.JFrame {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 300, 160, 80);
+        jB_voltar.setBounds(1080, 620, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,13 +128,13 @@ public class ListarCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -160,13 +169,25 @@ public class ListarCliente extends javax.swing.JFrame {
         
         jT_lista.setModel(modelo);
         jT_lista.setShowHorizontalLines(false);
+        jT_lista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jT_lista.getColumnModel().getColumn(0).setPreferredWidth(80);   
-        jT_lista.getColumnModel().getColumn(1).setPreferredWidth(120);  
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.05*jS_lista.getSize().getWidth()));   
+        jT_lista.getColumnModel().getColumn(2).setPreferredWidth((int) (0.10*jS_lista.getSize().getWidth()));  
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth((int) (0.30*jS_lista.getSize().getWidth()));  
+        jT_lista.getColumnModel().getColumn(3).setPreferredWidth((int) (0.55*jS_lista.getSize().getWidth()));  
     }
     
     private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
-        this.dispose();
+        try{
+            Principal principal = new Principal();
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            Toolkit theKit = principal.getToolkit(); // for Fullscreen  
+            principal.setBounds(new Rectangle(theKit.getScreenSize()));  
+            principal.setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_jB_voltarActionPerformed
 
     private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
@@ -199,7 +220,7 @@ public class ListarCliente extends javax.swing.JFrame {
         try {
             atualizarLista("");
         } catch (Exception ex) {
-            Logger.getLogger(ListarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jB_excluirActionPerformed

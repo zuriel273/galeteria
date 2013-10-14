@@ -75,11 +75,11 @@
         <Component class="javax.swing.JButton" name="jB_clientes">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lib/imagem/clientes.png"/>
+              <Image iconType="3" name="/lib/imagem/manager.png"/>
             </Property>
-            <Property name="mnemonic" type="int" value="108"/>
-            <Property name="text" type="java.lang.String" value="Listar Clientes"/>
-            <Property name="toolTipText" type="java.lang.String" value="Listar Clientes"/>
+            <Property name="mnemonic" type="int" value="103"/>
+            <Property name="text" type="java.lang.String" value="Ger. Clientes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Gerenciar Clientes"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_clientesActionPerformed"/>
@@ -93,11 +93,11 @@
         <Component class="javax.swing.JButton" name="jB_pedido">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lib/imagem/cart.png"/>
+              <Image iconType="3" name="/lib/imagem/cart_manager.png"/>
             </Property>
             <Property name="mnemonic" type="int" value="80"/>
-            <Property name="text" type="java.lang.String" value="Listar Pedidos"/>
-            <Property name="toolTipText" type="java.lang.String" value="Listar Pedidos"/>
+            <Property name="text" type="java.lang.String" value="Ger. Pedidos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Gerenciar Pedidos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_pedidoActionPerformed"/>

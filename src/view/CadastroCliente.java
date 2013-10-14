@@ -95,7 +95,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 jB_salvarActionPerformed(evt);
             }
         });
-        jB_salvar.setBounds(20, 300, 120, 80);
+        jB_salvar.setBounds(20, 300, 160, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
@@ -106,7 +106,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 jB_cancelarActionPerformed(evt);
             }
         });
-        jB_cancelar.setBounds(450, 300, 120, 80);
+        jB_cancelar.setBounds(410, 300, 160, 80);
         jDesktopPane1.add(jB_cancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_titulo.setFont(new java.awt.Font("Ume Mincho S3", 1, 48)); // NOI18N
@@ -134,12 +134,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
-        try {
-            new Principal().setVisible(true);
-            this.dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.dispose();
     }//GEN-LAST:event_jB_cancelarActionPerformed
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
@@ -156,12 +151,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             try {
                 if(cD.editarCliente(c)){ 
                     JOptionPane.showMessageDialog(this, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
-                    try {
-                        new Principal().setVisible(true);
-                        this.dispose();
-                    } catch (Exception ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    this.dispose();
                 }
             } catch (Exception ex) {
                 Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);

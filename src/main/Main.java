@@ -23,12 +23,11 @@ public class Main {
      */
     public static void main(String args[]) throws Exception {
         try {
-//            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             Principal principal = new Principal();
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
             Toolkit theKit = principal.getToolkit(); // for Fullscreen  
-            System.out.println(theKit.getScreenSize());
             principal.setBounds(new Rectangle(theKit.getScreenSize()));  
             principal.setVisible(true);
         } catch (ClassNotFoundException ex) {

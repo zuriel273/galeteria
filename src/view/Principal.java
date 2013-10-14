@@ -7,11 +7,13 @@ package view;
 import dados.ClienteDAO;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -43,14 +45,14 @@ public class Principal extends javax.swing.JFrame {
         this.bgcolor = Color.getHSBColor(hsb[0],hsb[1],hsb[2]);
         jDesktopPane1.setBackground(this.bgcolor);
         jB_novo_pedido.setEnabled(false);
-         atualizarLista("");
+        atualizarLista("");
     }
 
      private void atualizarLista(String nome) throws Exception{
         
         this.setAlwaysOnTop(false);
         
-        String [] colunas = new String []{"Id","Nome","Telefone","Endereco"};
+        String [] colunas = new String []{"#","Nome","Telefone","Endereco"};
         modelo = new DefaultTableModel(null, colunas){
             
         @Override
@@ -76,7 +78,7 @@ public class Principal extends javax.swing.JFrame {
         jT_lista.setShowHorizontalLines(false);
         jT_lista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.03*jS_lista.getSize().getWidth()));   
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.05*jS_lista.getSize().getWidth()));   
         jT_lista.getColumnModel().getColumn(2).setPreferredWidth((int) (0.08*jS_lista.getSize().getWidth()));  
         jT_lista.getColumnModel().getColumn(1).setPreferredWidth((int) (0.30*jS_lista.getSize().getWidth()));  
         jT_lista.getColumnModel().getColumn(3).setPreferredWidth((int) (0.59*jS_lista.getSize().getWidth()));  
@@ -126,10 +128,10 @@ public class Principal extends javax.swing.JFrame {
         jB_add_cliente.setBounds(50, 620, 160, 80);
         jDesktopPane1.add(jB_add_cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/clientes.png"))); // NOI18N
-        jB_clientes.setMnemonic('l');
-        jB_clientes.setText("Listar Clientes");
-        jB_clientes.setToolTipText("Listar Clientes");
+        jB_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/manager.png"))); // NOI18N
+        jB_clientes.setMnemonic('g');
+        jB_clientes.setText("Ger. Clientes");
+        jB_clientes.setToolTipText("Gerenciar Clientes");
         jB_clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_clientesActionPerformed(evt);
@@ -138,10 +140,10 @@ public class Principal extends javax.swing.JFrame {
         jB_clientes.setBounds(260, 620, 160, 80);
         jDesktopPane1.add(jB_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart.png"))); // NOI18N
+        jB_pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/cart_manager.png"))); // NOI18N
         jB_pedido.setMnemonic('P');
-        jB_pedido.setText("Listar Pedidos");
-        jB_pedido.setToolTipText("Listar Pedidos");
+        jB_pedido.setText("Ger. Pedidos");
+        jB_pedido.setToolTipText("Gerenciar Pedidos");
         jB_pedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_pedidoActionPerformed(evt);
@@ -243,11 +245,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
         new CadastroCliente(bgcolor).setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_jB_add_clienteActionPerformed
 
     private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed
-        new ListarCliente(bgcolor).setVisible(true);
+        GerenciarCliente gc = new GerenciarCliente(bgcolor);
+        gc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Toolkit theKit = gc.getToolkit(); // for Fullscreen  
+        gc.setBounds(new Rectangle(theKit.getScreenSize()));  
+        gc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_clientesActionPerformed
 
     private void jB_novo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_novo_pedidoActionPerformed
@@ -267,7 +273,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_novo_pedidoActionPerformed
 
     private void jB_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_pedidoActionPerformed
-        new ListarPedido(bgcolor).setVisible(true);
+        GerenciarPedido gc = new GerenciarPedido(bgcolor);
+        gc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Toolkit theKit = gc.getToolkit(); // for Fullscreen  
+        gc.setBounds(new Rectangle(theKit.getScreenSize()));  
+        gc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jB_pedidoActionPerformed
 
     private void jT_listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_listaMouseClicked

@@ -80,7 +80,7 @@ public class PedidoDAO {
                 rs2.next();
 
                 Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
-                Pedido p = new Pedido(c);
+                Pedido p = new Pedido(rs.getString("pedido1"),rs.getString("pedido2"),rs.getString("pedido3"),rs.getString("pedido4"),rs.getString("pedido5"),rs.getString("pedido6"),rs.getString("pedido7"),rs.getString("pedido8"),rs.getString("endereco"),rs.getInt("id"),rs.getFloat("valor"),c);
                 lista.add(p);
             }
             stmt.close();
@@ -114,4 +114,21 @@ public class PedidoDAO {
         return lista;
     }
     
+    public Pedido getPedidoById(int id){
+        Pedido pedido = new Pedido(null);
+        ResultSet rs;
+        try{
+            java.sql.Statement stmt = Myconnection.getStatement();
+            rs = stmt.executeQuery("SELECT * FROM pedido WHERE id = "+id);
+            while(rs.next()){
+                ClienteDAO cDAO = new ClienteDAO();
+                Cliente c = cDAO.buscaClienteId(rs.getInt("id_cliente"));
+                pedido = new Pedido(rs.getString("pedido1"),rs.getString("pedido2"),rs.getString("pedido3"),rs.getString("pedido4"),rs.getString("pedido5"),rs.getString("pedido6"),rs.getString("pedido7"),rs.getString("pedido8"),rs.getString("endereco"),rs.getInt("id"),rs.getFloat("valor"),c);
+            }
+            stmt.close();
+        }catch(Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return pedido;
+    }
 }
