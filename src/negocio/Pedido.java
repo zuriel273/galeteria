@@ -32,7 +32,7 @@ public class Pedido {
         this.valor = valor;
         this.cliente = cliente;
     }
-
+ 
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
     }

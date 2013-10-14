@@ -12,6 +12,10 @@ public class Cliente {
     private int id, numPedidos;
     private String nome, endereco, telefone;
 
+    public Cliente(int id) {
+        this.id = id;
+    }
+    
     public Cliente(String nome, String endereco, String telefone) {
         this.nome = nome;
         this.endereco = endereco;

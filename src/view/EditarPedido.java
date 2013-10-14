@@ -32,19 +32,33 @@ public class EditarPedido extends javax.swing.JDialog {
     public EditarPedido(java.awt.Frame parent, boolean modal,int id) {
         super(parent, modal);
         this.pai = parent;
-        pedido = pDAO.getPedidoById(id);
+        this.pedido = pDAO.getPedidoById(id);
         initComponents();
         this.cliente = cDAO.listaCliente("");
         atualizaLista();
+        iniciarCampos();
     }
     
     private void atualizaLista(){
         for (Cliente cli : this.cliente) {
-            jC_clientes.addItem(cli.getNome());
+            jC_clientes.addItem("#"+cli.getId()+" - "+cli.getNome());
             if(cli.getId() == pedido.getCliente().getId()){
-                jC_clientes.setSelectedItem(cli.getNome());
+                jC_clientes.setSelectedItem("#"+cli.getId()+" - "+cli.getNome());
             }
         }
+    }
+    
+    private void iniciarCampos(){
+        jT_endereco.setText(pedido.getEndereco());
+        jT_pedido_1.setText(pedido.getPedido1());
+        jT_pedido_2.setText(pedido.getPedido2());
+        jT_pedido_3.setText(pedido.getPedido3());
+        jT_pedido_4.setText(pedido.getPedido4());
+        jT_pedido_5.setText(pedido.getPedido5());
+        jT_pedido_6.setText(pedido.getPedido6());
+        jT_pedido_7.setText(pedido.getPedido7());
+        jT_pedido_8.setText(pedido.getPedido8());
+        jF_Valor.setText(""+pedido.getValor());
     }
     
     /**
@@ -235,24 +249,32 @@ public class EditarPedido extends javax.swing.JDialog {
         else{
 
             valor = valor.replace(",",".");
-            Pedido p = new Pedido(c);
-            p.setPedido1(pedido1);
-            p.setPedido2(pedido2);
-            p.setPedido3(pedido3);
-            p.setPedido4(pedido4);
-            p.setPedido5(pedido5);
-            p.setPedido6(pedido6);
-            p.setPedido7(pedido7);
-            p.setPedido8(pedido8);
-            p.setValor(Float.parseFloat(valor));
-            p.setEndereco(endereco);
-
+            String selecionado = (String) jC_clientes.getSelectedItem();
+            String [] sel = selecionado.split("-");
+            int id = Integer.parseInt(sel[0].replace("#","").trim());
+            c = new Cliente(id);
+            pedido.setPedido1(pedido1);
+            pedido.setPedido2(pedido2);
+            pedido.setPedido3(pedido3);
+            pedido.setPedido4(pedido4);
+            pedido.setPedido5(pedido5);
+            pedido.setPedido6(pedido6);
+            pedido.setPedido7(pedido7);
+            pedido.setPedido8(pedido8);
+            pedido.setValor(Float.parseFloat(valor));
+            pedido.setEndereco(endereco);
+            pedido.setCliente(c);
             try {
-                if(pD.cadastraPedido(p)){
-                    JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
-                    this.dispose();
+                if(pD.atualizaPedido(pedido)){
+                    try {
+                        ((GerenciarPedido)pai).atualizarLista("");
+                        JOptionPane.showMessageDialog(this, "Pedido atualizado com sucesso.");                   
+                        this.dispose();
+                    } catch (Exception ex) {
+                        Logger.getLogger(EditarPedido.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }else{
-                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
+                    JOptionPane.showMessageDialog(this, "Erro ao atualizar!");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);

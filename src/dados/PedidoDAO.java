@@ -131,4 +131,23 @@ public class PedidoDAO {
         }
         return pedido;
     }
+    
+    public boolean atualizaPedido(Pedido m) throws Exception{
+        if(m != null){
+                        
+            String comandoSql = "UPDATE pedido SET PEDIDO1='"+m.getPedido1()+"',PEDIDO2='"+m.getPedido2()+"',PEDIDO3='"+m.getPedido3()+"',PEDIDO4='"+m.getPedido4()+"',PEDIDO5='"+m.getPedido5()+"'"
+                    + ",PEDIDO6='"+m.getPedido6()+"',PEDIDO7='"+m.getPedido7()+"',PEDIDO8='"+m.getPedido8()+"',VALOR='"+m.getValor()+"',ID_CLIENTE="+m.getCliente().getId()+",ENDERECO='"+m.getEndereco()+"' WHERE id="+m.getId(); 
+            
+            try{
+                java.sql.Statement stmt = (Statement)Myconnection.getStatement();
+                stmt.executeUpdate(comandoSql);
+                stmt.close();
+                return true;                
+            }catch(Exception e){
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }        
+        }        
+        return false;
+    }
+    
 }
