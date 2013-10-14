@@ -15,20 +15,21 @@ import negocio.Cliente;
  *
  * @author massilva
  */
-public class CadastroCliente extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadastroCliente
-     */
+public class CadastroCliente extends javax.swing.JDialog {
+    
     int id;
-    public CadastroCliente(Color bgcolor){
+    java.awt.Frame pai;
+    public CadastroCliente(java.awt.Frame parent, boolean modal,Color bgcolor) {
+        super(parent, modal);
         initComponents();
+        this.pai = parent;
         jDesktopPane1.setBackground(bgcolor);     
     }
     
-     public CadastroCliente(Color bgcolor,int id){
+    public CadastroCliente(java.awt.Frame parent, boolean modal,Color bgcolor,int id){
         initComponents();
         Cliente c;
+        this.pai = parent;
         ClienteDAO cD = new ClienteDAO();
         
         c = cD.buscaClienteId(id);
@@ -36,12 +37,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jT_nome.setText(c.getNome());
         jT_telefone.setText(c.getTelefone());
         jT_endereco.setText(c.getEndereco());
-        
-        
+        jL_titulo.setText("Atualizar Cliente");
         jB_salvar.setText("Atualizar");
         jDesktopPane1.setBackground(bgcolor);
     }
-
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,9 +63,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jL_titulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Cliente");
-        setAlwaysOnTop(true);
-        setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jT_endereco.setBounds(150, 200, 420, 30);
@@ -133,41 +130,46 @@ public class CadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jB_cancelarActionPerformed
-
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         // TODO add your handling code here:
         String nome = jT_nome.getText();
-        String endereco = jT_endereco.getText();        
+        String endereco = jT_endereco.getText();
         String telefone = jT_telefone.getText();
         ClienteDAO cD = new ClienteDAO();
-        
+
         Cliente c = new Cliente(nome, endereco, telefone);
         c.setId(id);
         c.setNumPedidos(0);
         if (jB_salvar.getText().equals("Atualizar")){
             try {
-                if(cD.editarCliente(c)){ 
+                if(cD.editarCliente(c)){
                     JOptionPane.showMessageDialog(this, "Alteração de cadastro efetuada com sucesso!", "Confirmação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    ((GerenciarCliente)pai).atualizarLista("");
                     this.dispose();
                 }
             } catch (Exception ex) {
-                Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CadastroClienteBk.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-        
+
             if(cD.cadastraCliente(c)){
                 JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
-                this.dispose();
+                try {
+                    ((Principal)pai).atualizarLista("");
+                    this.dispose();
+                } catch (Exception ex) {
+                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
-            }        
+            }
         }
-        
-        
+
     }//GEN-LAST:event_jB_salvarActionPerformed
+
+    private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jB_cancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cancelar;

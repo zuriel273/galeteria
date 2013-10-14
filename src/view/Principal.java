@@ -48,7 +48,7 @@ public class Principal extends javax.swing.JFrame {
         atualizarLista("");
     }
 
-     private void atualizarLista(String nome) throws Exception{
+     public void atualizarLista(String nome) throws Exception{
         
         this.setAlwaysOnTop(false);
         
@@ -244,7 +244,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_fecharActionPerformed
 
     private void jB_add_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_add_clienteActionPerformed
-        new CadastroCliente(bgcolor).setVisible(true);
+        new CadastroCliente(this,true,bgcolor).setVisible(true);
     }//GEN-LAST:event_jB_add_clienteActionPerformed
 
     private void jB_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_clientesActionPerformed

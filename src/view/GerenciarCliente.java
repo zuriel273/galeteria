@@ -141,7 +141,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void atualizarLista(String nome) throws Exception{
+     public void atualizarLista(String nome) throws Exception{
         
         this.setAlwaysOnTop(false);
         
@@ -195,7 +195,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
         try {
             int numLinhaSelecionada = jT_lista.getSelectedRow();
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-            new CadastroCliente(this.bgcolor,id).setVisible(true);
+            new CadastroCliente(this,true,this.bgcolor,id).setVisible(true);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o cliente.");
         }
