@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -46,7 +47,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
     }
 
     DefaultTableModel modelo;
-    private void atualizarLista(String nome) throws Exception{
+    public void atualizarLista(String nome) throws Exception{
         this.setAlwaysOnTop(false);
         
         String [] colunas = new String []{"#","Nome do Cliente","Pedido 1","Pedido 2","Pedido 3","Pedido 4","Endereço Entrega","Valor"};
@@ -191,7 +192,8 @@ public class GerenciarPedido extends javax.swing.JFrame {
         try {
             int numLinhaSelecionada = jT_lista.getSelectedRow();         
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-            new EditarPedido(this,true,id).setVisible(true);
+            JDialog dialogo = new EditarPedido(this,true,id);
+            dialogo.setVisible(true);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
         }

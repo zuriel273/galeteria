@@ -5,6 +5,9 @@
 package view;
 
 import dados.PedidoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import negocio.Pedido;
 
 /**
@@ -13,14 +16,16 @@ import negocio.Pedido;
  */
 public class EditarPedido extends javax.swing.JDialog {
 
-    Pedido pedido;
+    java.awt.Frame pai;
+    public Pedido pedido;
     PedidoDAO pDAO = new PedidoDAO();
     /**
      * Creates new form EditarPedido
      */
     public EditarPedido(java.awt.Frame parent, boolean modal,int id) {
         super(parent, modal);
-        pDAO.getPedidoById(id);
+        this.pai = parent;
+        pedido = pDAO.getPedidoById(id);
         initComponents();
     }
 
@@ -34,8 +39,19 @@ public class EditarPedido extends javax.swing.JDialog {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        jButton1.setMnemonic('f');
+        jButton1.setText("Fechar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(590, 440, 60, 30);
+        jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,7 +71,20 @@ public class EditarPedido extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*
+         * Exemplo ao fechar o JDialog
+         */
+        try {
+            ((GerenciarPedido)pai).atualizarLista("Pedido");
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(EditarPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     // End of variables declaration//GEN-END:variables
 }
