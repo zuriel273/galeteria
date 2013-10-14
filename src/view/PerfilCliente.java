@@ -34,10 +34,6 @@ public class PerfilCliente extends javax.swing.JFrame {
          initComponents();
         
         this.cliente = cliente;
-        int numPedido = cDAO.getNumPedidoClienteById(cliente.getId());
-        cliente.setNumPedidos(numPedido);
-        jL_NumPedidos.setText(""+numPedido);
-        
         this.bgcolor = bgcolor;
         jDesktopPane1.setBackground(bgcolor);
         
@@ -168,9 +164,11 @@ public class PerfilCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void atualizarLista() throws Exception{
+     public void atualizarLista() throws Exception{
         
-        this.setAlwaysOnTop(false);
+        int numPedido = cDAO.getNumPedidoClienteById(cliente.getId());
+        cliente.setNumPedidos(numPedido);
+        jL_NumPedidos.setText(""+numPedido);
         
         String [] colunas = new String []{"#","Endereço","Valor"};
         modelo = new DefaultTableModel(null, colunas){
@@ -203,8 +201,7 @@ public class PerfilCliente extends javax.swing.JFrame {
 
     private void jB_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AdicionarActionPerformed
         // TODO add your handling code here:
-       new CadastroPedido(bgcolor,cliente).setVisible(true);
-       this.dispose();
+       new CadastroPedido(this,true,this.bgcolor,this.cliente).setVisible(true);
     }//GEN-LAST:event_jB_AdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

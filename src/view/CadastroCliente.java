@@ -148,7 +148,7 @@ public class CadastroCliente extends javax.swing.JDialog {
                     this.dispose();
                 }
             } catch (Exception ex) {
-                Logger.getLogger(CadastroClienteBk.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
 

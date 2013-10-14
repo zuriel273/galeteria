@@ -4,7 +4,6 @@
  */
 package view;
 
-import dados.ClienteDAO;
 import dados.PedidoDAO;
 import java.awt.Color;
 import java.util.logging.Level;
@@ -18,23 +17,22 @@ import negocio.Pedido;
  *
  * @author massilva
  */
-public class CadastroPedido extends javax.swing.JFrame {
+public class CadastroPedido extends javax.swing.JDialog {
 
-    
     DefaultTableModel modelo;
     Color bgcolor;
     Cliente c;
+    java.awt.Frame pai;
     
-    /**
-     * Creates new form CadastroPedido
-     */
-    public CadastroPedido(Color bgcolor, Cliente c) {
+    public CadastroPedido(java.awt.Frame parent, boolean modal,Color bgcolor, Cliente c) {
+        super(parent, modal);
         initComponents();
+        this.bgcolor = bgcolor;
         this.c = c;
+        this.pai = parent;
         jT_endereco.setText(c.getEndereco());
         jL_Cliente.setText(c.getNome());
-        jL_Telefone.setText(c.getTelefone());
-       
+        jL_Telefone.setText(c.getTelefone());  
         jDesktopPane1.setBackground(bgcolor);
     }
 
@@ -78,9 +76,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         jL_Cliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Pedido");
-        setAlwaysOnTop(true);
-        setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -153,9 +148,9 @@ public class CadastroPedido extends javax.swing.JFrame {
         jB_salvar.setBounds(20, 520, 160, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
-        jB_voltar.setMnemonic('v');
-        jB_voltar.setText("Voltar");
+        jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
+        jB_voltar.setMnemonic('f');
+        jB_voltar.setText("Fechar");
         jB_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_voltarActionPerformed(evt);
@@ -173,12 +168,12 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jL_Valor.setText("Valor:   R$");
-        jL_Valor.setBounds(340, 470, 120, 40);
+        jL_Valor.setBounds(520, 470, 120, 40);
         jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jF_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jF_Valor.setBounds(460, 470, 130, 40);
+        jF_Valor.setBounds(650, 470, 130, 40);
         jDesktopPane1.add(jF_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_TelefoneN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -212,19 +207,13 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
-    
-    private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
-        new PerfilCliente(bgcolor, c).setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jB_voltarActionPerformed
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         // TODO add your handling code here:
         String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
         String  endereco;
         PedidoDAO pD = new PedidoDAO();
-        
+
         endereco = jT_endereco.getText();
         pedido1 = jT_pedido_1.getText();
         pedido2 = jT_pedido_2.getText();
@@ -235,12 +224,12 @@ public class CadastroPedido extends javax.swing.JFrame {
         pedido7 = jT_pedido_7.getText();
         pedido8 = jT_pedido_8.getText();
         String valor = jF_Valor.getText();
-        
+
         if(valor.isEmpty()){
             JOptionPane.showMessageDialog(this,"O campo valor está vázio");
         }
         else{
-            
+
             valor = valor.replace(",",".");
             Pedido p = new Pedido(c);
             p.setPedido1(pedido1);
@@ -257,17 +246,21 @@ public class CadastroPedido extends javax.swing.JFrame {
             try {
                 if(pD.cadastraPedido(p)){
                     JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
-                    new PerfilCliente(bgcolor, c).setVisible(true);
+                    ((PerfilCliente)pai).atualizarLista();
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
-                }       
+                }
             } catch (Exception ex) {
                 Logger.getLogger(CadastroPedido.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }//GEN-LAST:event_jB_salvarActionPerformed
+
+    private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jB_voltarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_salvar;
