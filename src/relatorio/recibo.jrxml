@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7411f908-80b9-4d0b-8967-79991989b548">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nomeCliente" class="java.lang.String"/>
+	<parameter name="telefone" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT laudo.*,paciente.*
+FROM laudo
+INNER JOIN paciente
+ON laudo.paciente_id=paciente.id
+ORDER BY paciente.nome]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="data" class="java.lang.String"/>
+	<field name="tipocalc" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="peso" class="java.lang.Float"/>
+	<field name="siv" class="java.lang.Float"/>
+	<field name="ae" class="java.lang.Float"/>
+	<field name="ddve" class="java.lang.Float"/>
+	<field name="ddvd" class="java.lang.Float"/>
+	<field name="altura" class="java.lang.Float"/>
+	<field name="aorta" class="java.lang.Float"/>
+	<field name="dsve" class="java.lang.Float"/>
+	<field name="pp" class="java.lang.Float"/>
+	<field name="vsf" class="java.lang.Float"/>
+	<field name="vdf" class="java.lang.Float"/>
+	<field name="enccav" class="java.lang.Float"/>
+	<field name="indespessurarel" class="java.lang.Float"/>
+	<field name="superficiecorporea" class="java.lang.Float"/>
+	<field name="massa" class="java.lang.Float"/>
+	<field name="indmassave" class="java.lang.Float"/>
+	<field name="relae_ao" class="java.lang.Float"/>
+	<field name="fe" class="java.lang.Float"/>
+	<field name="texto" class="java.lang.String"/>
+	<field name="paciente_id" class="java.lang.Integer"/>
+	<field name="medico_id" class="java.lang.Integer"/>
+	<field name="medico_nome" class="java.lang.String"/>
+	<field name="medico_crm" class="java.lang.Integer"/>
+	<field name="convenio_id" class="java.lang.Integer"/>
+	<field name="convenio_nome" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="datanasc" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="tel" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8db26949-b6dd-4453-adb5-207d52ec9648" x="88" y="0" width="339" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Comprovante do Pedido]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<frame>
+				<reportElement uuid="2312a07e-f36a-4483-ac7a-bd52d128764b" x="0" y="0" width="555" height="90"/>
+				<rectangle>
+					<reportElement uuid="7dfbfb80-23b3-4975-9229-4eca9411d883" x="14" y="15" width="520" height="66"/>
+				</rectangle>
+				<staticText>
+					<reportElement uuid="0545079d-d4a9-49ca-b9c0-fdf21f9a1e57" x="24" y="55" width="46" height="14"/>
+					<textElement/>
+					<text><![CDATA[Plano:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6c42d70d-a410-4554-9c49-6b2d94fcb1b6" x="330" y="55" width="72" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sexo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f2dbe325-9b9f-4eec-9c24-5dc7eb9db302" x="329" y="27" width="46" height="14"/>
+					<textElement/>
+					<text><![CDATA[Telefone]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b7dd789-5696-4a06-99cb-0ecba1e9e773" x="23" y="27" width="46" height="14"/>
+					<textElement/>
+					<text><![CDATA[Cliente]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="8d077385-e7ba-4a64-ac47-039977c1ff4c" x="69" y="27" width="243" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$P{nomeCliente}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="9e2ae526-5930-4a94-ba8f-55964d30b094" x="375" y="27" width="118" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$P{telefone}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="221" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="320" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="109" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="32" splitType="Stretch"/>
+	</summary>
+</jasperReport>
