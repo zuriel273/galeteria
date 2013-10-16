@@ -320,30 +320,22 @@ public class EditarPedido extends javax.swing.JDialog {
                 Connection con;
                 Myconnection conexao = new Myconnection();
                 con = conexao.getConnection();
-            
+           
                 String local = System.getProperty("user.dir");  
-                //System.out.println(local+"/src/relatorio/recibo2.jrxml");
                 
                 JasperDesign jasperDesign = JRXmlLoader.load(local+"/src\relatorio\recibo2.jrxml");
                           
                 JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);  
-
-                //int ID_PEDIDO = id;  
-
+  
                 Map parametro = new HashMap();  
-
-                //String imgNormalidade = local+"/src/imagens/", logo = local+"/src/imagens/logo.jpg";
+                
                 parametro.put("telefone",pedido.getCliente().getTelefone()); 
                 parametro.put("nomeCliente", pedido.getCliente().getNome());
-                
-              
-                
+                              
                 JasperPrint print;  
 
                 print = JasperFillManager.fillReport(jasperReport,parametro,con);
-
-                 
-                
+               
                 JasperViewer viewer = new JasperViewer(print,false);  
                 
                 viewer.setTitle("Comprovante");
