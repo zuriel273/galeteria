@@ -5,15 +5,30 @@
 package view;
 
 import dados.ClienteDAO;
+import dados.Myconnection;
 import dados.PedidoDAO;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
 import negocio.Pedido;
-
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author massilva
@@ -26,6 +41,7 @@ public class EditarPedido extends javax.swing.JDialog {
     Cliente c;
     ClienteDAO cDAO = new ClienteDAO();
     PedidoDAO pDAO = new PedidoDAO();
+    int idx;
     /**
      * Creates new form EditarPedido
      */
@@ -36,6 +52,7 @@ public class EditarPedido extends javax.swing.JDialog {
         initComponents();
         this.cliente = cDAO.listaCliente("");
         atualizaLista();
+        this.idx = id;
         iniciarCampos();
     }
     
@@ -43,7 +60,7 @@ public class EditarPedido extends javax.swing.JDialog {
         for (Cliente cli : this.cliente) {
             jC_clientes.addItem("#"+cli.getId()+" - "+cli.getNome());
             if(cli.getId() == pedido.getCliente().getId()){
-                jC_clientes.setSelectedItem("#"+cli.getId()+" - "+cli.getNome());
+                jC_clientes.setSelectedItem("#"+cli.getId()+" - "+cli.getNome());                
             }
         }
     }
@@ -97,6 +114,7 @@ public class EditarPedido extends javax.swing.JDialog {
         jF_Valor = new javax.swing.JFormattedTextField();
         jL_ClienteN = new javax.swing.JLabel();
         jC_clientes = new javax.swing.JComboBox();
+        jButton_print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -106,7 +124,7 @@ public class EditarPedido extends javax.swing.JDialog {
         jL_titulo.setFont(new java.awt.Font("Ume P Mincho S3", 1, 48)); // NOI18N
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Cadastro de Pedido");
-        jL_titulo.setBounds(0, 0, 800, 80);
+        jL_titulo.setBounds(10, 0, 800, 80);
         jDesktopPane2.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_pedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -207,8 +225,18 @@ public class EditarPedido extends javax.swing.JDialog {
         jDesktopPane2.add(jL_ClienteN, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jC_clientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ":: Selecione ::" }));
-        jC_clientes.setBounds(110, 140, 360, 28);
+        jC_clientes.setBounds(110, 140, 360, 20);
         jDesktopPane2.add(jC_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/print.png"))); // NOI18N
+        jButton_print.setText("Comprovante");
+        jButton_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_printActionPerformed(evt);
+            }
+        });
+        jButton_print.setBounds(330, 520, 160, 80);
+        jDesktopPane2.add(jButton_print, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,9 +315,56 @@ public class EditarPedido extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
+    private void jButton_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printActionPerformed
+             try{   
+                Connection con;
+                Myconnection conexao = new Myconnection();
+                con = conexao.getConnection();
+            
+                String local = System.getProperty("user.dir");  
+                //System.out.println(local+"/src/relatorio/recibo2.jrxml");
+                
+                JasperDesign jasperDesign = JRXmlLoader.load(local+"/src\relatorio\recibo2.jrxml");
+                          
+                JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);  
+
+                //int ID_PEDIDO = id;  
+
+                Map parametro = new HashMap();  
+
+                //String imgNormalidade = local+"/src/imagens/", logo = local+"/src/imagens/logo.jpg";
+                parametro.put("telefone",pedido.getCliente().getTelefone()); 
+                parametro.put("nomeCliente", pedido.getCliente().getNome());
+                
+              
+                
+                JasperPrint print;  
+
+                print = JasperFillManager.fillReport(jasperReport,parametro,con);
+
+                 
+                
+                JasperViewer viewer = new JasperViewer(print,false);  
+                
+                viewer.setTitle("Comprovante");
+                viewer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);  
+                if (!print.getPages().isEmpty()) {  
+                        viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);  
+                        viewer.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);  
+                        //viewer.setSize(d);
+                        viewer.setVisible(true);  
+                }
+             }catch(Exception e){}
+    }//GEN-LAST:event_jButton_printActionPerformed
+
+     
+                
+        
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
+    private javax.swing.JButton jButton_print;
     private javax.swing.JComboBox jC_clientes;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JFormattedTextField jF_Valor;
