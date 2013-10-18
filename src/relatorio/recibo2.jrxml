@@ -12,40 +12,6 @@ INNER JOIN paciente
 ON laudo.paciente_id=paciente.id
 ORDER BY paciente.nome]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="data" class="java.lang.String"/>
-	<field name="tipocalc" class="java.lang.String"/>
-	<field name="tipo" class="java.lang.String"/>
-	<field name="peso" class="java.lang.Float"/>
-	<field name="siv" class="java.lang.Float"/>
-	<field name="ae" class="java.lang.Float"/>
-	<field name="ddve" class="java.lang.Float"/>
-	<field name="ddvd" class="java.lang.Float"/>
-	<field name="altura" class="java.lang.Float"/>
-	<field name="aorta" class="java.lang.Float"/>
-	<field name="dsve" class="java.lang.Float"/>
-	<field name="pp" class="java.lang.Float"/>
-	<field name="vsf" class="java.lang.Float"/>
-	<field name="vdf" class="java.lang.Float"/>
-	<field name="enccav" class="java.lang.Float"/>
-	<field name="indespessurarel" class="java.lang.Float"/>
-	<field name="superficiecorporea" class="java.lang.Float"/>
-	<field name="massa" class="java.lang.Float"/>
-	<field name="indmassave" class="java.lang.Float"/>
-	<field name="relae_ao" class="java.lang.Float"/>
-	<field name="fe" class="java.lang.Float"/>
-	<field name="texto" class="java.lang.String"/>
-	<field name="paciente_id" class="java.lang.Integer"/>
-	<field name="medico_id" class="java.lang.Integer"/>
-	<field name="medico_nome" class="java.lang.String"/>
-	<field name="medico_crm" class="java.lang.Integer"/>
-	<field name="convenio_id" class="java.lang.Integer"/>
-	<field name="convenio_nome" class="java.lang.String"/>
-	<field name="nome" class="java.lang.String"/>
-	<field name="datanasc" class="java.lang.String"/>
-	<field name="cpf" class="java.lang.String"/>
-	<field name="sexo" class="java.lang.String"/>
-	<field name="tel" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

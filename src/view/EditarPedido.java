@@ -323,14 +323,16 @@ public class EditarPedido extends javax.swing.JDialog {
            
                 String local = System.getProperty("user.dir");  
                 
-                JasperDesign jasperDesign = JRXmlLoader.load(local+"/src\relatorio\recibo2.jrxml");
+                JasperDesign jasperDesign = JRXmlLoader.load(local+"/src/relatorio/comprovante.jrxml");
                           
                 JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);  
   
                 Map parametro = new HashMap();  
                 
                 parametro.put("telefone",pedido.getCliente().getTelefone()); 
-                parametro.put("nomeCliente", pedido.getCliente().getNome());
+                parametro.put("id",pedido.getId()); 
+                parametro.put("nome", pedido.getCliente().getNome());
+                parametro.put("endereco", pedido.getCliente().getEndereco());
                               
                 JasperPrint print;  
 
@@ -347,6 +349,7 @@ public class EditarPedido extends javax.swing.JDialog {
                         viewer.setVisible(true);  
                 }
              }catch(Exception e){}
+             this.dispose();
     }//GEN-LAST:event_jButton_printActionPerformed
 
      
