@@ -365,6 +365,7 @@ public class EditarPedido extends javax.swing.JDialog {
                         viewer.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);  
                         //viewer.setSize(d);
                         viewer.setVisible(true);  
+                        viewer.setAlwaysOnTop(true);
                 }
              }catch(Exception e){}
              this.dispose();

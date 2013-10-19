@@ -69,7 +69,7 @@ public class PedidoDAO {
     public List listaPedido(String nome){
         ResultSet rs, rs2;
         List lista = new ArrayList();
-        String sql = "SELECT * FROM pedido INNER JOIN cliente WHERE  cliente.ID = pedido.ID_CLIENTE AND cliente.NOME like '%"+nome+"%'";
+        String sql = "SELECT * FROM pedido INNER JOIN cliente WHERE  cliente.ID = pedido.ID_CLIENTE AND cliente.NOME like '%"+nome+"%' ORDER BY pedido.id DESC";
         try{
             java.sql.Statement stmt = Myconnection.getStatement();
             rs = stmt.executeQuery(sql);

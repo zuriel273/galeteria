@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Cliente;
@@ -64,6 +66,7 @@ public class PerfilCliente extends javax.swing.JFrame {
         jS_lista = new javax.swing.JScrollPane();
         jT_lista = new javax.swing.JTable();
         jB_Adicionar = new javax.swing.JButton();
+        jB_editar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
         jL_Endereco = new javax.swing.JLabel();
         jL_EnderecoN = new javax.swing.JLabel();
@@ -111,6 +114,17 @@ public class PerfilCliente extends javax.swing.JFrame {
         });
         jB_Adicionar.setBounds(620, 180, 160, 80);
         jDesktopPane1.add(jB_Adicionar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jB_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/text_edit.png"))); // NOI18N
+        jB_editar.setMnemonic('e');
+        jB_editar.setText("Editar");
+        jB_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_editarActionPerformed(evt);
+            }
+        });
+        jB_editar.setBounds(620, 290, 160, 80);
+        jDesktopPane1.add(jB_editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
         jB_voltar.setMnemonic('f');
@@ -204,8 +218,22 @@ public class PerfilCliente extends javax.swing.JFrame {
        new CadastroPedido(this,true,this.bgcolor,this.cliente).setVisible(true);
     }//GEN-LAST:event_jB_AdicionarActionPerformed
 
+    private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
+        try {
+            this.setAlwaysOnTop(false);
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+            JDialog dialogo = new EditarPedido(this,true,id);
+            dialogo.setVisible(true);
+            this.setAlwaysOnTop(false);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+        }
+    }//GEN-LAST:event_jB_editarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Adicionar;
+    private javax.swing.JButton jB_editar;
     private javax.swing.JButton jB_voltar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jL_Endereco;

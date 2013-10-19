@@ -39,6 +39,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         this.dimensao = this.getToolkit().getScreenSize();
         jL_titulo.setSize((int) dimensao.getWidth(),80);
         jDesktopPane1.setBackground(bgcolor);
+         this.setAlwaysOnTop(false);
         try {
             atualizarLista("");
         } catch (Exception ex) {
@@ -106,11 +107,12 @@ public class GerenciarPedido extends javax.swing.JFrame {
         setTitle("Lista de Clientes");
         setAlwaysOnTop(true);
 
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
+
         jL_titulo.setFont(new java.awt.Font("Ume P Mincho S3", 1, 48)); // NOI18N
-        jL_titulo.setForeground(new java.awt.Color(0, 0, 0));
         jL_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_titulo.setText("Gerenciar Pedidos");
-        jL_titulo.setBounds(0, 0, 1360, 80);
+        jL_titulo.setBounds(0, 0, 1300, 80);
         jDesktopPane1.add(jL_titulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jT_lista.setModel(new javax.swing.table.DefaultTableModel(
@@ -195,10 +197,12 @@ public class GerenciarPedido extends javax.swing.JFrame {
 
     private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
         try {
+             this.setAlwaysOnTop(false);
             int numLinhaSelecionada = jT_lista.getSelectedRow();         
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
             JDialog dialogo = new EditarPedido(this,true,id);
             dialogo.setVisible(true);
+             this.setAlwaysOnTop(false);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
         }
