@@ -10,7 +10,7 @@ package negocio;
  */
 public class Pedido {
     String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
-    String  endereco;
+    String  endereco, observacao;
     int id;
     float valor;
     Cliente cliente;
@@ -133,5 +133,12 @@ public class Pedido {
         this.endereco = endereco;
     }
 
-     
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+    
 }

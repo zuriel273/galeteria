@@ -22,8 +22,8 @@ public class PedidoDAO {
     public boolean cadastraPedido (Pedido m) throws Exception{
         if(m != null){
                         
-            String comandoSql = "INSERT INTO pedido (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,VALOR,ID_CLIENTE,ENDERECO) " +
-            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"','"+m.getValor()+"',"+m.getCliente().getId()+",'"+m.getEndereco()+"');"; 
+            String comandoSql = "INSERT INTO pedido (PEDIDO1,PEDIDO2,PEDIDO3,PEDIDO4,PEDIDO5,PEDIDO6,PEDIDO7,PEDIDO8,VALOR,ID_CLIENTE,ENDERECO,OBSERVACAO) " +
+            "VALUES ('"+m.getPedido1()+"','"+m.getPedido2()+"','"+m.getPedido3()+"','"+m.getPedido4()+"','"+m.getPedido5()+"','"+m.getPedido6()+"','"+m.getPedido7()+"','"+m.getPedido8()+"','"+m.getValor()+"',"+m.getCliente().getId()+",'"+m.getEndereco()+"','"+m.getObservacao()+"');"; 
           
 //            System.out.println(comandoSql);
             try{
@@ -83,6 +83,7 @@ public class PedidoDAO {
 
                 Cliente c = new Cliente(rs2.getString("NOME"), rs2.getString("ENDERECO"),rs2.getString("TELEFONE"));
                 Pedido p = new Pedido(rs.getString("pedido1"),rs.getString("pedido2"),rs.getString("pedido3"),rs.getString("pedido4"),rs.getString("pedido5"),rs.getString("pedido6"),rs.getString("pedido7"),rs.getString("pedido8"),rs.getString("endereco"),rs.getInt("id"),rs.getFloat("valor"),c);
+                p.setObservacao(rs.getString("observacao"));
                 lista.add(p);
             }
             stmt.close();
@@ -106,7 +107,7 @@ public class PedidoDAO {
                 p.setEndereco(rs.getString("endereco"));
                 p.setId(rs.getInt("id"));
                 p.setValor(rs.getFloat("valor"));
-                
+                p.setObservacao(rs.getString("observacao"));
                 lista.add(p);
             }
             stmt.close();
@@ -126,6 +127,7 @@ public class PedidoDAO {
                 ClienteDAO cDAO = new ClienteDAO();
                 Cliente c = cDAO.buscaClienteId(rs.getInt("id_cliente"));
                 pedido = new Pedido(rs.getString("pedido1"),rs.getString("pedido2"),rs.getString("pedido3"),rs.getString("pedido4"),rs.getString("pedido5"),rs.getString("pedido6"),rs.getString("pedido7"),rs.getString("pedido8"),rs.getString("endereco"),rs.getInt("id"),rs.getFloat("valor"),c);
+                pedido.setObservacao(rs.getString("observacao"));
             }
             stmt.close();
         }catch(Exception e){
@@ -138,7 +140,7 @@ public class PedidoDAO {
         if(m != null){
                         
             String comandoSql = "UPDATE pedido SET PEDIDO1='"+m.getPedido1()+"',PEDIDO2='"+m.getPedido2()+"',PEDIDO3='"+m.getPedido3()+"',PEDIDO4='"+m.getPedido4()+"',PEDIDO5='"+m.getPedido5()+"'"
-                    + ",PEDIDO6='"+m.getPedido6()+"',PEDIDO7='"+m.getPedido7()+"',PEDIDO8='"+m.getPedido8()+"',VALOR='"+m.getValor()+"',ID_CLIENTE="+m.getCliente().getId()+",ENDERECO='"+m.getEndereco()+"' WHERE id="+m.getId(); 
+                    + ",PEDIDO6='"+m.getPedido6()+"',PEDIDO7='"+m.getPedido7()+"',PEDIDO8='"+m.getPedido8()+"',VALOR='"+m.getValor()+"',ID_CLIENTE="+m.getCliente().getId()+",ENDERECO='"+m.getEndereco()+"',OBSERVACAO='"+m.getObservacao()+"' WHERE id="+m.getId(); 
             
             try{
                 java.sql.Statement stmt = (Statement)Myconnection.getStatement();

@@ -67,13 +67,16 @@ public class CadastroPedido extends javax.swing.JDialog {
         jB_salvar = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
         jT_endereco = new javax.swing.JTextField();
-        jL_endereco = new javax.swing.JLabel();
+        jL_obs = new javax.swing.JLabel();
         jL_Valor = new javax.swing.JLabel();
         jF_Valor = new javax.swing.JFormattedTextField();
         jL_TelefoneN = new javax.swing.JLabel();
         jL_Telefone = new javax.swing.JLabel();
         jL_ClienteN = new javax.swing.JLabel();
         jL_Cliente = new javax.swing.JLabel();
+        jL_endereco = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_obs = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,7 +148,7 @@ public class CadastroPedido extends javax.swing.JDialog {
                 jB_salvarActionPerformed(evt);
             }
         });
-        jB_salvar.setBounds(20, 520, 160, 80);
+        jB_salvar.setBounds(20, 630, 160, 80);
         jDesktopPane1.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/remove.png"))); // NOI18N
@@ -156,24 +159,24 @@ public class CadastroPedido extends javax.swing.JDialog {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 520, 160, 80);
+        jB_voltar.setBounds(620, 630, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_endereco.setBounds(20, 420, 760, 40);
+        jT_endereco.setBounds(20, 530, 760, 40);
         jDesktopPane1.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jL_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jL_endereco.setText("Endereço de Entrega");
-        jL_endereco.setBounds(20, 390, 180, 30);
-        jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jL_obs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jL_obs.setText("Observações");
+        jL_obs.setBounds(20, 370, 180, 30);
+        jDesktopPane1.add(jL_obs, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jL_Valor.setText("Valor:   R$");
-        jL_Valor.setBounds(520, 470, 120, 40);
+        jL_Valor.setText("Subvalor:   R$");
+        jL_Valor.setBounds(520, 580, 120, 40);
         jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jF_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jF_Valor.setBounds(650, 470, 130, 40);
+        jF_Valor.setBounds(650, 580, 130, 40);
         jDesktopPane1.add(jF_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_TelefoneN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -194,6 +197,18 @@ public class CadastroPedido extends javax.swing.JDialog {
         jL_Cliente.setBounds(120, 80, 580, 40);
         jDesktopPane1.add(jL_Cliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jL_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jL_endereco.setText("Endereço de Entrega");
+        jL_endereco.setBounds(20, 500, 180, 30);
+        jDesktopPane1.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jTextArea_obs.setColumns(20);
+        jTextArea_obs.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_obs);
+
+        jScrollPane1.setBounds(26, 406, 750, 80);
+        jDesktopPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,7 +217,7 @@ public class CadastroPedido extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
         );
 
         pack();
@@ -211,7 +226,7 @@ public class CadastroPedido extends javax.swing.JDialog {
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         // TODO add your handling code here:
         String  pedido1, pedido2, pedido3, pedido4, pedido5, pedido6, pedido7, pedido8;
-        String  endereco;
+        String  endereco, observacao;
         PedidoDAO pD = new PedidoDAO();
 
         endereco = jT_endereco.getText();
@@ -224,6 +239,7 @@ public class CadastroPedido extends javax.swing.JDialog {
         pedido7 = jT_pedido_7.getText();
         pedido8 = jT_pedido_8.getText();
         String valor = jF_Valor.getText();
+        observacao = jTextArea_obs.getText();
 
         if(valor.isEmpty()){
             JOptionPane.showMessageDialog(this,"O campo valor está vázio");
@@ -242,7 +258,8 @@ public class CadastroPedido extends javax.swing.JDialog {
             p.setPedido8(pedido8);
             p.setValor(Float.parseFloat(valor));
             p.setEndereco(endereco);
-
+            p.setObservacao(observacao);
+            
             try {
                 if(pD.cadastraPedido(p)){
                     JOptionPane.showMessageDialog(this, "Pedido cadastrado com sucesso.");
@@ -281,8 +298,10 @@ public class CadastroPedido extends javax.swing.JDialog {
     private javax.swing.JLabel jL_TelefoneN;
     private javax.swing.JLabel jL_Valor;
     private javax.swing.JLabel jL_endereco;
+    private javax.swing.JLabel jL_obs;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_endereco;
     private javax.swing.JTextField jT_pedido_1;
     private javax.swing.JTextField jT_pedido_2;
@@ -292,5 +311,6 @@ public class CadastroPedido extends javax.swing.JDialog {
     private javax.swing.JTextField jT_pedido_6;
     private javax.swing.JTextField jT_pedido_7;
     private javax.swing.JTextField jT_pedido_8;
+    private javax.swing.JTextArea jTextArea_obs;
     // End of variables declaration//GEN-END:variables
 }

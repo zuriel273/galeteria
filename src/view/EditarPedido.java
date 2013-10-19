@@ -76,6 +76,7 @@ public class EditarPedido extends javax.swing.JDialog {
         jT_pedido_7.setText(pedido.getPedido7());
         jT_pedido_8.setText(pedido.getPedido8());
         jF_Valor.setText(""+pedido.getValor());
+        jTextArea_obs.setText(pedido.getObservacao());
     }
     
     /**
@@ -115,6 +116,9 @@ public class EditarPedido extends javax.swing.JDialog {
         jL_ClienteN = new javax.swing.JLabel();
         jC_clientes = new javax.swing.JComboBox();
         jButton_print = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_obs = new javax.swing.JTextArea();
+        jL_obs = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -129,55 +133,55 @@ public class EditarPedido extends javax.swing.JDialog {
 
         jL_pedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jL_pedido.setText("Pedido");
-        jL_pedido.setBounds(20, 180, 400, 30);
+        jL_pedido.setBounds(20, 140, 400, 30);
         jDesktopPane2.add(jL_pedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_1.setText("#1");
-        jL_1.setBounds(30, 220, 20, 30);
+        jL_1.setBounds(30, 180, 20, 30);
         jDesktopPane2.add(jL_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_2.setText("#2");
-        jL_2.setBounds(30, 260, 20, 30);
+        jL_2.setBounds(30, 220, 20, 30);
         jDesktopPane2.add(jL_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_3.setText("#3");
-        jL_3.setBounds(30, 300, 20, 30);
+        jL_3.setBounds(30, 260, 20, 30);
         jDesktopPane2.add(jL_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_4.setText("#4");
-        jL_4.setBounds(30, 340, 20, 30);
+        jL_4.setBounds(30, 300, 20, 30);
         jDesktopPane2.add(jL_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_5.setText("#5");
-        jL_5.setBounds(410, 220, 20, 30);
+        jL_5.setBounds(410, 180, 20, 30);
         jDesktopPane2.add(jL_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_6.setText("#6");
-        jL_6.setBounds(410, 260, 20, 30);
+        jL_6.setBounds(410, 220, 20, 30);
         jDesktopPane2.add(jL_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_7.setText("#7");
-        jL_7.setBounds(410, 300, 20, 30);
+        jL_7.setBounds(410, 260, 20, 30);
         jDesktopPane2.add(jL_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_8.setText("#8");
-        jL_8.setBounds(410, 340, 20, 30);
+        jL_8.setBounds(410, 300, 20, 30);
         jDesktopPane2.add(jL_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_1.setBounds(50, 220, 350, 28);
+        jT_pedido_1.setBounds(50, 180, 350, 28);
         jDesktopPane2.add(jT_pedido_1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_2.setBounds(50, 260, 350, 28);
+        jT_pedido_2.setBounds(50, 220, 350, 28);
         jDesktopPane2.add(jT_pedido_2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_3.setBounds(50, 300, 350, 28);
+        jT_pedido_3.setBounds(50, 260, 350, 28);
         jDesktopPane2.add(jT_pedido_3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_4.setBounds(50, 340, 350, 28);
+        jT_pedido_4.setBounds(50, 300, 350, 28);
         jDesktopPane2.add(jT_pedido_4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_5.setBounds(430, 220, 350, 28);
+        jT_pedido_5.setBounds(430, 180, 350, 28);
         jDesktopPane2.add(jT_pedido_5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_6.setBounds(430, 260, 350, 28);
+        jT_pedido_6.setBounds(430, 220, 350, 28);
         jDesktopPane2.add(jT_pedido_6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_7.setBounds(430, 300, 350, 28);
+        jT_pedido_7.setBounds(430, 260, 350, 28);
         jDesktopPane2.add(jT_pedido_7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_pedido_8.setBounds(430, 340, 350, 28);
+        jT_pedido_8.setBounds(430, 300, 350, 28);
         jDesktopPane2.add(jT_pedido_8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/save.png"))); // NOI18N
@@ -188,7 +192,7 @@ public class EditarPedido extends javax.swing.JDialog {
                 jB_salvarActionPerformed(evt);
             }
         });
-        jB_salvar.setBounds(20, 520, 160, 80);
+        jB_salvar.setBounds(20, 610, 160, 80);
         jDesktopPane2.add(jB_salvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jB_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/back.png"))); // NOI18N
@@ -199,33 +203,33 @@ public class EditarPedido extends javax.swing.JDialog {
                 jB_voltarActionPerformed(evt);
             }
         });
-        jB_voltar.setBounds(620, 520, 160, 80);
+        jB_voltar.setBounds(620, 610, 160, 80);
         jDesktopPane2.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jT_endereco.setBounds(20, 420, 760, 40);
+        jT_endereco.setBounds(20, 510, 760, 40);
         jDesktopPane2.add(jT_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jL_endereco.setText("Endereço de Entrega");
-        jL_endereco.setBounds(20, 390, 180, 30);
+        jL_endereco.setBounds(20, 480, 180, 30);
         jDesktopPane2.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jL_Valor.setText("Valor:   R$");
-        jL_Valor.setBounds(530, 470, 120, 40);
+        jL_Valor.setText("Subvalor:   R$");
+        jL_Valor.setBounds(530, 560, 120, 40);
         jDesktopPane2.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jF_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jF_Valor.setBounds(650, 470, 130, 40);
+        jF_Valor.setBounds(650, 560, 130, 40);
         jDesktopPane2.add(jF_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_ClienteN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jL_ClienteN.setText("Cliente:");
-        jL_ClienteN.setBounds(20, 140, 90, 30);
+        jL_ClienteN.setBounds(20, 100, 90, 30);
         jDesktopPane2.add(jL_ClienteN, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jC_clientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ":: Selecione ::" }));
-        jC_clientes.setBounds(110, 140, 360, 20);
+        jC_clientes.setBounds(110, 100, 360, 30);
         jDesktopPane2.add(jC_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/print.png"))); // NOI18N
@@ -235,8 +239,20 @@ public class EditarPedido extends javax.swing.JDialog {
                 jButton_printActionPerformed(evt);
             }
         });
-        jButton_print.setBounds(330, 520, 160, 80);
+        jButton_print.setBounds(330, 610, 160, 80);
         jDesktopPane2.add(jButton_print, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jTextArea_obs.setColumns(20);
+        jTextArea_obs.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_obs);
+
+        jScrollPane1.setBounds(30, 380, 750, 80);
+        jDesktopPane2.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jL_obs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jL_obs.setText("Observações");
+        jL_obs.setBounds(20, 340, 180, 30);
+        jDesktopPane2.add(jL_obs, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,7 +263,7 @@ public class EditarPedido extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -270,7 +286,8 @@ public class EditarPedido extends javax.swing.JDialog {
         pedido7 = jT_pedido_7.getText();
         pedido8 = jT_pedido_8.getText();
         String valor = jF_Valor.getText();
-
+        String observacao = jTextArea_obs.getText();
+        
         if(valor.isEmpty()){
             JOptionPane.showMessageDialog(this,"O campo valor está vázio");
         }
@@ -292,6 +309,7 @@ public class EditarPedido extends javax.swing.JDialog {
             pedido.setValor(Float.parseFloat(valor));
             pedido.setEndereco(endereco);
             pedido.setCliente(c);
+            pedido.setObservacao(observacao);
             try {
                 if(pD.atualizaPedido(pedido)){
                     try {
@@ -374,8 +392,10 @@ public class EditarPedido extends javax.swing.JDialog {
     private javax.swing.JLabel jL_ClienteN;
     private javax.swing.JLabel jL_Valor;
     private javax.swing.JLabel jL_endereco;
+    private javax.swing.JLabel jL_obs;
     private javax.swing.JLabel jL_pedido;
     private javax.swing.JLabel jL_titulo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_endereco;
     private javax.swing.JTextField jT_pedido_1;
     private javax.swing.JTextField jT_pedido_2;
@@ -385,5 +405,6 @@ public class EditarPedido extends javax.swing.JDialog {
     private javax.swing.JTextField jT_pedido_6;
     private javax.swing.JTextField jT_pedido_7;
     private javax.swing.JTextField jT_pedido_8;
+    private javax.swing.JTextArea jTextArea_obs;
     // End of variables declaration//GEN-END:variables
 }
