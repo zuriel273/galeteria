@@ -7,6 +7,7 @@ package view;
 import dados.ClienteDAO;
 import dados.Myconnection;
 import dados.PedidoDAO;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -340,9 +341,13 @@ public class EditarPedido extends javax.swing.JDialog {
                 con = conexao.getConnection();
            
                 String local = System.getProperty("user.dir");  
+                             
                 
-                JasperDesign jasperDesign = JRXmlLoader.load(local+"/src/relatorio/comprovante.jrxml");
-                          
+                InputStream stream = getClass().getResourceAsStream("/relatorio/comprovante.jrxml");
+                
+                //JasperDesign jasperDesign = JRXmlLoader.load(local+"/src/relatorio/comprovante.jrxml");
+                JasperDesign jasperDesign = JRXmlLoader.load(stream);
+                
                 JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);  
   
                 Map parametro = new HashMap();  
