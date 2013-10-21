@@ -44,7 +44,6 @@ public class GerenciarPedido extends javax.swing.JFrame {
         this.dimensao = this.getToolkit().getScreenSize();
         jL_titulo.setSize((int) dimensao.getWidth(),80);
         jDesktopPane1.setBackground(bgcolor);
-         this.setAlwaysOnTop(false);
         try {
             atualizarLista("");
         } catch (Exception ex) {
@@ -54,7 +53,6 @@ public class GerenciarPedido extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     public void atualizarLista(String nome) throws Exception{
-        this.setAlwaysOnTop(false);
         
         String [] colunas = new String []{"#","Nome do Cliente","Pedido 1","Pedido 2","Pedido 3","Pedido 4","Endereço Entrega","Valor"};
         modelo = new DefaultTableModel(null, colunas){
@@ -71,6 +69,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         if(listar.isEmpty()){
             jB_editar.setVisible(false);
             jB_excluir.setVisible(false);
+            jButton_print.setVisible(false);
         }
         
         Iterator it = listar.iterator();
