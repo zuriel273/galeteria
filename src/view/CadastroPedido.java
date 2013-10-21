@@ -170,8 +170,8 @@ public class CadastroPedido extends javax.swing.JDialog {
         jDesktopPane1.add(jL_obs, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jL_Valor.setText("Subvalor:   R$");
-        jL_Valor.setBounds(520, 580, 120, 40);
+        jL_Valor.setText("SubTotal:   R$");
+        jL_Valor.setBounds(510, 580, 140, 40);
         jDesktopPane1.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));

@@ -116,7 +116,6 @@ public class EditarPedido extends javax.swing.JDialog {
         jF_Valor = new javax.swing.JFormattedTextField();
         jL_ClienteN = new javax.swing.JLabel();
         jC_clientes = new javax.swing.JComboBox();
-        jButton_print = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_obs = new javax.swing.JTextArea();
         jL_obs = new javax.swing.JLabel();
@@ -215,8 +214,8 @@ public class EditarPedido extends javax.swing.JDialog {
         jDesktopPane2.add(jL_endereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jL_Valor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jL_Valor.setText("Subvalor:   R$");
-        jL_Valor.setBounds(530, 560, 120, 40);
+        jL_Valor.setText("SubValor:   R$");
+        jL_Valor.setBounds(510, 560, 140, 40);
         jDesktopPane2.add(jL_Valor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jF_Valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
@@ -232,16 +231,6 @@ public class EditarPedido extends javax.swing.JDialog {
         jC_clientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ":: Selecione ::" }));
         jC_clientes.setBounds(110, 100, 360, 30);
         jDesktopPane2.add(jC_clientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/print.png"))); // NOI18N
-        jButton_print.setText("Comprovante");
-        jButton_print.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_printActionPerformed(evt);
-            }
-        });
-        jButton_print.setBounds(330, 610, 160, 80);
-        jDesktopPane2.add(jButton_print, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTextArea_obs.setColumns(20);
         jTextArea_obs.setRows(5);
@@ -334,48 +323,6 @@ public class EditarPedido extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jB_voltarActionPerformed
 
-    private void jButton_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printActionPerformed
-             try{   
-                Connection con;
-                Myconnection conexao = new Myconnection();
-                con = conexao.getConnection();
-           
-                String local = System.getProperty("user.dir");  
-                             
-                
-                InputStream stream = getClass().getResourceAsStream("/relatorio/comprovante.jrxml");
-                
-                //JasperDesign jasperDesign = JRXmlLoader.load(local+"/src/relatorio/comprovante.jrxml");
-                JasperDesign jasperDesign = JRXmlLoader.load(stream);
-                
-                JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);  
-  
-                Map parametro = new HashMap();  
-                
-                parametro.put("telefone",pedido.getCliente().getTelefone()); 
-                parametro.put("id",pedido.getId()); 
-                parametro.put("nome", pedido.getCliente().getNome());
-                parametro.put("endereco", pedido.getCliente().getEndereco());
-                              
-                JasperPrint print;  
-
-                print = JasperFillManager.fillReport(jasperReport,parametro,con);
-               
-                JasperViewer viewer = new JasperViewer(print,false);  
-                
-                viewer.setTitle("Comprovante");
-                viewer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);  
-                if (!print.getPages().isEmpty()) {  
-                        viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);  
-                        viewer.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);  
-                        //viewer.setSize(d);
-                        viewer.setVisible(true);  
-                        viewer.setAlwaysOnTop(true);
-                }
-             }catch(Exception e){}
-             this.dispose();
-    }//GEN-LAST:event_jButton_printActionPerformed
-
      
                 
         
@@ -383,7 +330,6 @@ public class EditarPedido extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jB_voltar;
-    private javax.swing.JButton jButton_print;
     private javax.swing.JComboBox jC_clientes;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JFormattedTextField jF_Valor;

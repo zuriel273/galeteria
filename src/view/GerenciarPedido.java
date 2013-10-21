@@ -4,14 +4,15 @@
  */
 package view;
 
-import dados.ClienteDAO;
+import dados.Myconnection;
 import dados.PedidoDAO;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -21,6 +22,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Pedido;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.*;
+import net.sf.jasperreports.engine.xml.*;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -61,7 +66,8 @@ public class GerenciarPedido extends javax.swing.JFrame {
         };
         
         PedidoDAO f = new PedidoDAO();
-        List listar = f.listaPedido(nome);
+        List listar;
+        listar = f.listaPedido(nome);
         if(listar.isEmpty()){
             jB_editar.setVisible(false);
             jB_excluir.setVisible(false);
@@ -102,6 +108,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         jB_editar = new javax.swing.JButton();
         jB_excluir = new javax.swing.JButton();
         jB_voltar = new javax.swing.JButton();
+        jButton_print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
@@ -163,6 +170,16 @@ public class GerenciarPedido extends javax.swing.JFrame {
         });
         jB_voltar.setBounds(1100, 620, 160, 80);
         jDesktopPane1.add(jB_voltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lib/imagem/print.png"))); // NOI18N
+        jButton_print.setText("Comprovante");
+        jButton_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_printActionPerformed(evt);
+            }
+        });
+        jButton_print.setBounds(450, 620, 160, 80);
+        jDesktopPane1.add(jButton_print, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,10 +244,59 @@ public class GerenciarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jB_excluirActionPerformed
 
+    private void jButton_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printActionPerformed
+        try {
+        
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
+            int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
+            PedidoDAO pD = new PedidoDAO();
+            
+            Connection con;
+            Myconnection conexao = new Myconnection();
+            con = conexao.getConnection();
+
+            String local = System.getProperty("user.dir");
+
+            InputStream stream = getClass().getResourceAsStream("/relatorio/comprovante.jrxml");
+
+            //JasperDesign jasperDesign = JRXmlLoader.load(local+"/src/relatorio/comprovante.jrxml");
+            JasperDesign jasperDesign = JRXmlLoader.load(stream);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            Map parametro = new HashMap();
+            Pedido pedido = pD.getPedidoById(id);
+            parametro.put("telefone",pedido.getCliente().getTelefone());
+            parametro.put("id",pedido.getId());
+            parametro.put("nome", pedido.getCliente().getNome());
+            parametro.put("endereco", pedido.getCliente().getEndereco());
+
+            JasperPrint print;
+
+            print = JasperFillManager.fillReport(jasperReport,parametro,con);
+
+            JasperViewer viewer = new JasperViewer(print,false);
+
+            viewer.setTitle("Comprovante");
+            viewer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+            if (!print.getPages().isEmpty()) {
+                viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+                viewer.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                //viewer.setSize(d);
+                viewer.setVisible(true);
+                viewer.setAlwaysOnTop(true);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton_printActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_editar;
     private javax.swing.JButton jB_excluir;
     private javax.swing.JButton jB_voltar;
+    private javax.swing.JButton jButton_print;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jL_titulo;
     private javax.swing.JScrollPane jS_lista;
