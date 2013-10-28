@@ -237,7 +237,7 @@
 				<text><![CDATA[Endereço:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="246" y="266" width="88" height="20"/>
+				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="233" y="266" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -263,9 +263,7 @@
 					<font size="13" isBold="false" isUnderline="false" isStrikeThrough="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[
-
-(($F{valor}.equals("0,0") ? " " : 
+				<textFieldExpression><![CDATA[(($F{valor}.equals("0,0") ? " " : 
 (($F{valor}.equals("0") ? " " :
 (($F{valor}.equals("0.0") ? " " :
 (($F{valor}.equals(" ") ? " " :
@@ -352,7 +350,7 @@ $F{valor}))))))))]]></textFieldExpression>
 				<reportElement uuid="3d5dbecd-372d-4bdd-b6b2-a35e0eeb8912" x="304" y="222" width="100" height="1"/>
 			</line>
 			<staticText>
-				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="246" y="286" width="88" height="20"/>
+				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="233" y="286" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -366,7 +364,7 @@ $F{valor}))))))))]]></textFieldExpression>
 				<text><![CDATA[Total Entrega:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="246" y="306" width="88" height="20"/>
+				<reportElement uuid="ecb10e60-cb90-4f07-9dd1-a28e8aa7182c" x="233" y="306" width="100" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>

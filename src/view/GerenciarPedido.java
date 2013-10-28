@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.PrintServiceAttributeSet;
+import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import negocio.Pedido;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.*;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.engine.xml.*;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -288,7 +295,6 @@ public class GerenciarPedido extends javax.swing.JFrame {
         } catch (Exception e){
             JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
         }
-        this.dispose();
     }//GEN-LAST:event_jButton_printActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
