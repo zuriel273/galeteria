@@ -4,10 +4,18 @@
  */
 package view;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 import dados.Myconnection;
 import dados.PedidoDAO;
 import java.awt.*;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,11 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.HashPrintServiceAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.PrintServiceAttributeSet;
-import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,11 +30,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Pedido;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.*;
-import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
-import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
-import net.sf.jasperreports.engine.xml.*;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -42,6 +47,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
 
     Dimension dimensao;
     Color bgcolor;
+
     /**
      * Creates new form ListarCliente
      */
@@ -49,7 +55,7 @@ public class GerenciarPedido extends javax.swing.JFrame {
         initComponents();
         this.bgcolor = bgcolor;
         this.dimensao = this.getToolkit().getScreenSize();
-        jL_titulo.setSize((int) dimensao.getWidth(),80);
+        jL_titulo.setSize((int) dimensao.getWidth(), 80);
         jDesktopPane1.setBackground(bgcolor);
         try {
             atualizarLista("");
@@ -57,47 +63,46 @@ public class GerenciarPedido extends javax.swing.JFrame {
             Logger.getLogger(GerenciarPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     DefaultTableModel modelo;
-    public void atualizarLista(String nome) throws Exception{
-        
-        String [] colunas = new String []{"#","Nome do Cliente","Pedido 1","Pedido 2","Pedido 3","Pedido 4","Endereço Entrega","Valor"};
-        modelo = new DefaultTableModel(null, colunas){
-            
-        @Override
-        public boolean isCellEditable(int row, int col){
+
+    public void atualizarLista(String nome) throws Exception {
+
+        String[] colunas = new String[]{"#", "Nome do Cliente", "Pedido 1", "Pedido 2", "Pedido 3", "Pedido 4", "Endereço Entrega", "Valor"};
+        modelo = new DefaultTableModel(null, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
                 return false;
             }
         };
-        
+
         PedidoDAO f = new PedidoDAO();
         List listar;
         listar = f.listaPedido(nome);
-        if(listar.isEmpty()){
+        if (listar.isEmpty()) {
             jB_editar.setVisible(false);
             jB_excluir.setVisible(false);
             jButton_print.setVisible(false);
         }
-        
+
         Iterator it = listar.iterator();
-        while(it.hasNext()){
-            Pedido pedido = (Pedido)it.next();
-            modelo.addRow(new Object[]{pedido.getId(),pedido.getCliente().getNome(),pedido.getPedido1(),pedido.getPedido2(),pedido.getPedido3(),pedido.getPedido4(),pedido.getEndereco(),pedido.getValor()});
+        while (it.hasNext()) {
+            Pedido pedido = (Pedido) it.next();
+            modelo.addRow(new Object[]{pedido.getId(), pedido.getCliente().getNome(), pedido.getPedido1(), pedido.getPedido2(), pedido.getPedido3(), pedido.getPedido4(), pedido.getEndereco(), pedido.getValor()});
         }
-        
+
         jT_lista.setModel(modelo);
         jT_lista.setShowHorizontalLines(false);
         jT_lista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jT_lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.04*jS_lista.getSize().getWidth()));   
-        jT_lista.getColumnModel().getColumn(2).setPreferredWidth((int) (0.10*jS_lista.getSize().getWidth()));  
-        jT_lista.getColumnModel().getColumn(3).setPreferredWidth((int) (0.10*jS_lista.getSize().getWidth()));
-        jT_lista.getColumnModel().getColumn(4).setPreferredWidth((int) (0.10*jS_lista.getSize().getWidth()));
-        jT_lista.getColumnModel().getColumn(5).setPreferredWidth((int) (0.10*jS_lista.getSize().getWidth()));
-        jT_lista.getColumnModel().getColumn(1).setPreferredWidth((int) (0.20*jS_lista.getSize().getWidth()));  
-        jT_lista.getColumnModel().getColumn(6).setPreferredWidth((int) (0.35*jS_lista.getSize().getWidth()));  
+        jT_lista.getColumnModel().getColumn(0).setPreferredWidth((int) (0.04 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(2).setPreferredWidth((int) (0.10 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(3).setPreferredWidth((int) (0.10 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(4).setPreferredWidth((int) (0.10 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(5).setPreferredWidth((int) (0.10 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(1).setPreferredWidth((int) (0.20 * jS_lista.getSize().getWidth()));
+        jT_lista.getColumnModel().getColumn(6).setPreferredWidth((int) (0.35 * jS_lista.getSize().getWidth()));
     }
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,28 +211,27 @@ public class GerenciarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_voltarActionPerformed
-        try{
+        try {
             Principal principal = new Principal();
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
             Toolkit theKit = principal.getToolkit(); // for Fullscreen  
-            principal.setBounds(new Rectangle(theKit.getScreenSize()));  
+            principal.setBounds(new Rectangle(theKit.getScreenSize()));
             principal.setVisible(true);
             this.dispose();
-        }catch(Exception e){
-            
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_jB_voltarActionPerformed
 
     private void jB_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_editarActionPerformed
         try {
-             this.setAlwaysOnTop(false);
-            int numLinhaSelecionada = jT_lista.getSelectedRow();         
+            this.setAlwaysOnTop(false);
+            int numLinhaSelecionada = jT_lista.getSelectedRow();
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
-            JDialog dialogo = new EditarPedido(this,true,id);
+            JDialog dialogo = new EditarPedido(this, true, id);
             dialogo.setVisible(true);
-             this.setAlwaysOnTop(false);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+            this.setAlwaysOnTop(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o pedido.");
         }
     }//GEN-LAST:event_jB_editarActionPerformed
 
@@ -236,8 +240,8 @@ public class GerenciarPedido extends javax.swing.JFrame {
             int numLinhaSelecionada = jT_lista.getSelectedRow();
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
             PedidoDAO pD = new PedidoDAO();
-            int conf = JOptionPane.showConfirmDialog(this, "Desejar deletar?","", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-            if(conf == 0){
+            int conf = JOptionPane.showConfirmDialog(this, "Desejar deletar?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (conf == 0) {
                 pD.excluirPedido(id);
             }
             try {
@@ -245,18 +249,18 @@ public class GerenciarPedido extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(GerenciarCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o pedido.");
         }
     }//GEN-LAST:event_jB_excluirActionPerformed
 
     private void jButton_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printActionPerformed
         try {
-        
+
             int numLinhaSelecionada = jT_lista.getSelectedRow();
             int id = Integer.parseInt(jT_lista.getValueAt(numLinhaSelecionada, 0).toString());
             PedidoDAO pD = new PedidoDAO();
-            
+
             Connection con;
             Myconnection conexao = new Myconnection();
             con = conexao.getConnection();
@@ -279,24 +283,23 @@ public class GerenciarPedido extends javax.swing.JFrame {
 
             JasperPrint print;
 
-            print = JasperFillManager.fillReport(jasperReport,parametro,con);
-
-            JasperViewer viewer = new JasperViewer(print,false);
-
+            print = JasperFillManager.fillReport(jasperReport, parametro, con);
+            //JasperExportManager.exportReportToPdfFile(print, "/relatorio/relatorio.pdf");
+            JasperViewer viewer = new JasperViewer(print, false);
             viewer.setTitle("Comprovante");
-            viewer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+            viewer.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
             if (!print.getPages().isEmpty()) {
                 viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
-                viewer.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                viewer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //viewer.setSize(d);
                 viewer.setVisible(true);
                 viewer.setAlwaysOnTop(true);
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this,"Por favor, selecione o pedido.");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o pedido.");
         }
     }//GEN-LAST:event_jButton_printActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_editar;
     private javax.swing.JButton jB_excluir;
